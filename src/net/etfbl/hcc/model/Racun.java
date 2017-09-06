@@ -1,17 +1,23 @@
 package net.etfbl.hcc.model;
 
+import java.util.ArrayList;
+
 public class Racun {
 
 	private int idRacuna;
 	private boolean placen;
+	private Popust popust;
+	private ArrayList<Stavka> stavke;
 
 	public Racun() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Racun(int idRacuna, boolean placen) {
+	public Racun(int idRacuna, boolean placen,Popust p,ArrayList<Stavka> al) {
 		this.idRacuna = idRacuna;
 		this.placen = placen;
+		this.popust=p;
+		this.stavke=al;
 	}
 
 	@Override
@@ -34,6 +40,22 @@ public class Racun {
 		if (idRacuna != other.idRacuna)
 			return false;
 		return true;
+	}
+
+	public ArrayList<Stavka> getStavke() {
+		return stavke;
+	}
+
+	public void setStavke(ArrayList<Stavka> stavke) {
+		this.stavke = stavke;
+	}
+
+	public Popust getPopust() {
+		return popust;
+	}
+
+	public void setPopust(Popust popust) {
+		this.popust = popust;
 	}
 
 	public int getIdRacuna() {
