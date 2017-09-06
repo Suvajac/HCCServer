@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SportTermin extends Termin {
+public class SportTermin extends Termin implements Serializable{
 
 	public SportTermin() {
 		// TODO Auto-generated constructor stub

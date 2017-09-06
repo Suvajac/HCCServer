@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class Recepcionar extends Korisnik {
+import java.io.Serializable;
+
+public class Recepcionar extends Korisnik implements Serializable{
 
 	public Recepcionar() {
 		// TODO Auto-generated constructor stub

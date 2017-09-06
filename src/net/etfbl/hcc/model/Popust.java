@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class Popust {
+import java.io.Serializable;
+
+public class Popust implements Serializable{
 	private String kodPopusta;
 	private double procenat;
 	private boolean aktivan;

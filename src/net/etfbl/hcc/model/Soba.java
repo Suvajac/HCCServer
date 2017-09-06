@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class Soba {
+import java.io.Serializable;
+
+public class Soba implements Serializable{
 	private int brSobe;
 	private int brKreveta;
 	private int brSprata;

@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Gost extends Korisnik {
+public class Gost extends Korisnik implements Serializable{
 	private Racun racun;
 	private Soba soba;
 	private ArrayList<Usluga> usluge;

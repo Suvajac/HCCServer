@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Termin {
+public class Termin implements Serializable{
 	private int idTermina;
 	private Date datum;
 	private String vrijeme;

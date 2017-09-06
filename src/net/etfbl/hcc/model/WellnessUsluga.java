@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class WellnessUsluga extends Usluga {
+import java.io.Serializable;
+
+public class WellnessUsluga extends Usluga implements Serializable{
 	private WellnessTermin wellnessTermin;
 
 	public WellnessUsluga() {

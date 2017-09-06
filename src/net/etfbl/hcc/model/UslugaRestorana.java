@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class UslugaRestorana extends Usluga {
+import java.io.Serializable;
+
+public class UslugaRestorana extends Usluga implements Serializable{
 	private Sto sto;
 
 	public UslugaRestorana() {

@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class SportskaOprema {
+import java.io.Serializable;
+
+public class SportskaOprema implements Serializable{
 
 	private int idSportskeOpreme;
 	private String naziv;

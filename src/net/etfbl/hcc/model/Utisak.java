@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Utisak {
+public class Utisak implements Serializable{
 	private int idUtiska;
 	private String tekst;
 	private Date datum;

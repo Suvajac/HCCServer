@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Obavjestenje {
+public class Obavjestenje implements Serializable{
 
 	private int idObavjestenje;
 	private String tekst;

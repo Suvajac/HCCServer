@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Racun {
+public class Racun implements Serializable{
 
 	private int idRacuna;
 	private boolean placen;

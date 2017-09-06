@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class Korisnik {
+import java.io.Serializable;
+
+public class Korisnik implements Serializable{
 	private String username;
 	private String ime;
 	private String prezime;

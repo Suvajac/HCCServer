@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class Sto {
+import java.io.Serializable;
+
+public class Sto implements Serializable{
 	private int idStola;
 	private int brojStolica;
 	private boolean rezervisan;

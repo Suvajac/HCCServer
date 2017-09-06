@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Registracija {
+public class Registracija implements Serializable{
 	private Date datumOd;
 	private Date datumDo;
 	private Korisnik korisnik;

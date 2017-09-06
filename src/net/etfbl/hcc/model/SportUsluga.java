@@ -1,8 +1,9 @@
 package net.etfbl.hcc.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SportUsluga extends Usluga {
+public class SportUsluga extends Usluga implements Serializable{
 	private ArrayList<SportskaOprema> listaOpreme;
 	private SportTermin sportTermin;
 

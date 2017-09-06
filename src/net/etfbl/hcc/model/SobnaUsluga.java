@@ -1,6 +1,8 @@
 package net.etfbl.hcc.model;
 
-public class SobnaUsluga extends Usluga {
+import java.io.Serializable;
+
+public class SobnaUsluga extends Usluga implements Serializable{
 
 	public SobnaUsluga() {
 		// TODO Auto-generated constructor stub
