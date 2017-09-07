@@ -8,8 +8,8 @@ public class SobnaUsluga extends Usluga implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public SobnaUsluga(int idUsluge, String naziv, Stavka s) {
-		super(idUsluge, naziv, s);
+	public SobnaUsluga(int idUsluge, String naziv,double c) {
+		super(idUsluge, naziv,c);
 		// TODO Auto-generated constructor stub
 	}
 

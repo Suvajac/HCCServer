@@ -24,7 +24,7 @@ public class Main {
 		g.setSoba(new Soba(101,5,5,5));
 
 		System.out.println(new MySQLGostDAO()
-				.getKorisnik("draganbunic").getRacun().getPopust().getProcenat());
+				.getKorisnik("draganbunic").getRacun());
 		//System.out.println(new MySQLGostDAO()
 			//	.dodaj(g,new Date(31321),new Date(21313)));
 	}

@@ -73,9 +73,8 @@ public class MySQLGostDAO implements GostDAO {
 				rsStavke = psStavke.executeQuery();
 				ArrayList<Stavka> retStavke=new ArrayList<Stavka>();
 				while(rsStavke.next()){
-					Usluga u=new Usluga(rsStavke.getInt(1),rsStavke.getString(6),null);
-					Stavka s=new  Stavka(rsStavke.getInt(2),rsStavke.getDouble(3),rsStavke.getDate(4),u);
-					u.setStavka(s);
+					Usluga u=new Usluga(rsStavke.getInt(1),rsStavke.getString(5),rsStavke.getDouble(6));
+					Stavka s=new Stavka(rsStavke.getInt(2),rsStavke.getDate(3),u);
 					retStavke.add(s);
 				}
 				r.setStavke(retStavke);

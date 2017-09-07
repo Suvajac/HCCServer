@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class Usluga implements Serializable{
 	private int idUsluge;
 	private String naziv;
-	private Stavka stavka;
+	private double cijena;
 
 	public Usluga() {
 		// TODO Auto-generated constructor stub
 	}
-	public Usluga(int idUsluge, String naziv,Stavka s) {
+	public Usluga(int idUsluge, String naziv,double cijena) {
 		this.idUsluge = idUsluge;
 		this.naziv = naziv;
-		this.stavka=s;
+		this.cijena=cijena;
 	}
 	@Override
 	public int hashCode() {
@@ -35,11 +35,12 @@ public class Usluga implements Serializable{
 			return false;
 		return true;
 	}
-	public Stavka getStavka() {
-		return stavka;
+
+	public double getCijena() {
+		return cijena;
 	}
-	public void setStavka(Stavka stavka) {
-		this.stavka = stavka;
+	public void setCijena(double cijena) {
+		this.cijena = cijena;
 	}
 	public int getIdUsluge() {
 		return idUsluge;

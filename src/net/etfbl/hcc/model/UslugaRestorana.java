@@ -10,8 +10,8 @@ public class UslugaRestorana extends Usluga implements Serializable{
 		sto=null;
 	}
 
-	public UslugaRestorana(int idUsluge, String naziv, Stavka s) {
-		super(idUsluge, naziv, s);
+	public UslugaRestorana(int idUsluge, String naziv,double c) {
+		super(idUsluge, naziv,c);
 		// TODO Auto-generated constructor stub
 		sto=null;
 	}
