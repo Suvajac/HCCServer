@@ -47,7 +47,7 @@ public class ConnectionPool {
 
     private void readConfiguration() {
         ResourceBundle bundle = PropertyResourceBundle
-                .getBundle("application.connection.ConnectionPool");
+                .getBundle("net.etfbl.hcc.connection.ConnectionPool");
         jdbcURL = bundle.getString("jdbcURL");
         username = bundle.getString("username");
         password = bundle.getString("password");
