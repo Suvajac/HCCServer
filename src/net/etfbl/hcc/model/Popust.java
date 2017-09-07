@@ -3,7 +3,7 @@ package net.etfbl.hcc.model;
 import java.io.Serializable;
 
 public class Popust implements Serializable{
-	private String kodPopusta;
+	private int kodPopusta;
 	private double procenat;
 	private boolean aktivan;
 
@@ -11,17 +11,19 @@ public class Popust implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Popust(String kodPopusta, double procenat, boolean aktivan) {
+	public Popust(int kodPopusta, double procenat, boolean aktivan) {
 		this.kodPopusta = kodPopusta;
 		this.procenat = procenat;
 		this.aktivan = aktivan;
 	}
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((kodPopusta == null) ? 0 : kodPopusta.hashCode());
+		result = prime * result + kodPopusta;
 		return result;
 	}
 
@@ -34,19 +36,16 @@ public class Popust implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Popust other = (Popust) obj;
-		if (kodPopusta == null) {
-			if (other.kodPopusta != null)
-				return false;
-		} else if (!kodPopusta.equals(other.kodPopusta))
+		if (kodPopusta != other.kodPopusta)
 			return false;
 		return true;
 	}
 
-	public String getKodPopusta() {
+	public int getKodPopusta() {
 		return kodPopusta;
 	}
 
-	public void setKodPopusta(String kodPopusta) {
+	public void setKodPopusta(int kodPopusta) {
 		this.kodPopusta = kodPopusta;
 	}
 
