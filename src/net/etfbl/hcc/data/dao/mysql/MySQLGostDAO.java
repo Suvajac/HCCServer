@@ -33,16 +33,20 @@ public class MySQLGostDAO implements GostDAO {
 		ResultSet rs = null;
 		PreparedStatement psStavke = null;
 		ResultSet rsStavke = null;
+		PreparedStatement psPopust = null;
+		ResultSet rsPopust = null;
 
 		String query = "SELECT *FROM korisnik NATURAL JOIN gost natural join registracija natural join soba "
-				+ "natural join racun inner join popust on IdPopusta=KodPopusta "
+				+ "natural join racun "
 				+ "WHERE username= ?";
 		String queryStavke="SELECT * FROM stavka natural join usluga where IdRacuna = ? ";
+		String queryPopust="SELECT * FROM popust where KodPopusta = ? ";
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
 			psStavke=conn.prepareStatement(queryStavke);
+			psPopust=conn.prepareStatement(queryPopust);
 
 			ps.setString(1, username);
 
@@ -52,9 +56,19 @@ public class MySQLGostDAO implements GostDAO {
 				retVal = new Gost(rs.getString(3), rs.getString(4),
 						rs.getString(5),rs.getString(6),rs.getString(7));
 				retVal.setSoba(new Soba(rs.getInt(2),rs.getInt(10),rs.getInt(11),rs.getDouble(12)));
-				Racun r=new Racun(rs.getInt(1),rs.getBoolean(13),new Popust(rs.getInt(14),rs.getDouble(16),rs.getBoolean(17)),null);
 
+				Popust p=new Popust(rs.getInt(14),0,false);
 
+				Racun r=new Racun(rs.getInt(1),rs.getBoolean(13),p,null);
+
+				psPopust.setInt(1, p.getKodPopusta());
+				rsPopust=psPopust.executeQuery();
+				if(rsPopust.next()){
+					p.setKodPopusta(rsPopust.getInt(1));
+					p.setProcenat(rsPopust.getDouble(2));
+					p.setAktivan(rsPopust.getBoolean(3));
+				}
+				r.setPopust(p);
 				psStavke.setInt(1, r.getIdRacuna());
 				rsStavke = psStavke.executeQuery();
 				ArrayList<Stavka> retStavke=new ArrayList<Stavka>();

@@ -41,5 +41,3 @@ begin
 	
 end$$
 delimiter ;
-
-call insert_into_gost( "username", " ime", " prezime", " brojTelefona", " lozinkaHash",101,null,null);
