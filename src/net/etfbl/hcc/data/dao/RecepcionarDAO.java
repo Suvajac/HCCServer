@@ -1,7 +1,5 @@
 package net.etfbl.hcc.data.dao;
 
-import java.sql.Date;
-
 import net.etfbl.hcc.model.Recepcionar;
 
 public interface RecepcionarDAO {

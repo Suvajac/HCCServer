@@ -3,6 +3,11 @@ package net.etfbl.hcc.model;
 import java.io.Serializable;
 
 public class Popust implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int kodPopusta;
 	private double procenat;
 	private boolean aktivan;

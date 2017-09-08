@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class SportTermin extends Termin implements Serializable{
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public SportTermin() {
 		// TODO Auto-generated constructor stub
 	}

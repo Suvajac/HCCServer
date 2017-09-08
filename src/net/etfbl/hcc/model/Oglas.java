@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Oglas implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int idOglasa;
 	private String poruka;
 	private Date datum;

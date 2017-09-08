@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class Stavka implements Serializable{
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int idStavke;
 	private Date datum;
 	private Usluga usluga;

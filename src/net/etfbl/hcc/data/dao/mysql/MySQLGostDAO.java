@@ -1,7 +1,6 @@
 package net.etfbl.hcc.data.dao.mysql;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,10 +8,8 @@ import java.util.ArrayList;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.GostDAO;
-import net.etfbl.hcc.model.Korisnik;
 import net.etfbl.hcc.model.Popust;
 import net.etfbl.hcc.model.Racun;
-import net.etfbl.hcc.model.Recepcionar;
 import net.etfbl.hcc.model.Soba;
 import net.etfbl.hcc.model.Stavka;
 import net.etfbl.hcc.model.Usluga;
@@ -55,6 +52,8 @@ public class MySQLGostDAO implements GostDAO {
 			if (rs.next()){
 				retVal = new Gost(rs.getString(3), rs.getString(4),
 						rs.getString(5),rs.getString(6),rs.getString(7));
+				retVal.setDatumOd(rs.getDate(8));
+				retVal.setDatumDo(rs.getDate(9));
 				retVal.setSoba(new Soba(rs.getInt(2),rs.getInt(10),rs.getInt(11),rs.getDouble(12)));
 
 				Popust p=new Popust(rs.getInt(14),0,false);

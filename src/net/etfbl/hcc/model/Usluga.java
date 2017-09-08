@@ -3,6 +3,11 @@ package net.etfbl.hcc.model;
 import java.io.Serializable;
 
 public class Usluga implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int idUsluge;
 	private String naziv;
 	private double cijena;

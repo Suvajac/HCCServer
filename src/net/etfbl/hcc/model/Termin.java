@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Termin implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int idTermina;
 	private Date datum;
 	private String vrijeme;

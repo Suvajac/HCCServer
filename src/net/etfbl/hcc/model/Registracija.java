@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Registracija implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Date datumOd;
 	private Date datumDo;
 	private Korisnik korisnik;

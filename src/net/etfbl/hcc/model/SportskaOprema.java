@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class SportskaOprema implements Serializable{
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int idSportskeOpreme;
 	private String naziv;
 	private double cijena;

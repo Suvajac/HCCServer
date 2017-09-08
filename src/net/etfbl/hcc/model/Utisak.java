@@ -3,7 +3,12 @@ package net.etfbl.hcc.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Utisak implements Serializable,Comparable{
+public class Utisak implements Serializable,Comparable<Object>{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int idUtiska;
 	private String tekst;
 	private Date datum;

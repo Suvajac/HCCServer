@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SportUsluga extends Usluga implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private ArrayList<SportskaOprema> listaOpreme;
 	private SportTermin sportTermin;
 

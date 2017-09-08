@@ -3,6 +3,11 @@ package net.etfbl.hcc.model;
 import java.io.Serializable;
 
 public class Soba implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int brSobe;
 	private int brKreveta;
 	private int brSprata;
