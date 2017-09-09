@@ -23,15 +23,14 @@ public class MySQLProizvodDAO implements ProizvodDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into proizvod(IdProizvoda,Naziv,Cijena,Tip) values "
-				+ "(?, ?, ? , ?) ";
+		String query = "insert into proizvod(Naziv,Cijena,Tip) values "
+				+ "(?, ? , ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, proizvod.getIdProizvoda());
-			ps.setString(2, proizvod.getNaziv());
-			ps.setDouble(3, proizvod.getCijena());
-			ps.setString(4, proizvod.getTip());
+			ps.setString(1, proizvod.getNaziv());
+			ps.setDouble(2, proizvod.getCijena());
+			ps.setString(3, proizvod.getTip());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {

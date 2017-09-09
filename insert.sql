@@ -1,0 +1,13 @@
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('12:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('13:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('14:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('15:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('16:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('17:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('18:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('19:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('20:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('21:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('22:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('23:00');
+INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('23:00');

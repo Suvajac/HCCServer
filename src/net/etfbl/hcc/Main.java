@@ -1,6 +1,10 @@
 package net.etfbl.hcc;
 
+import java.util.Date;
 
+import net.etfbl.hcc.data.dao.mysql.MySQLProizvodDAO;
+import net.etfbl.hcc.data.dao.mysql.MySQLSportTerminDAO;
+import net.etfbl.hcc.model.SportTermin;
 
 public class Main {
 
@@ -13,8 +17,9 @@ public class Main {
 
 
 		System.out.println(new MySQLGostDAO()
-				.getKorisnik("ljubisamilincic").getDatumDo());
-		System.out.println(new MySQLProizvodDAO().getProizvodi());*/
+				.getKorisnik("ljubisamilincic").getDatumDo());*/
+		System.out.println(new MySQLSportTerminDAO().provjeriTermin(new SportTermin(0,new Date(),"14:00")));
+
 	}
 
 }
