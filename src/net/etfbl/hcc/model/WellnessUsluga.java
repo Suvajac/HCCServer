@@ -10,8 +10,6 @@ public class WellnessUsluga extends Usluga implements Serializable{
 
 	private WellnessTermin wellnessTermin;
 
-
-
 	public WellnessUsluga() {
 		// TODO Auto-generated constructor stub
 		wellnessTermin=null;

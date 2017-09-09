@@ -10,4 +10,3 @@ INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('20:00');
 INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('21:00');
 INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('22:00');
 INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('23:00');
-INSERT INTO `hotelcc`.`vrijemetermina` (`Vrijeme`) VALUES ('23:00');

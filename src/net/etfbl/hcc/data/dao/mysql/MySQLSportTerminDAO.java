@@ -1,15 +1,16 @@
 package net.etfbl.hcc.data.dao.mysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.SportTerminDAO;
-import net.etfbl.hcc.model.Recepcionar;
 import net.etfbl.hcc.model.SportTermin;
 import net.etfbl.hcc.model.Termin;
 import net.etfbl.hcc.util.DBUtilities;
@@ -62,21 +63,21 @@ public class MySQLSportTerminDAO implements SportTerminDAO {
 	}
 
 	@Override
-	public boolean dodaj(SportTermin termin) {
-		boolean retVal = false;
+	public int dodaj(SportTermin termin) {
+		int retVal = 0;
 		Connection conn = null;
-		PreparedStatement ps = null;
+		CallableStatement proc = null;
 
-		String query = "call insert_into_sporttermin "
-				+ "(?, ?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, termin.getIdTermina());
+			proc = conn.prepareCall("{ call insert_into_sporttermin (?, ?, ? , ?) }");
+			proc.registerOutParameter(4, Types.INTEGER);
+
+			proc.setInt(1, termin.getIdTermina());
 			if(termin.getDatum()!=null){
             	java.sql.Date date=new java.sql.Date(termin.getDatum().getTime());
-            	ps.setDate(2,date);
-            }else ps.setDate(2,null);
+            	proc.setDate(2,date);
+            }else proc.setDate(2,null);
 			if(termin.getVrijeme()!=null){
 				SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 				java.sql.Time timeValue=null;
@@ -86,16 +87,18 @@ public class MySQLSportTerminDAO implements SportTerminDAO {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				ps.setTime(3, timeValue);
-			}else ps.setTime(3, null);
+				proc.setTime(3, timeValue);
+			}else proc.setTime(3, null);
 
-			retVal = ps.executeUpdate() == 1;
+			proc.execute();
+			retVal = proc.getInt(4);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
-			DBUtilities.getInstance().close(ps);
+			DBUtilities.getInstance().close(proc);
 		}
 		return retVal;
 	}

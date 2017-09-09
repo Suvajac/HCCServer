@@ -44,19 +44,22 @@ delimiter ;
 
 delimiter $$
 create procedure insert_into_sporttermin(
-	in varid int(50),
+	in varid int(11),
 	in varDate date,
-    in varVrijeme time
+    in varVrijeme time,
+    out rez int(11)
 	)
 begin
 	declare a int(11) default 0;
 	if(varid >0) then
 		insert into termin(IdTermina,Datum,Vrijeme) values(varid,varDate,varVrijeme);
 		insert into sporttermin(IdTermina) values(varid);
+        set rez=varid;
 	else
 		insert into termin(Datum,Vrijeme) values(varDate,varVrijeme);
         select max(IdTermina) into a from termin;
 		insert into sporttermin(IdTermina) values(a);
+        set rez=a;
     end if;
 	
 end$$
@@ -64,19 +67,114 @@ delimiter ;
 
 delimiter $$
 create procedure insert_into_wellnesstermin(
-	in varid int(50),
+	in varid int(11),
 	in varDate date,
-    in varVrijeme time
+    in varVrijeme time,
+    out rez int(11)
+	)
+begin
+	declare a int(11) default 0;
+    
+	if(varid >0) then
+		insert into termin(IdTermina,Datum,Vrijeme) values(varid,varDate,varVrijeme);
+		insert into wellnesstermin(IdTermina) values(varid);
+		set rez=varid;
+    else
+		insert into termin(Datum,Vrijeme) values(varDate,varVrijeme);
+        select max(IdTermina) into a from termin;
+		insert into wellnesstermin(IdTermina) values(a);
+        set rez=a;
+    end if;
+	
+end$$
+delimiter ;
+
+delimiter $$
+create procedure insert_into_sobnausluga(
+	in varid int(11),
+	in varNaziv varchar(20),
+    in varCijena decimal,
+    in varTip varchar(20)
 	)
 begin
 	declare a int(11) default 0;
 	if(varid >0) then
-		insert into termin(IdTermina,Datum,Vrijeme) values(varid,varDate,varVrijeme);
-		insert into wellnesstermin(IdTermina) values(varid);
+		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
+		insert into sobnausluga(IdUsluge,Tip) values(varid,varTip);
 	else
-		insert into termin(Datum,Vrijeme) values(varDate,varVrijeme);
-        select max(IdTermina) into a from termin;
-		insert into wellnesstermin(IdTermina) values(a);
+		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
+		select max(IdUsluge) into a from usluga;
+		insert into sobnausluga(IdUsluge,Tip) values(a,varTip);
+    end if;
+	
+end$$
+delimiter ;
+
+delimiter $$
+create procedure insert_into_uslugarestorana(
+	in varid int(11),
+	in varNaziv varchar(20),
+    in varCijena decimal,
+    in varIdStola int(11),
+    in varVrijeme varchar(20)
+	)
+begin
+	declare a int(11) default 0;
+	if(varid >0) then
+		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
+		insert into uslugarestorana(IdUsluge,IdStola,Vrijeme) values(varid,varIdStola,varVrijeme);
+	else
+		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
+		select max(IdUsluge) into a from usluga;
+		insert into uslugarestorana(IdUsluge,IdStola,Vrijeme) values(a,varIdStola,varVrijeme);
+    end if;
+	
+end$$
+delimiter ;
+
+delimiter $$
+create procedure insert_into_wellnessusluga(
+	in varid int(11),
+	in varNaziv varchar(20),
+    in varCijena decimal,
+    in varIdTermina int(11),
+    out rez int(11)
+	)
+begin
+	declare a int(11) default 0;
+	if(varid >0) then
+		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
+		insert into wellnessusluga(IdUsluge,IdTermina) values(varid,varIdTermina);
+        set rez=varid;
+	else
+		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
+		select max(IdUsluge) into a from usluga;
+		insert into wellnessusluga(IdUsluge,IdTermina) values(a,varIdTermina);
+        set rez=a;
+    end if;
+	
+end$$
+delimiter ;
+
+delimiter $$
+create procedure insert_into_sportusluga(
+	in varid int(11),
+	in varNaziv varchar(20),
+    in varCijena decimal,
+    in varIdTermina int(11),
+    out rez int(11)
+	)
+begin
+	declare a int(11) default 0;
+	if(varid >0) then
+		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
+		insert into sportusluga(IdUsluge,IdTermina) values(varid,varIdTermina);
+        set rez=varid;
+	else
+		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
+		select max(IdUsluge) into a from usluga;
+		insert into sportusluga(IdUsluge,IdTermina) values(a,varIdTermina);
+        set rez=a;
     end if;
 	
 end$$
@@ -90,5 +188,9 @@ grant execute on procedure hotelcc.insert_into_gost to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_recepcionar to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_sporttermin to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_wellnesstermin to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_sobnausluga to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_uslugarestorana to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_wellnessusluga to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_sportusluga to 'mils'@'localhost';
 grant select on mysql.proc to 'mils'@'localhost';
 flush privileges;
