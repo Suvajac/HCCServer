@@ -8,10 +8,10 @@ public class Proizvod implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int idProizvoda;
-	private String tip;
-	private String naziv;
-	private double cijena;
+	protected int idProizvoda;
+	protected String tip;
+	protected String naziv;
+	protected double cijena;
 
 	public Proizvod() {
 		// TODO Auto-generated constructor stub

@@ -32,7 +32,7 @@ public class MySQLSportskaOpremaDAO implements SportskaOpremaDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new SportskaOprema(rs.getInt(1),rs.getString(2),rs.getDouble(3)));
+				retVal.add(new SportskaOprema(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getString(4)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
