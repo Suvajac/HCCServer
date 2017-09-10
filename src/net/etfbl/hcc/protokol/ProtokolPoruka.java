@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProtokolPoruka implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String tip;
 	private ArrayList<Object> listaObjekata;
-	
-	
+
+
 	public ProtokolPoruka() {
 		super();
 	}
@@ -16,7 +21,7 @@ public class ProtokolPoruka implements Serializable{
 		this.tip = tip;
 		listaObjekata = new ArrayList<>();
 	}
-	
+
 	public ProtokolPoruka(String tip, ArrayList<Object> listaObjekata) {
 		super();
 		this.tip = tip;
@@ -26,7 +31,7 @@ public class ProtokolPoruka implements Serializable{
 	public void add(Object o){
 		listaObjekata.add(o);
 	}
-	
+
 	public String getTip() {
 		return tip;
 	}
@@ -42,7 +47,7 @@ public class ProtokolPoruka implements Serializable{
 	public void setListaObjekata(ArrayList<Object> listaObjekata) {
 		this.listaObjekata = listaObjekata;
 	}
-	
-	
-	
+
+
+
 }

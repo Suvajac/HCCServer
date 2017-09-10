@@ -27,6 +27,7 @@ CREATE TABLE `sportskaoprema` (
   `Naziv` varchar(20) NOT NULL,
   `Cijena` decimal(5,2) NOT NULL,
   `IdUsluge` int(11) NOT NULL,
+  `Velicina` varchar(20),
   PRIMARY KEY (`IdSportskeOpreme`),
   KEY `R_28` (`IdUsluge`),
   CONSTRAINT `sportskaoprema_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `sportusluga` (`IdUsluge`)
