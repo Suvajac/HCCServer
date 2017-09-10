@@ -1,0 +1,6 @@
+Racun r = new Racun();
+ProtokolPorukaBuilder builder = new GetRacunBuilder();
+ArrayList<Object> lista = new ArrayList<>();
+lista.add(r);
+builder.buildObjekti(lista);
+out.writeObject(builder.getProtokolPoruka());

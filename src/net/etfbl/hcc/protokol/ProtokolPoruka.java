@@ -1,0 +1,48 @@
+package net.etfbl.hcc.protokol;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class ProtokolPoruka implements Serializable{
+	private String tip;
+	private ArrayList<Object> listaObjekata;
+	
+	
+	public ProtokolPoruka() {
+		super();
+	}
+
+	public ProtokolPoruka(String tip){
+		this.tip = tip;
+		listaObjekata = new ArrayList<>();
+	}
+	
+	public ProtokolPoruka(String tip, ArrayList<Object> listaObjekata) {
+		super();
+		this.tip = tip;
+		this.listaObjekata = listaObjekata;
+	}
+
+	public void add(Object o){
+		listaObjekata.add(o);
+	}
+	
+	public String getTip() {
+		return tip;
+	}
+
+	public void setTip(String tip) {
+		this.tip = tip;
+	}
+
+	public ArrayList<Object> getListaObjekata() {
+		return listaObjekata;
+	}
+
+	public void setListaObjekata(ArrayList<Object> listaObjekata) {
+		this.listaObjekata = listaObjekata;
+	}
+	
+	
+	
+}
