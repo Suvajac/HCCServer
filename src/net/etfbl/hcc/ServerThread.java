@@ -2,11 +2,6 @@ package net.etfbl.hcc;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import net.etfbl.hcc.model.*;
 import net.etfbl.hcc.util.HCCUtil;
@@ -14,14 +9,14 @@ import net.etfbl.hcc.util.ProtokolPoruka;
 
 public class ServerThread extends Thread{
 	private Socket sock;
-	private PrintWriter out;
-	private BufferedReader in;
+	private ObjectOutputStream out;
+	private ObjectInputStream in;
 
 	public ServerThread(Socket sock){
 		try{
 			this.sock = sock;
-			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(sock.getOutputStream())),true);
-			in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+			out = new ObjectOutputStream(sock.getOutputStream());
+			in = new ObjectInputStream(sock.getInputStream());
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -32,31 +27,27 @@ public class ServerThread extends Thread{
 	public void run(){
 		ProtokolPoruka ppin = null;
 		ProtokolPoruka ppout = null;
+		String poruka = null;
 		try {
-			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
-
-					JSONObject json = new JSONObject(in.readLine());
-					ObjectMapper mapper = new ObjectMapper();
-			        ppin =mapper.readValue(json.toString(), ProtokolPoruka.class);
-			        
-					ArrayList<Object> rez=new ArrayList<Object>();
-					String tip = (String) json.getString("tip");
-					switch(ppin.getTip()){
+			while(poruka==null || !poruka.equals("Korisnik.logout")){
+				poruka = (String) in.readObject();
+					switch(poruka){
 						case "Korisnik.getKorisnik" :
+							String username = (String) in.readObject();
 							System.out.println("Korisnik.getKorisnik");
 							Korisnik k=null;
-							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(((Korisnik)ppin.getObjekti()[0]).getUsername());
+							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(username);
 							if(k==null)
-								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(((Korisnik)ppin.getObjekti()[0]).getUsername());
-							rez.clear();
-							rez.add(k);
-							ppout=new ProtokolPoruka("response",new Object[]{k});
+								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(username);
+							out.reset();
+							out.writeObject(k);
+							out.flush();
 							break;
 						case "Utisak.dodaj" :
 							System.out.println("Utisak.dodaj");
 							Utisak u=(Utisak)ppin.getObjekti()[0];
 							HCCUtil.getDAOFactory().getUtisakDAO().dodaj(u);
-							rez.clear();
+						
 							ppout=new ProtokolPoruka("response",new Object[]{u});
 							break;
 						case "asdfg" :
@@ -64,13 +55,11 @@ public class ServerThread extends Thread{
 						default :
 							ppout = new ProtokolPoruka("greska");
 					}
-					JSONObject jsonOut = new JSONObject(ppout);
-					out.println(jsonOut.toString());
 			}
 		}catch (EOFException e) {
 			e.printStackTrace();
 		}
-		catch (IOException  | JSONException e) {
+		catch (IOException  | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		finally {
