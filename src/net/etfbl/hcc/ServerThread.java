@@ -45,19 +45,19 @@ public class ServerThread extends Thread{
 						case "Korisnik.getKorisnik" :
 							System.out.println("Korisnik.getKorisnik");
 							Korisnik k=null;
-							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(((Korisnik)ppin.getListaObjekata().get(0)).getUsername());
+							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(((Korisnik)ppin.getObjekti()[0]).getUsername());
 							if(k==null)
-								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(((Korisnik)ppin.getListaObjekata().get(0)).getUsername());
+								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(((Korisnik)ppin.getObjekti()[0]).getUsername());
 							rez.clear();
 							rez.add(k);
-							ppout=new ProtokolPoruka("response",rez);
+							ppout=new ProtokolPoruka("response",new Object[]{k});
 							break;
 						case "Utisak.dodaj" :
 							System.out.println("Utisak.dodaj");
-							Utisak u=(Utisak)ppin.getListaObjekata().get(0);
+							Utisak u=(Utisak)ppin.getObjekti()[0];
 							HCCUtil.getDAOFactory().getUtisakDAO().dodaj(u);
 							rez.clear();
-							ppout=new ProtokolPoruka("response",rez);
+							ppout=new ProtokolPoruka("response",new Object[]{u});
 							break;
 						case "asdfg" :
 							break;

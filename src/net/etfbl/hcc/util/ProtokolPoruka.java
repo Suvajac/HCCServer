@@ -10,7 +10,7 @@ public class ProtokolPoruka implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String tip;
-	private ArrayList<Object> listaObjekata;
+	private Object[] objekti;
 
 
 	public ProtokolPoruka() {
@@ -19,17 +19,12 @@ public class ProtokolPoruka implements Serializable{
 
 	public ProtokolPoruka(String tip){
 		this.tip = tip;
-		listaObjekata = new ArrayList<>();
 	}
 
-	public ProtokolPoruka(String tip, ArrayList<Object> listaObjekata) {
+	public ProtokolPoruka(String tip, Object[] objekti) {
 		super();
 		this.tip = tip;
-		this.listaObjekata = listaObjekata;
-	}
-
-	public void add(Object o){
-		listaObjekata.add(o);
+		this.objekti = objekti;
 	}
 
 	public String getTip() {
@@ -40,14 +35,15 @@ public class ProtokolPoruka implements Serializable{
 		this.tip = tip;
 	}
 
-	public ArrayList<Object> getListaObjekata() {
-		return listaObjekata;
+	public Object[] getObjekti() {
+		return objekti;
 	}
 
-	public void setListaObjekata(ArrayList<Object> listaObjekata) {
-		this.listaObjekata = listaObjekata;
+	public void setObjekti(Object[] objekti) {
+		this.objekti = objekti;
 	}
 
 
+	
 
 }
