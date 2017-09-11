@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.UtisakDAO;
@@ -61,7 +62,7 @@ public class MySQLUtisakDAO implements UtisakDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new Utisak(rs.getInt(1),rs.getString(2),rs.getDate(3),
+				retVal.add(new Utisak(rs.getInt(1),rs.getString(2),new Date(rs.getDate(3).getTime()),
 						new MySQLGostDAO().getKorisnik(rs.getString(4))));
 		} catch (SQLException e) {
 			e.printStackTrace();

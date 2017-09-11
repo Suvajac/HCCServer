@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.OglasDAO;
@@ -32,7 +33,7 @@ public class MySQLOglasDAO implements OglasDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new Oglas(rs.getInt(1),rs.getString(3),rs.getDate(2)));
+				retVal.add(new Oglas(rs.getInt(1),rs.getString(3),new Date(rs.getDate(2).getTime())));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

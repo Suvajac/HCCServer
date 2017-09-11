@@ -31,8 +31,7 @@ public class ServerThread extends Thread{
 		ArrayList<Object> rezLista=new ArrayList<Object>();
 		try {
 			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
-				try{
-					ppin = (ProtokolPoruka) in.readObject();
+				ppin = (ProtokolPoruka) in.readObject();
 					switch(ppin.getTip()){
 						case "Korisnik.getKorisnik" :
 							System.out.println("Korisnik.getKorisnik");
@@ -55,16 +54,30 @@ public class ServerThread extends Thread{
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
+						case "Utisak.getUtisci" :
+							System.out.println("Utisak.getUtisci");
+							ArrayList<Utisak> utisci = HCCUtil.getDAOFactory().getUtisakDAO().getUtisci();
+							rezLista.clear();
+							rezLista.add(utisci);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Oglas.getOglasi" :
+							System.out.println("Oglas.getOglasi");
+							ArrayList<Oglas> oglasi = HCCUtil.getDAOFactory().getOglasDAO().getOglasi();
+							rezLista.clear();
+							rezLista.add(oglasi);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
 						case "asdfg" :
 							break;
 						default :
 					}
-					out.reset();
-					out.writeObject(ppout);
-					out.flush();
-				}catch (EOFException e) {
-					//e.printStackTrace();
-				}
+				out.reset();
+				out.writeObject(ppout);
+				out.flush();
+
 			}
 		}
 		catch (IOException  | ClassNotFoundException e) {
