@@ -3,6 +3,8 @@ package net.etfbl.hcc.util;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import net.etfbl.hcc.model.ObjectHCC;
+
 public class ProtokolPoruka implements Serializable{
 	/**
 	 *
@@ -10,7 +12,7 @@ public class ProtokolPoruka implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String tip;
-	private ArrayList<Object> listaObjekata;
+	private ArrayList<ObjectHCC> listaObjekata;
 
 
 	public ProtokolPoruka() {
@@ -22,13 +24,13 @@ public class ProtokolPoruka implements Serializable{
 		listaObjekata = new ArrayList<>();
 	}
 
-	public ProtokolPoruka(String tip, ArrayList<Object> listaObjekata) {
+	public ProtokolPoruka(String tip, ArrayList<ObjectHCC> listaObjekata) {
 		super();
 		this.tip = tip;
 		this.listaObjekata = listaObjekata;
 	}
 
-	public void add(Object o){
+	public void add(ObjectHCC o){
 		listaObjekata.add(o);
 	}
 
@@ -40,11 +42,11 @@ public class ProtokolPoruka implements Serializable{
 		this.tip = tip;
 	}
 
-	public ArrayList<Object> getListaObjekata() {
+	public ArrayList<ObjectHCC> getListaObjekata() {
 		return listaObjekata;
 	}
 
-	public void setListaObjekata(ArrayList<Object> listaObjekata) {
+	public void setListaObjekata(ArrayList<ObjectHCC> listaObjekata) {
 		this.listaObjekata = listaObjekata;
 	}
 

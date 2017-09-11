@@ -2,7 +2,7 @@ package net.etfbl.hcc.model;
 
 import java.io.Serializable;
 
-public class Korisnik implements Serializable{
+public class Korisnik extends ObjectHCC implements Serializable{
 	/**
 	 *
 	 */

@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import net.etfbl.hcc.model.Korisnik;
+import net.etfbl.hcc.model.ObjectHCC;
+import net.etfbl.hcc.model.Utisak;
 import net.etfbl.hcc.util.HCCUtil;
 import net.etfbl.hcc.util.ProtokolPoruka;
 
@@ -35,15 +37,23 @@ public class ServerThread extends Thread{
 			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
 
 					ppin = (ProtokolPoruka) in.readObject();
+					ArrayList<ObjectHCC> rez=new ArrayList<ObjectHCC>();
 					switch(ppin.getTip()){
 						case "Korisnik.getKorisnik" :
 							System.out.println("Korisnik.getKorisnik");
 							Korisnik k=null;
-							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik((String)ppin.getListaObjekata().get(0));
+							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(((Korisnik)ppin.getListaObjekata().get(0)).getUsername());
 							if(k==null)
-								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik((String)ppin.getListaObjekata().get(0));
-							ArrayList<Object> rez=new ArrayList<Object>();
+								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(((Korisnik)ppin.getListaObjekata().get(0)).getUsername());
+							rez.clear();
 							rez.add(k);
+							ppout=new ProtokolPoruka("response",rez);
+							break;
+						case "Utisak.dodaj" :
+							System.out.println("Utisak.dodaj");
+							Utisak u=(Utisak)ppin.getListaObjekata().get(0);
+							HCCUtil.getDAOFactory().getUtisakDAO().dodaj(u);
+							rez.clear();
 							ppout=new ProtokolPoruka("response",rez);
 							break;
 						case "asdfg" :
@@ -51,12 +61,12 @@ public class ServerThread extends Thread{
 						default :
 							ppout = new ProtokolPoruka("greska");
 					}
+					out.reset();
 					out.writeObject(ppout);
-
+					out.flush();
 			}
 		}catch (EOFException e) {
-			// TODO: handle exception al nikad
-			System.out.println("PUKOOOO");
+			e.printStackTrace();
 		}
 		catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
