@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
+
 import net.etfbl.hcc.model.*;
 import net.etfbl.hcc.util.HCCUtil;
 import net.etfbl.hcc.util.ProtokolPoruka;
@@ -35,9 +37,11 @@ public class ServerThread extends Thread{
 			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
 
 					JSONObject json = new JSONObject(in.readLine());
+					Gson gson = new Gson();
+			        ppin = gson.fromJson(json.toString(), ProtokolPoruka.class);
 					ArrayList<Object> rez=new ArrayList<Object>();
 					String tip = (String) json.getString("tip");
-					switch(tip){
+					switch(ppin.getTip()){
 						case "Korisnik.getKorisnik" :
 							System.out.println("Korisnik.getKorisnik");
 							String username = (String) ((JSONObject)json.getJSONArray("listaObjekata").get(0)).get("username");
