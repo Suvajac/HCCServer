@@ -1,23 +1,34 @@
 package net.etfbl.hcc;
 
+import java.io.IOException;
+import java.net.*;
+
 import net.etfbl.hcc.util.ConnectionProperty;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("hello".hashCode());
-		System.out.println("Hello millss");
-		/*Gost g=new Gost( "usernamePaaa", " ime", " prezime", " brojTelefona", " lozinkaHash");
-		g.setSoba(new Soba(101,5,5,5));
-
-
-		System.out.println(new MySQLGostDAO()
-				.getKorisnik("ljubisamilincic").getDatumDo());
-		SportUsluga w=new SportUsluga(0, "naziv w usl",111.11);
-		w.setSportTermin(new SportTermin(4,new Date(),"12:00"));
-		System.out.println(new MySQLSportUslugaDAO().dodaj(w));*/
-		
+		ServerSocket ss = null;
+		try {
+			ss = new ServerSocket(ConnectionProperty.getInstance().getServerTCPPort());
+			System.out.println("Running...");
+			while(true){
+				Socket sock = ss.accept();
+				new ServerThread(sock).start();
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(ss!=null)
+					ss.close();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
