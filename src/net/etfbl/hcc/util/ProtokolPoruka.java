@@ -1,4 +1,4 @@
-package net.etfbl.hcc.protokol;
+package net.etfbl.hcc.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
