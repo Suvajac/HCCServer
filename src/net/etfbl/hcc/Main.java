@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.*;
 
 import net.etfbl.hcc.util.ConnectionProperty;
-import net.etfbl.hcc.util.HCCUtil;
+
 
 public class Main {
 

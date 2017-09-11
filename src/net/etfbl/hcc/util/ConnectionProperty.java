@@ -30,7 +30,7 @@ public class ConnectionProperty {
     public int getMulticastPort(){
         return Integer.parseInt(readValue("MulticastPort"));
     }
-    
+
     public void setServerIpAddress(String value){
     	writeValue("ServerIpAdress", value);
     }
@@ -45,8 +45,9 @@ public class ConnectionProperty {
     }
 
     private String readValue(String key){
+    	BufferedReader reader=null;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/net/etfbl/hcc/util/ConnectionProperties.txt"));
+            reader = new BufferedReader(new FileReader("src/net/etfbl/hcc/util/ConnectionProperties.txt"));
             String line = null;
             while((line=reader.readLine())!=null){
                 if(line.startsWith(key)){
@@ -56,10 +57,17 @@ public class ConnectionProperty {
         }
         catch (IOException e){
             e.printStackTrace();
+        }finally{
+        	try {
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
         return null;
     }
-    
+
     private void writeValue(String key,String value){
     	try{
             BufferedReader reader = new BufferedReader(new FileReader("src/net/etfbl/hcc/util/ConnectionProperties.txt"));
@@ -69,14 +77,14 @@ public class ConnectionProperty {
                 lines.add(l);
             }
             reader.close();
-            
+
             for(int i=0;i<lines.size();i++){
             	String line = lines.get(i);
             	if(line.startsWith(key)){
             		lines.set(i, new String(key+"="+value));
             	}
             }
-            
+
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("src/etfbl/mdp/res/ConnectionProperties.txt")));
             for(String line : lines){
             	writer.println(line);
