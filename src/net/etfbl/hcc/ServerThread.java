@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
-
+//Komentar
 import net.etfbl.hcc.model.*;
 import net.etfbl.hcc.util.HCCUtil;
 import net.etfbl.hcc.util.ProtokolPoruka;
