@@ -3,7 +3,7 @@ package net.etfbl.hcc.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Utisak extends ObjectHCC implements Serializable,Comparable<Object>{
+public class Utisak implements Serializable,Comparable<Object>{
 	/**
 	 *
 	 */

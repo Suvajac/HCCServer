@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import net.etfbl.hcc.model.Korisnik;
-import net.etfbl.hcc.model.ObjectHCC;
 import net.etfbl.hcc.model.Utisak;
 import net.etfbl.hcc.util.HCCUtil;
 import net.etfbl.hcc.util.ProtokolPoruka;
@@ -37,7 +36,8 @@ public class ServerThread extends Thread{
 			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
 
 					ppin = (ProtokolPoruka) in.readObject();
-					ArrayList<ObjectHCC> rez=new ArrayList<ObjectHCC>();
+					System.out.println(ppin);
+					ArrayList<Object> rez=new ArrayList<Object>();
 					switch(ppin.getTip()){
 						case "Korisnik.getKorisnik" :
 							System.out.println("Korisnik.getKorisnik");
