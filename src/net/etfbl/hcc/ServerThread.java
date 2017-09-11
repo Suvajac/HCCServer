@@ -44,11 +44,10 @@ public class ServerThread extends Thread{
 					switch(ppin.getTip()){
 						case "Korisnik.getKorisnik" :
 							System.out.println("Korisnik.getKorisnik");
-							String username = (String) ((JSONObject)json.getJSONArray("listaObjekata").get(0)).get("username");
 							Korisnik k=null;
-							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(username);
+							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(((Korisnik)ppin.getListaObjekata().get(0)).getUsername());
 							if(k==null)
-								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(username);
+								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(((Korisnik)ppin.getListaObjekata().get(0)).getUsername());
 							rez.clear();
 							rez.add(k);
 							ppout=new ProtokolPoruka("response",rez);
