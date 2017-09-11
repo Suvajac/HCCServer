@@ -4,11 +4,10 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-//Komentar
 import net.etfbl.hcc.model.*;
 import net.etfbl.hcc.util.HCCUtil;
 import net.etfbl.hcc.util.ProtokolPoruka;
@@ -37,8 +36,9 @@ public class ServerThread extends Thread{
 			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
 
 					JSONObject json = new JSONObject(in.readLine());
-					Gson gson = new Gson();
-			        ppin = gson.fromJson(json.toString(), ProtokolPoruka.class);
+					ObjectMapper mapper = new ObjectMapper();
+			        ppin =mapper.readValue(json.toString(), ProtokolPoruka.class);
+			        
 					ArrayList<Object> rez=new ArrayList<Object>();
 					String tip = (String) json.getString("tip");
 					switch(ppin.getTip()){
