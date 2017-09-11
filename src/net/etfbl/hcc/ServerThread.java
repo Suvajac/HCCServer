@@ -2,6 +2,7 @@ package net.etfbl.hcc;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import net.etfbl.hcc.model.*;
 import net.etfbl.hcc.util.HCCUtil;
@@ -25,39 +26,46 @@ public class ServerThread extends Thread{
 
 	@Override
 	public void run(){
-		ProtokolPoruka ppin = null;
-		ProtokolPoruka ppout = null;
-		String poruka = null;
+		ProtokolPoruka ppin=null;
+		ProtokolPoruka ppout=null;
+		ArrayList<Object> rezLista=new ArrayList<Object>();
 		try {
-			while(poruka==null || !poruka.equals("Korisnik.logout")){
-				poruka = (String) in.readObject();
-					switch(poruka){
+			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
+				try{
+					ppin = (ProtokolPoruka) in.readObject();
+					switch(ppin.getTip()){
 						case "Korisnik.getKorisnik" :
-							String username = (String) in.readObject();
 							System.out.println("Korisnik.getKorisnik");
+							String username = (String) ppin.getListaObjekata().get(0);
 							Korisnik k=null;
 							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(username);
 							if(k==null)
 								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(username);
-							out.reset();
-							out.writeObject(k);
-							out.flush();
+							rezLista.clear();
+							rezLista.add(k);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
 							break;
 						case "Utisak.dodaj" :
 							System.out.println("Utisak.dodaj");
-							Utisak u=(Utisak)ppin.getObjekti()[0];
+							Utisak u=(Utisak) ppin.getListaObjekata().get(0);
 							HCCUtil.getDAOFactory().getUtisakDAO().dodaj(u);
-						
-							ppout=new ProtokolPoruka("response",new Object[]{u});
+							rezLista.clear();
+							rezLista.add(new String("Utisak dodan!"));
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
 							break;
 						case "asdfg" :
 							break;
 						default :
-							ppout = new ProtokolPoruka("greska");
 					}
+					out.reset();
+					out.writeObject(ppout);
+					out.flush();
+				}catch (EOFException e) {
+					//e.printStackTrace();
+				}
 			}
-		}catch (EOFException e) {
-			e.printStackTrace();
 		}
 		catch (IOException  | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -71,7 +79,7 @@ public class ServerThread extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Log out");
 		}
+		System.out.println("Log out");
 	}
 }
