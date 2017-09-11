@@ -1,5 +1,7 @@
 package net.etfbl.hcc;
 
+import net.etfbl.hcc.util.ConnectionProperty;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -15,7 +17,7 @@ public class Main {
 		SportUsluga w=new SportUsluga(0, "naziv w usl",111.11);
 		w.setSportTermin(new SportTermin(4,new Date(),"12:00"));
 		System.out.println(new MySQLSportUslugaDAO().dodaj(w));*/
-
+		
 	}
 
 }
