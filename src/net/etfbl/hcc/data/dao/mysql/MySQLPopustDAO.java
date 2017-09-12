@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.PopustDAO;
 import net.etfbl.hcc.model.Gost;
@@ -17,9 +19,29 @@ public class MySQLPopustDAO implements PopustDAO {
 	}
 
 	@Override
-	public Popust potvrdiPopust(String kodPopusta,Gost gost) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean potvrdiPopust(int kodPopusta,Gost gost) {
+		boolean retVal = false;
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		String query = "update racun set IdPopusta=?  where IdRacuna=?";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, kodPopusta);
+			ps.setInt(2, gost.getRacun().getIdRacuna());
+
+			retVal = ps.executeUpdate() == 1;
+		} catch(MySQLIntegrityConstraintViolationException e){
+			System.out.println("Pogresan kod popusta je unesen!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
 	}
 
 	@Override

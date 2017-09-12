@@ -29,6 +29,7 @@ public class ServerThread extends Thread{
 		ProtokolPoruka ppin=null;
 		ProtokolPoruka ppout=null;
 		ArrayList<Object> rezLista=new ArrayList<Object>();
+		boolean test=false;
 		try {
 			while(ppin==null || !ppin.getTip().equals("Korisnik.logout")){
 				ppin = (ProtokolPoruka) in.readObject();
@@ -62,6 +63,14 @@ public class ServerThread extends Thread{
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
+						case "Utisak.obrisi" :
+							System.out.println("Utisak.obrisi");
+							test=HCCUtil.getDAOFactory().getUtisakDAO().obrisi((Utisak)ppin.getListaObjekata().get(0));
+							rezLista.clear();
+							rezLista.add(test);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
 						case "Oglas.getOglasi" :
 							System.out.println("Oglas.getOglasi");
 							ArrayList<Oglas> oglasi = HCCUtil.getDAOFactory().getOglasDAO().getOglasi();
@@ -70,7 +79,13 @@ public class ServerThread extends Thread{
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
-						case "asdfg" :
+						case "Popust.potvrdiPopust" :
+							System.out.println("Popust.potvrdiPopust");
+							test = HCCUtil.getDAOFactory().getPopustDAO().potvrdiPopust((int)ppin.getListaObjekata().get(0),(Gost) ppin.getListaObjekata().get(1));
+							rezLista.clear();
+							rezLista.add(test);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
 							break;
 						default :
 					}
