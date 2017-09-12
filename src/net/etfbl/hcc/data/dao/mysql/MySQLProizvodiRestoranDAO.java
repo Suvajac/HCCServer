@@ -7,25 +7,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import net.etfbl.hcc.connection.ConnectionPool;
-import net.etfbl.hcc.data.dao.ProizvodiSobaDAO;
+import net.etfbl.hcc.data.dao.ProizvodiRestoranDAO;
 import net.etfbl.hcc.model.Proizvod;
-import net.etfbl.hcc.model.SobnaUsluga;
+import net.etfbl.hcc.model.UslugaRestorana;
 import net.etfbl.hcc.util.DBUtilities;
 
-public class MySQLProizvodiSobaDAO implements ProizvodiSobaDAO {
+public class MySQLProizvodiRestoranDAO implements ProizvodiRestoranDAO {
 
-	public MySQLProizvodiSobaDAO() {
+	public MySQLProizvodiRestoranDAO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public ArrayList<Proizvod> getProizvodi(SobnaUsluga usluga) {
+	public ArrayList<Proizvod> getProizvodi(UslugaRestorana usluga) {
 		ArrayList<Proizvod> retVal = new ArrayList<Proizvod>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String query = "select * from proizvod natural join proizvodisoba where IdSobneUsluge=? ";
+		String query = "select * from proizvod natural join proizvodirestoran where IdUslugaRestorana=? ";
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -46,12 +46,12 @@ public class MySQLProizvodiSobaDAO implements ProizvodiSobaDAO {
 	}
 
 	@Override
-	public boolean setProizvodi(SobnaUsluga usluga) {
+	public boolean setProizvodi(UslugaRestorana usluga) {
 		boolean retVal = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into proizvodisoba(IdProizvoda,IdSobneUsluge) values (?, ?) ";
+		String query = "insert into proizvodirestoran(IdProizvoda,IdUslugeRestorana) values (?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);

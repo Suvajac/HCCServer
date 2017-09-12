@@ -5,7 +5,6 @@ import java.net.*;
 
 import net.etfbl.hcc.util.ConnectionProperty;
 
-
 public class Main {
 
 	public static void main(String[] args) {

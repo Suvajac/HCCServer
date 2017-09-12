@@ -6,6 +6,8 @@ import net.etfbl.hcc.data.dao.mysql.MySQLObavjestenjeDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLOglasDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLPopustDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLProizvodDAO;
+import net.etfbl.hcc.data.dao.mysql.MySQLProizvodiRestoranDAO;
+import net.etfbl.hcc.data.dao.mysql.MySQLProizvodiSobaDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLRacunDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLRecepcionarDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLSobaDAO;
@@ -42,4 +44,6 @@ public abstract class DAOFactory {
 	public abstract MySQLUtisakDAO getUtisakDAO();
 	public abstract MySQLWellnessTerminDAO getWellnessTerminDAO();
 	public abstract MySQLWellnessUslugaDAO getWellnessUslugaDAO();
+	public abstract MySQLProizvodiRestoranDAO getProizvodiRestoranDAO();
+	public abstract MySQLProizvodiSobaDAO getProizvodiSobaDAO();
 }

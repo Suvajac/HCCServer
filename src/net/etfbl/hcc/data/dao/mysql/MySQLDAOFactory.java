@@ -87,5 +87,15 @@ public class MySQLDAOFactory extends DAOFactory{
 	@Override
 	public MySQLWellnessUslugaDAO getWellnessUslugaDAO() {
 		return new MySQLWellnessUslugaDAO();
+	}
+
+	@Override
+	public MySQLProizvodiRestoranDAO getProizvodiRestoranDAO() {
+		return new MySQLProizvodiRestoranDAO();
+	}
+
+	@Override
+	public MySQLProizvodiSobaDAO getProizvodiSobaDAO() {
+		return new MySQLProizvodiSobaDAO();
 	};
 }
