@@ -1,12 +1,16 @@
 package net.etfbl.hcc.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class SobnaUsluga extends Usluga implements Serializable{
 
 	/**
 	 *
 	 */
+	
+	private ArrayList<Proizvod> listaProizvoda;
+	
 	private static final long serialVersionUID = 1L;
 
 	private String tip;
@@ -29,4 +33,12 @@ public class SobnaUsluga extends Usluga implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	public ArrayList<Proizvod> getListaProizvoda() {
+		return listaProizvoda;
+	}
+
+	public void setListaProizvoda(ArrayList<Proizvod> listaProizvoda) {
+		this.listaProizvoda = listaProizvoda;
+	}
+	
 }
