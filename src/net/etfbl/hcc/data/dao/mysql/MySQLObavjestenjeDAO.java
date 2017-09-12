@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.ObavjestenjeDAO;
@@ -32,13 +35,39 @@ public class MySQLObavjestenjeDAO implements ObavjestenjeDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new Obavjestenje(rs.getInt(1),rs.getString(2),rs.getTimestamp(3).toLocalDateTime()));
+				retVal.add(new Obavjestenje(rs.getInt(1),rs.getString(2),rs.getTimestamp(3).toLocalDateTime(),rs.getBoolean(4)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
 			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
+
+	@Override
+	public boolean procitajObavjestenje(Obavjestenje obavjestenje) {
+		boolean retVal = false;
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		String query = "update obavjestenje set Procitano=1, Datum=? where IdObavjestenja=?";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setTimestamp(1, Timestamp.valueOf(obavjestenje.getDatum()));
+			ps.setInt(2, obavjestenje.getIdObavjestenje());
+
+			retVal = ps.executeUpdate() == 1;
+		} catch(MySQLIntegrityConstraintViolationException e){
+			System.out.println("Uneseno obavjestenje ne postoji");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps);
 		}
 		return retVal;
 	}

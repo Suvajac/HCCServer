@@ -6,4 +6,5 @@ import net.etfbl.hcc.model.Obavjestenje;
 
 public interface ObavjestenjeDAO {
 	public ArrayList<Obavjestenje> getObavjestenja();
+	public boolean procitajObavjestenje(Obavjestenje obavjestenje);
 }

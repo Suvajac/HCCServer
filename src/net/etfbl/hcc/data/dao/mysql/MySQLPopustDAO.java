@@ -12,7 +12,6 @@ import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.PopustDAO;
 import net.etfbl.hcc.model.Gost;
 import net.etfbl.hcc.model.Popust;
-import net.etfbl.hcc.model.Utisak;
 import net.etfbl.hcc.util.DBUtilities;
 
 public class MySQLPopustDAO implements PopustDAO {
@@ -26,7 +25,8 @@ public class MySQLPopustDAO implements PopustDAO {
 		boolean retVal = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-
+		if(kodPopusta<=0)
+			return false;
 		String query = "update racun set IdPopusta=?  where IdRacuna=?";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
