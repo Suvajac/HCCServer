@@ -46,6 +46,15 @@ public class ServerThread extends Thread{
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
+						case "Gost.getKorisnike" :
+							System.out.println("Gost.getKorisnike");
+							ArrayList<Gost> gosti=null;
+							gosti=HCCUtil.getDAOFactory().getGostDAO().getKorisnike();
+							rezLista.clear();
+							rezLista.add(gosti);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
 						case "Utisak.dodaj" :
 							System.out.println("Utisak.dodaj");
 							Utisak u=(Utisak) ppin.getListaObjekata().get(0);
@@ -82,6 +91,31 @@ public class ServerThread extends Thread{
 						case "Popust.potvrdiPopust" :
 							System.out.println("Popust.potvrdiPopust");
 							test = HCCUtil.getDAOFactory().getPopustDAO().potvrdiPopust((int)ppin.getListaObjekata().get(0),(Gost) ppin.getListaObjekata().get(1));
+							rezLista.clear();
+							rezLista.add(test);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Popust.getPopusti" :
+							System.out.println("Popust.getPopusti");
+							ArrayList<Popust> popusti = HCCUtil.getDAOFactory().getPopustDAO().getPopuste();
+							rezLista.clear();
+							rezLista.add(popusti);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Popust.dodaj" :
+							System.out.println("Popust.dodaj");
+							Popust p=(Popust) ppin.getListaObjekata().get(0);
+							HCCUtil.getDAOFactory().getPopustDAO().dodaj(p);
+							rezLista.clear();
+							rezLista.add(new String("Popust dodan!"));
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Popust.obrisi" :
+							System.out.println("Popust.obrisi");
+							test=HCCUtil.getDAOFactory().getPopustDAO().obrisi((Popust) ppin.getListaObjekata().get(0));
 							rezLista.clear();
 							rezLista.add(test);
 							ppout=new ProtokolPoruka("response");

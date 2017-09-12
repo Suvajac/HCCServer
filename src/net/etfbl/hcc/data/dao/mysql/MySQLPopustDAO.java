@@ -2,7 +2,9 @@ package net.etfbl.hcc.data.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -10,6 +12,7 @@ import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.PopustDAO;
 import net.etfbl.hcc.model.Gost;
 import net.etfbl.hcc.model.Popust;
+import net.etfbl.hcc.model.Utisak;
 import net.etfbl.hcc.util.DBUtilities;
 
 public class MySQLPopustDAO implements PopustDAO {
@@ -76,14 +79,12 @@ public class MySQLPopustDAO implements PopustDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "UPDATE popust SET "
-				+ "Aktivan=? "
+		String query = "delete from popust "
 				+ "WHERE KodPopusta=? ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setBoolean(1, false);
-			ps.setInt(2, popust.getKodPopusta());
+			ps.setInt(1, popust.getKodPopusta());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {
@@ -92,6 +93,32 @@ public class MySQLPopustDAO implements PopustDAO {
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
 			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
+	}
+
+	@Override
+	public ArrayList<Popust> getPopuste() {
+		ArrayList<Popust> retVal = new ArrayList<Popust>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT * from popust ";
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				retVal.add(new Popust(rs.getInt(1),rs.getDouble(2),rs.getBoolean(3)));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
 		}
 		return retVal;
 	}
