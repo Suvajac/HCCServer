@@ -1,7 +1,7 @@
 package net.etfbl.hcc.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Stavka implements Serializable{
 
@@ -11,13 +11,13 @@ public class Stavka implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private int idStavke;
-	private Date datum;
+	private LocalDateTime datum;
 	private Usluga usluga;
 
 	public Stavka() {
 		// TODO Auto-generated constructor stub
 	}
-	public Stavka(int idStavke, Date datum,Usluga u) {
+	public Stavka(int idStavke, LocalDateTime datum,Usluga u) {
 		this.idStavke = idStavke;
 		this.datum = datum;
 		this.usluga=u;
@@ -55,10 +55,10 @@ public class Stavka implements Serializable{
 	public void setIdStavke(int idStavke) {
 		this.idStavke = idStavke;
 	}
-	public Date getDatum() {
+	public LocalDateTime getDatum() {
 		return datum;
 	}
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDateTime datum) {
 		this.datum = datum;
 	}
 

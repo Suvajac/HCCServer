@@ -1,7 +1,7 @@
 package net.etfbl.hcc.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Oglas implements Serializable{
 	/**
@@ -11,12 +11,12 @@ public class Oglas implements Serializable{
 
 	private int idOglasa;
 	private String poruka;
-	private Date datum;
+	private LocalDateTime datum;
 
 	public Oglas() {
 		// TODO Auto-generated constructor stub
 	}
-	public Oglas(int idOglasa, String poruka, Date datum) {
+	public Oglas(int idOglasa, String poruka, LocalDateTime datum) {
 		this.idOglasa = idOglasa;
 		this.poruka = poruka;
 		this.datum = datum;
@@ -53,10 +53,10 @@ public class Oglas implements Serializable{
 	public void setPoruka(String poruka) {
 		this.poruka = poruka;
 	}
-	public Date getDatum() {
+	public LocalDateTime getDatum() {
 		return datum;
 	}
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDateTime datum) {
 		this.datum = datum;
 	}
 

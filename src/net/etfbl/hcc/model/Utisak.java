@@ -1,7 +1,8 @@
 package net.etfbl.hcc.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class Utisak implements Serializable,Comparable<Object>{
 	/**
@@ -11,13 +12,13 @@ public class Utisak implements Serializable,Comparable<Object>{
 
 	private int idUtiska;
 	private String tekst;
-	private Date datum;
+	private LocalDateTime datum;
 	private Korisnik korisnik;
 
 	public Utisak() {
 		// TODO Auto-generated constructor stub
 	}
-	public Utisak(int idUtiska, String tekst, Date datum,Korisnik k) {
+	public Utisak(int idUtiska, String tekst, LocalDateTime datum,Korisnik k) {
 		this.idUtiska = idUtiska;
 		this.tekst = tekst;
 		this.datum = datum;
@@ -25,7 +26,7 @@ public class Utisak implements Serializable,Comparable<Object>{
 	}
 	public int compareTo(Object o){
 		Utisak u = (Utisak) o;
-		long time =u.getDatum().getTime()-this.datum.getTime();
+		long time =u.getDatum().toEpochSecond(ZoneOffset.UTC)-this.datum.toEpochSecond(ZoneOffset.UTC);
 		return (int) time;
 	}
 	@Override
@@ -66,10 +67,10 @@ public class Utisak implements Serializable,Comparable<Object>{
 	public void setTekst(String tekst) {
 		this.tekst = tekst;
 	}
-	public Date getDatum() {
+	public LocalDateTime getDatum() {
 		return datum;
 	}
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDateTime datum) {
 		this.datum = datum;
 	}
 

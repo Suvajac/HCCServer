@@ -1,7 +1,7 @@
 package net.etfbl.hcc.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Obavjestenje implements Serializable{
 
@@ -12,9 +12,9 @@ public class Obavjestenje implements Serializable{
 
 	private int idObavjestenje;
 	private String tekst;
-	private Date datum;
+	private LocalDateTime datum;
 
-	public Obavjestenje(int idObavjestenje, String tekst, Date datum) {
+	public Obavjestenje(int idObavjestenje, String tekst, LocalDateTime datum) {
 		this.idObavjestenje = idObavjestenje;
 		this.tekst = tekst;
 		this.datum = datum;
@@ -62,11 +62,11 @@ public class Obavjestenje implements Serializable{
 		this.tekst = tekst;
 	}
 
-	public Date getDatum() {
+	public LocalDateTime getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDateTime datum) {
 		this.datum = datum;
 	}
 
