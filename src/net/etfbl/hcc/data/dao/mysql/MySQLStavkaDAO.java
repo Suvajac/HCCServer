@@ -30,9 +30,9 @@ public class MySQLStavkaDAO implements StavkaDAO {
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, stavka.getIdStavke());
 			if(stavka.getDatum()!=null){
-            	java.sql.Date date=new java.sql.Date(stavka.getDatum().getTime());
-            	ps.setDate(2,date);
-            }else ps.setDate(2,null);
+				java.sql.Timestamp date=java.sql.Timestamp.valueOf(stavka.getDatum());
+            	ps.setTimestamp(2,date);
+            }else ps.setTimestamp(2,null);
 			ps.setInt(3, racun.getIdRacuna());
 			ps.setInt(4, stavka.getUsluga().getIdUsluge());
 

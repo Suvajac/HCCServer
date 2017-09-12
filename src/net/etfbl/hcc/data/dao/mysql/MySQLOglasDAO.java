@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.OglasDAO;
@@ -33,7 +32,7 @@ public class MySQLOglasDAO implements OglasDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new Oglas(rs.getInt(1),rs.getString(3),new Date(rs.getDate(2).getTime())));
+				retVal.add(new Oglas(rs.getInt(1),rs.getString(3),rs.getTimestamp(2).toLocalDateTime()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
@@ -50,17 +49,16 @@ public class MySQLOglasDAO implements OglasDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into oglas(IdOglasa,Datum,Poruka) values "
-				+ "(?, ?, ?) ";
+		String query = "insert into oglas(Datum,Poruka) values "
+				+ "(?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, oglas.getIdOglasa());
 			if(oglas.getDatum()!=null){
-            	java.sql.Date date=new java.sql.Date(oglas.getDatum().getTime());
-            	ps.setDate(2,date);
-            }else ps.setDate(2,null);
-			ps.setString(3, oglas.getPoruka());
+            	java.sql.Timestamp date=java.sql.Timestamp.valueOf(oglas.getDatum());
+            	ps.setTimestamp(1,date);
+            }else ps.setTimestamp(1,null);
+			ps.setString(2, oglas.getPoruka());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {

@@ -32,7 +32,7 @@ public class MySQLObavjestenjeDAO implements ObavjestenjeDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new Obavjestenje(rs.getInt(1),rs.getString(2),rs.getDate(3)));
+				retVal.add(new Obavjestenje(rs.getInt(1),rs.getString(2),rs.getTimestamp(3).toLocalDateTime()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

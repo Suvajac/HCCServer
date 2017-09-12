@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.UtisakDAO;
@@ -31,9 +30,9 @@ public class MySQLUtisakDAO implements UtisakDAO {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, utisak.getTekst());
 			if(utisak.getDatum()!=null){
-            	java.sql.Date date=new java.sql.Date(utisak.getDatum().getTime());
-            	ps.setDate(2,date);
-            }else ps.setDate(2,null);
+				java.sql.Timestamp date=java.sql.Timestamp.valueOf(utisak.getDatum());
+            	ps.setTimestamp(2,date);
+            }else ps.setTimestamp(2,null);
 			ps.setString(3, utisak.getKorisnik().getUsername());
 
 			retVal = ps.executeUpdate() == 1;
@@ -62,7 +61,7 @@ public class MySQLUtisakDAO implements UtisakDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new Utisak(rs.getInt(1),rs.getString(2),new Date(rs.getDate(3).getTime()),
+				retVal.add(new Utisak(rs.getInt(1),rs.getString(2),rs.getTimestamp(3).toLocalDateTime(),
 						new MySQLGostDAO().getKorisnik(rs.getString(4))));
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `stavka`;
 CREATE TABLE `stavka` (
   `IdStavke` int(11) NOT NULL,
   
-  `Datum` date NOT NULL,
+  `Datum` timestamp NOT NULL,
   `IdRacuna` int(11) NOT NULL,
   `IdUsluge` int(11) NOT NULL,
   PRIMARY KEY (`IdStavke`,`IdRacuna`),

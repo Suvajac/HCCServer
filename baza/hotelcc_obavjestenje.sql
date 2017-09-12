@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `obavjestenje`;
 CREATE TABLE `obavjestenje` (
   `IdObavjestenja` int(11) NOT NULL AUTO_INCREMENT,
   `Tekst` varchar(150) DEFAULT NULL,
-  `Datum` date NOT NULL,
+  `Datum` timestamp NOT NULL,
   PRIMARY KEY (`IdObavjestenja`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `utisak`;
 CREATE TABLE `utisak` (
   `IdUtiska` int(11) NOT NULL auto_increment,
   `Tekst` varchar(1024) NOT NULL,
-  `Datum` date NOT NULL,
+  `Datum` timestamp NOT NULL,
   `Username` varchar(50) NOT NULL,
   PRIMARY KEY (`IdUtiska`,`Username`),
   KEY `R_4` (`Username`),
