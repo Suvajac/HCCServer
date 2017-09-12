@@ -146,4 +146,69 @@ public class MySQLGostDAO implements GostDAO {
 		return retVal;
 	}
 
+	@Override
+	public ArrayList<Gost> getKorisnike() {
+		ArrayList<Gost> retVal = new ArrayList<Gost>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		PreparedStatement psStavke = null;
+		ResultSet rsStavke = null;
+		PreparedStatement psPopust = null;
+		ResultSet rsPopust = null;
+
+		String query = "SELECT *FROM korisnik NATURAL JOIN gost natural join registracija natural join soba "
+				+ "natural join racun ";
+		String queryStavke="SELECT * FROM stavka natural join usluga where IdRacuna = ? ";
+		String queryPopust="SELECT * FROM popust where KodPopusta = ? ";
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			psStavke=conn.prepareStatement(queryStavke);
+			psPopust=conn.prepareStatement(queryPopust);
+
+			rs = ps.executeQuery();
+			Gost tempGost;
+			while(rs.next()){
+				tempGost = new Gost(rs.getString(3), rs.getString(4),
+						rs.getString(5),rs.getString(6),rs.getString(7));
+				tempGost.setDatumOd(rs.getDate(8));
+				tempGost.setDatumDo(rs.getDate(9));
+				tempGost.setSoba(new Soba(rs.getInt(2),rs.getInt(10),rs.getInt(11),rs.getDouble(12)));
+
+				Popust p=new Popust(rs.getInt(14),0,false);
+
+				Racun r=new Racun(rs.getInt(1),rs.getBoolean(13),p,null);
+
+				psPopust.setInt(1, p.getKodPopusta());
+				rsPopust=psPopust.executeQuery();
+				if(rsPopust.next()){
+					p.setKodPopusta(rsPopust.getInt(1));
+					p.setProcenat(rsPopust.getDouble(2));
+					p.setAktivan(rsPopust.getBoolean(3));
+				}
+				r.setPopust(p);
+				psStavke.setInt(1, r.getIdRacuna());
+				rsStavke = psStavke.executeQuery();
+				ArrayList<Stavka> retStavke=new ArrayList<Stavka>();
+				while(rsStavke.next()){
+					Usluga u=new Usluga(rsStavke.getInt(1),rsStavke.getString(5),rsStavke.getDouble(6));
+					Stavka s=new Stavka(rsStavke.getInt(2),rs.getTimestamp(3).toLocalDateTime(),u);
+					retStavke.add(s);
+				}
+				r.setStavke(retStavke);
+				tempGost.setRacun(r);
+				retVal.add(tempGost);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
+
 }

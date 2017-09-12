@@ -18,29 +18,29 @@ USE `hotelcc`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `soba`
+-- Table structure for table `proizvodirestoran`
 --
 
-DROP TABLE IF EXISTS `soba`;
+DROP TABLE IF EXISTS `proizvodirestoran`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `soba` (
-  `BrSobe` int(11) NOT NULL,
-  `BrKreveta` int(11) NOT NULL,
-  `BrSprata` int(11) NOT NULL,
-  `CijenaPoDanu` decimal(6,2) NOT NULL,
-  PRIMARY KEY (`BrSobe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `proizvodirestoran` (
+  `IdUslugaRestorana` int(11) NOT NULL,
+  `IdProizvoda` int(11) NOT NULL,
+  PRIMARY KEY (`IdUslugaRestorana`,`IdProizvoda`),
+  KEY `fk_proizvodirestoran_1_idx` (`IdProizvoda`),
+  CONSTRAINT `fk_proizvodirestoran_1` FOREIGN KEY (`IdProizvoda`) REFERENCES `proizvod` (`IdProizvoda`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_proizvodirestoran_2` FOREIGN KEY (`IdUslugaRestorana`) REFERENCES `uslugarestorana` (`IdUsluge`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `soba`
+-- Dumping data for table `proizvodirestoran`
 --
 
-LOCK TABLES `soba` WRITE;
-/*!40000 ALTER TABLE `soba` DISABLE KEYS */;
-INSERT INTO `soba` VALUES (101,3,1,45.00),(102,3,1,45.00),(103,2,1,40.00),(104,2,1,40.00),(105,2,1,50.00),(106,1,1,30.00),(107,1,1,30.00),(108,1,1,40.00),(109,3,1,75.00),(201,3,2,45.00),(202,3,2,45.00),(203,2,2,40.00),(204,2,2,40.00),(205,2,2,50.00),(206,1,2,30.00),(207,1,2,30.00),(208,1,2,40.00),(209,3,2,75.00);
-/*!40000 ALTER TABLE `soba` ENABLE KEYS */;
+LOCK TABLES `proizvodirestoran` WRITE;
+/*!40000 ALTER TABLE `proizvodirestoran` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proizvodirestoran` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-12 17:09:45
+-- Dump completed on 2017-09-12 17:09:44

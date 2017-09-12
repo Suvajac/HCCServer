@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hotelcc`;
+-- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
 -- ------------------------------------------------------
--- Server version	5.7.19-log
+-- Server version	5.7.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,10 +26,11 @@ DROP TABLE IF EXISTS `termin`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `termin` (
   `Datum` date NOT NULL,
-  `IdTermina` int(11) NOT NULL auto_increment,
-  `Vrijeme` time not null,
+  `IdTermina` int(11) NOT NULL AUTO_INCREMENT,
+  `Vrijeme` time NOT NULL,
   PRIMARY KEY (`IdTermina`),
   KEY `R_71` (`IdTermina`),
+  KEY `termin_ibfk_1` (`Vrijeme`),
   CONSTRAINT `termin_ibfk_1` FOREIGN KEY (`Vrijeme`) REFERENCES `vrijemetermina` (`Vrijeme`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-06 17:16:06
+-- Dump completed on 2017-09-12 17:09:45

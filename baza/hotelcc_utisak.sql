@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hotelcc`;
+-- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
 -- ------------------------------------------------------
--- Server version	5.7.19-log
+-- Server version	5.7.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,14 +25,14 @@ DROP TABLE IF EXISTS `utisak`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `utisak` (
-  `IdUtiska` int(11) NOT NULL auto_increment,
+  `IdUtiska` int(11) NOT NULL AUTO_INCREMENT,
   `Tekst` varchar(1024) NOT NULL,
-  `Datum` timestamp NOT NULL,
+  `Datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Username` varchar(50) NOT NULL,
   PRIMARY KEY (`IdUtiska`,`Username`),
   KEY `R_4` (`Username`),
   CONSTRAINT `utisak_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `korisnik` (`Username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +41,7 @@ CREATE TABLE `utisak` (
 
 LOCK TABLES `utisak` WRITE;
 /*!40000 ALTER TABLE `utisak` DISABLE KEYS */;
+INSERT INTO `utisak` VALUES (2,'Prvi utisak','2017-09-12 13:26:30','bojansuvajac'),(3,'Utisak','2017-09-12 13:49:52','ljubisamilincic');
 /*!40000 ALTER TABLE `utisak` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-06 17:16:05
+-- Dump completed on 2017-09-12 17:09:45
