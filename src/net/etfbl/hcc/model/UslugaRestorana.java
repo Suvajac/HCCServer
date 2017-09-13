@@ -39,6 +39,14 @@ public class UslugaRestorana extends Usluga implements Serializable{
 	public void setListaProizvoda(ArrayList<Proizvod> listaProizvoda) {
 		this.listaProizvoda = listaProizvoda;
 	}
+
+	public int getBrojStolica() {
+		return brojStolica;
+	}
+
+	public void setBrojStolica(int brojStolica) {
+		this.brojStolica = brojStolica;
+	}
 	
 	
 
