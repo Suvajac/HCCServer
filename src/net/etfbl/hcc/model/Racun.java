@@ -25,6 +25,14 @@ public class Racun implements Serializable{
 		this.popust=p;
 		this.stavke=al;
 	}
+	
+	public double getUkupnaCijena(){
+		double cijena = 0.0;
+		for(Stavka s : stavke){
+			cijena+=s.getUsluga().getCijena();
+		}
+		return cijena;
+	}
 
 	@Override
 	public int hashCode() {
