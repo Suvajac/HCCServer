@@ -2,6 +2,7 @@ package net.etfbl.hcc;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -45,7 +46,8 @@ public class ServerThread extends Thread{
 							k=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(username);
 							if(k==null)
 								k=HCCUtil.getDAOFactory().getRecepcionarDAO().getKorisnik(username);
-							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - je logovan");
+							if(k!=null)
+								System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - je logovan");
 							rezLista.clear();
 							rezLista.add(k);
 							ppout=new ProtokolPoruka("response");
@@ -59,6 +61,78 @@ public class ServerThread extends Thread{
 							rezLista.add(gosti);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
+							break;
+						case "Gost.dodaj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.dodaj");
+							Gost g=(Gost) ppin.getListaObjekata().get(0);
+							HCCUtil.getDAOFactory().getGostDAO().dodaj(g);
+							Gost gResponse=HCCUtil.getDAOFactory().getGostDAO().getKorisnik(g.getUsername());
+							rezLista.clear();
+							rezLista.add(gResponse);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Gost.azuriraj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.azuriraj");
+							Gost newgost=(Gost) ppin.getListaObjekata().get(0);
+							test=HCCUtil.getDAOFactory().getGostDAO().azuriraj(newgost);
+							rezLista.clear();
+							rezLista.add(test);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "SportUsluga.dodaj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - SportUsluga.dodaj");
+							SportUsluga spuslg=(SportUsluga) ppin.getListaObjekata().get(0);
+							test=HCCUtil.getDAOFactory().getSportTerminDAO().provjeriTermin(spuslg.getSportTermin());
+							int rezultatIdSpUslg=0;
+							boolean daLiSetovoOpremu=false;
+							boolean daLiSetovoStavkuSport=false;
+							if(test){
+								int idTerminaSport=HCCUtil.getDAOFactory().getSportTerminDAO().dodaj(spuslg.getSportTermin());
+								SportTermin tempSpTer=spuslg.getSportTermin();
+								tempSpTer.setIdTermina(idTerminaSport);
+								spuslg.setSportTermin(tempSpTer);
+								rezultatIdSpUslg=HCCUtil.getDAOFactory().getSportUslugaDAO().dodaj(spuslg);
+								spuslg.setIdUsluge(rezultatIdSpUslg);
+								daLiSetovoOpremu=HCCUtil.getDAOFactory().getOpremaSportUslugaDAO().setOprema(spuslg);
+								Stavka stavkaSpUslg=new Stavka(0,LocalDateTime.now(),spuslg);
+								daLiSetovoStavkuSport=HCCUtil.getDAOFactory().getStavkaDAO().dodaj(stavkaSpUslg, (Racun) ppin.getListaObjekata().get(1));
+							}
+							rezLista.clear();
+							rezLista.add(test);
+							rezLista.add(rezultatIdSpUslg);
+							rezLista.add(daLiSetovoOpremu);
+							rezLista.add(daLiSetovoStavkuSport);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "WellnessUsluga.dodaj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - WellnessUsluga.dodaj");
+							WellnessUsluga welluslg=(WellnessUsluga) ppin.getListaObjekata().get(0);
+							test=HCCUtil.getDAOFactory().getWellnessTerminDAO().provjeriTermin(welluslg.getWellnessTermin());
+							int rezultatIdWellUslg=0;
+							boolean daLiSetovoStavkuWell=false;
+							if(test){
+								int idTerminaWellness=HCCUtil.getDAOFactory().getWellnessTerminDAO().dodaj(welluslg.getWellnessTermin());
+								WellnessTermin tempWellTer=welluslg.getWellnessTermin();
+								tempWellTer.setIdTermina(idTerminaWellness);
+								welluslg.setWellnessTermin(tempWellTer);
+								rezultatIdWellUslg=HCCUtil.getDAOFactory().getWellnessUslugaDAO().dodaj(welluslg);
+								welluslg.setIdUsluge(rezultatIdWellUslg);
+								Stavka stavkaWellUslg=new Stavka(0,LocalDateTime.now(),welluslg);
+								daLiSetovoStavkuWell=HCCUtil.getDAOFactory().getStavkaDAO().dodaj(stavkaWellUslg, (Racun) ppin.getListaObjekata().get(1));
+							}
+							rezLista.clear();
+							rezLista.add(test);
+							rezLista.add(rezultatIdWellUslg);
+							rezLista.add(daLiSetovoStavkuWell);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "UslugaRestorana.dodaj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - UslugaRestorana.dodaj");
+							UslugaRestorana uslgrest=(UslugaRestorana) ppin.getListaObjekata().get(0);
 							break;
 						case "Utisak.dodaj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Utisak.dodaj");
@@ -90,6 +164,23 @@ public class ServerThread extends Thread{
 							ArrayList<Oglas> oglasi = HCCUtil.getDAOFactory().getOglasDAO().getOglasi();
 							rezLista.clear();
 							rezLista.add(oglasi);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Oglas.dodaj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Oglas.dodaj");
+							Oglas o=(Oglas) ppin.getListaObjekata().get(0);
+							int rezDodavanja=HCCUtil.getDAOFactory().getOglasDAO().dodaj(o);
+							rezLista.clear();
+							rezLista.add(rezDodavanja);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Oglas.obrisi" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Oglas.obrisi");
+							test=HCCUtil.getDAOFactory().getOglasDAO().obrisi((Oglas) ppin.getListaObjekata().get(0));
+							rezLista.clear();
+							rezLista.add(test);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
@@ -153,9 +244,17 @@ public class ServerThread extends Thread{
 						case "Proizvod.dodaj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Proizvod.dodaj");
 							Proizvod proizvod=(Proizvod) ppin.getListaObjekata().get(0);
-							HCCUtil.getDAOFactory().getProizvodDAO().dodaj(proizvod);
+							int rezIdProiz=HCCUtil.getDAOFactory().getProizvodDAO().dodaj(proizvod);
 							rezLista.clear();
-							rezLista.add(new String("Proizvod dodan!"));
+							rezLista.add(rezIdProiz);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Proizvod.obrisi" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Proizvod.obrisi");
+							test=HCCUtil.getDAOFactory().getProizvodDAO().obrisi((Proizvod) ppin.getListaObjekata().get(0));
+							rezLista.clear();
+							rezLista.add(test);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;

@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		ServerSocket ss = null;
 		try {
-			ss = new ServerSocket(ConnectionProperty.getInstance().getServerTCPPort()+1);
+			ss = new ServerSocket(ConnectionProperty.getInstance().getServerTCPPort());
 			System.out.println("Running...");
 			while(true){
 				Socket sock = ss.accept();

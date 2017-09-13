@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -29,7 +27,7 @@ CREATE TABLE `usluga` (
   `Naziv` varchar(20) NOT NULL,
   `Cijena` decimal(8,2) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +36,7 @@ CREATE TABLE `usluga` (
 
 LOCK TABLES `usluga` WRITE;
 /*!40000 ALTER TABLE `usluga` DISABLE KEYS */;
+INSERT INTO `usluga` VALUES (1,'sobna',33.00);
 /*!40000 ALTER TABLE `usluga` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-12 17:09:45
+-- Dump completed on 2017-09-13 10:55:06

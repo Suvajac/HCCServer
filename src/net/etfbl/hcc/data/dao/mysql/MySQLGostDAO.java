@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.GostDAO;
@@ -52,8 +53,8 @@ public class MySQLGostDAO implements GostDAO {
 			if (rs.next()){
 				retVal = new Gost(rs.getString(3), rs.getString(4),
 						rs.getString(5),rs.getString(6),rs.getString(7));
-				retVal.setDatumOd(rs.getDate(8));
-				retVal.setDatumDo(rs.getDate(9));
+				retVal.setDatumOd(new java.util.Date(rs.getDate(8).getTime()));
+				retVal.setDatumDo(new java.util.Date(rs.getDate(9).getTime()));
 				retVal.setSoba(new Soba(rs.getInt(2),rs.getInt(10),rs.getInt(11),rs.getDouble(12)));
 
 				Popust p=new Popust(rs.getInt(14),0,false);
@@ -73,7 +74,7 @@ public class MySQLGostDAO implements GostDAO {
 				ArrayList<Stavka> retStavke=new ArrayList<Stavka>();
 				while(rsStavke.next()){
 					Usluga u=new Usluga(rsStavke.getInt(1),rsStavke.getString(5),rsStavke.getDouble(6));
-					Stavka s=new Stavka(rsStavke.getInt(2),rs.getTimestamp(3).toLocalDateTime(),u);
+					Stavka s=new Stavka(rsStavke.getInt(2),rsStavke.getTimestamp(3).toLocalDateTime(),u);
 					retStavke.add(s);
 				}
 				r.setStavke(retStavke);
@@ -90,7 +91,7 @@ public class MySQLGostDAO implements GostDAO {
 	}
 
 	@Override
-	public boolean dodaj(Gost gost,java.sql.Date date,java.sql.Date date2) {
+	public boolean dodaj(Gost gost) {
 		boolean retVal = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -106,8 +107,8 @@ public class MySQLGostDAO implements GostDAO {
 			ps.setString(4, gost.getBrojTelefona());
 			ps.setString(5, gost.getLozinkaHash());
 			ps.setInt(6, gost.getSoba().getBrSobe());
-			ps.setDate(7, date);
-			ps.setDate(8, date2);
+			ps.setDate(7, new java.sql.Date(gost.getDatumOd().getTime()));
+			ps.setDate(8, new java.sql.Date(gost.getDatumDo().getTime()));
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {
@@ -173,8 +174,8 @@ public class MySQLGostDAO implements GostDAO {
 			while(rs.next()){
 				tempGost = new Gost(rs.getString(3), rs.getString(4),
 						rs.getString(5),rs.getString(6),rs.getString(7));
-				tempGost.setDatumOd(rs.getDate(8));
-				tempGost.setDatumDo(rs.getDate(9));
+				tempGost.setDatumOd(new java.util.Date(rs.getDate(8).getTime()));
+				tempGost.setDatumDo(new java.util.Date(rs.getDate(9).getTime()));
 				tempGost.setSoba(new Soba(rs.getInt(2),rs.getInt(10),rs.getInt(11),rs.getDouble(12)));
 
 				Popust p=new Popust(rs.getInt(14),0,false);
@@ -194,7 +195,7 @@ public class MySQLGostDAO implements GostDAO {
 				ArrayList<Stavka> retStavke=new ArrayList<Stavka>();
 				while(rsStavke.next()){
 					Usluga u=new Usluga(rsStavke.getInt(1),rsStavke.getString(5),rsStavke.getDouble(6));
-					Stavka s=new Stavka(rsStavke.getInt(2),rs.getTimestamp(3).toLocalDateTime(),u);
+					Stavka s=new Stavka(rsStavke.getInt(2),rsStavke.getTimestamp(3).toLocalDateTime(),u);
 					retStavke.add(s);
 				}
 				r.setStavke(retStavke);

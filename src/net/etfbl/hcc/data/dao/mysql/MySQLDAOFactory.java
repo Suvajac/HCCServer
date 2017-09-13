@@ -97,5 +97,10 @@ public class MySQLDAOFactory extends DAOFactory{
 	@Override
 	public MySQLProizvodiSobaDAO getProizvodiSobaDAO() {
 		return new MySQLProizvodiSobaDAO();
+	}
+
+	@Override
+	public MySQLOpremaSportUslugaDAO getOpremaSportUslugaDAO() {
+		return new MySQLOpremaSportUslugaDAO();
 	};
 }

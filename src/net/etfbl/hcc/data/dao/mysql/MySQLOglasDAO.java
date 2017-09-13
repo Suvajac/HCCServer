@@ -1,9 +1,11 @@
 package net.etfbl.hcc.data.dao.mysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import net.etfbl.hcc.connection.ConnectionPool;
@@ -44,21 +46,47 @@ public class MySQLOglasDAO implements OglasDAO {
 	}
 
 	@Override
-	public boolean dodaj(Oglas oglas) {
+	public int dodaj(Oglas oglas) {
+		int retVal = 0;
+		Connection conn = null;
+		CallableStatement proc = null;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			proc = conn.prepareCall("{ call insert_into_oglas (?, ?, ? , ?) }");
+			proc.registerOutParameter(4, Types.INTEGER);
+
+			proc.setInt(1, oglas.getIdOglasa());
+			if(oglas.getDatum()!=null){
+				java.sql.Timestamp date=java.sql.Timestamp.valueOf(oglas.getDatum());
+            	proc.setTimestamp(2,date);
+            }else proc.setTimestamp(2,null);
+			proc.setString(3, oglas.getPoruka());
+			proc.execute();
+			retVal = proc.getInt(4);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(proc);
+		}
+		return retVal;
+	}
+
+	@Override
+	public boolean obrisi(Oglas oglas) {
 		boolean retVal = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into oglas(Datum,Poruka) values "
-				+ "(?, ?) ";
+		String query = "DELETE FROM oglas "
+				+ "WHERE IdOglasa=? ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			if(oglas.getDatum()!=null){
-            	java.sql.Timestamp date=java.sql.Timestamp.valueOf(oglas.getDatum());
-            	ps.setTimestamp(1,date);
-            }else ps.setTimestamp(1,null);
-			ps.setString(2, oglas.getPoruka());
+			ps.setInt(1, oglas.getIdOglasa());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {

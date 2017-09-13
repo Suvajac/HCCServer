@@ -6,5 +6,6 @@ import net.etfbl.hcc.model.Oglas;
 
 public interface OglasDAO {
 	public ArrayList<Oglas> getOglasi();
-	public boolean dodaj(Oglas oglas);
+	public int dodaj(Oglas oglas);
+	public boolean obrisi(Oglas oglas);
 }

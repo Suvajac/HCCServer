@@ -1,9 +1,11 @@
 package net.etfbl.hcc.data.dao.mysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import net.etfbl.hcc.connection.ConnectionPool;
@@ -18,27 +20,29 @@ public class MySQLProizvodDAO implements ProizvodDAO {
 	}
 
 	@Override
-	public boolean dodaj(Proizvod proizvod) {
-		boolean retVal = false;
+	public int dodaj(Proizvod proizvod) {
+		int retVal = 0;
 		Connection conn = null;
-		PreparedStatement ps = null;
+		CallableStatement proc = null;
 
-		String query = "insert into proizvod(Naziv,Cijena,Tip) values "
-				+ "(?, ? , ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(query);
-			ps.setString(1, proizvod.getNaziv());
-			ps.setDouble(2, proizvod.getCijena());
-			ps.setString(3, proizvod.getTip());
+			proc = conn.prepareCall("{ call insert_into_proizvod (?, ?, ? , ? , ?) }");
+			proc.registerOutParameter(5, Types.INTEGER);
 
-			retVal = ps.executeUpdate() == 1;
+			proc.setInt(1, proizvod.getIdProizvoda());
+			proc.setString(2, proizvod.getNaziv());
+			proc.setDouble(3, proizvod.getCijena());
+			proc.setString(4, proizvod.getTip());
+			proc.execute();
+			retVal = proc.getInt(5);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
-			DBUtilities.getInstance().close(ps);
+			DBUtilities.getInstance().close(proc);
 		}
 		return retVal;
 	}

@@ -23,18 +23,17 @@ public class MySQLStavkaDAO implements StavkaDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into stavka(IdStavke,Datum,IdRacuna,IdUsluge) values "
-				+ "(?, ?, ?, ? , ?) ";
+		String query = "insert into stavka(Datum,IdRacuna,IdUsluge) values "
+				+ "(?, ?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, stavka.getIdStavke());
 			if(stavka.getDatum()!=null){
 				java.sql.Timestamp date=java.sql.Timestamp.valueOf(stavka.getDatum());
-            	ps.setTimestamp(2,date);
-            }else ps.setTimestamp(2,null);
-			ps.setInt(3, racun.getIdRacuna());
-			ps.setInt(4, stavka.getUsluga().getIdUsluge());
+            	ps.setTimestamp(1,date);
+            }else ps.setTimestamp(1,null);
+			ps.setInt(2, racun.getIdRacuna());
+			ps.setInt(3, stavka.getUsluga().getIdUsluge());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {
