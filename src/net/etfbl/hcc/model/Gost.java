@@ -11,9 +11,6 @@ public class Gost extends Korisnik implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Racun racun;
-	private Soba soba;
-	private Date DatumOd;
-	private Date DatumDo;
 	private ArrayList<Usluga> usluge;
 
 	public Gost() {
@@ -24,24 +21,7 @@ public class Gost extends Korisnik implements Serializable{
 		super(username, ime, prezime, brojTelefona, lozinkaHash);
 		// TODO Auto-generated constructor stub
 		usluge=new ArrayList<Usluga>();
-		soba=null;
 		racun=null;
-	}
-
-	public Date getDatumOd() {
-		return DatumOd;
-	}
-
-	public void setDatumOd(Date datumOd) {
-		DatumOd = datumOd;
-	}
-
-	public Date getDatumDo() {
-		return DatumDo;
-	}
-
-	public void setDatumDo(Date datumDo) {
-		DatumDo = datumDo;
 	}
 
 	public Racun getRacun() {
@@ -50,14 +30,6 @@ public class Gost extends Korisnik implements Serializable{
 
 	public void setRacun(Racun racun) {
 		this.racun = racun;
-	}
-
-	public Soba getSoba() {
-		return soba;
-	}
-
-	public void setSoba(Soba soba) {
-		this.soba = soba;
 	}
 
 	public ArrayList<Usluga> getUsluge() {
