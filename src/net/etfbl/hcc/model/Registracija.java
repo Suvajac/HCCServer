@@ -11,16 +11,16 @@ public class Registracija implements Serializable{
 
 	private Date datumOd;
 	private Date datumDo;
-	private Korisnik korisnik;
+	private Gost gost;
 	private Soba soba;
 
 	public Registracija() {
 		// TODO Auto-generated constructor stub
 	}
-	public Registracija(Date datumOd, Date datumDo, Korisnik username, Soba idSobe) {
+	public Registracija(Date datumOd, Date datumDo, Gost username, Soba idSobe) {
 		this.datumOd = datumOd;
 		this.datumDo = datumDo;
-		this.korisnik = username;
+		this.gost = username;
 		this.soba = idSobe;
 	}
 
@@ -28,7 +28,7 @@ public class Registracija implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((korisnik == null) ? 0 : korisnik.hashCode());
+		result = prime * result + ((gost == null) ? 0 : gost.hashCode());
 		result = prime * result + ((soba == null) ? 0 : soba.hashCode());
 		return result;
 	}
@@ -41,10 +41,10 @@ public class Registracija implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Registracija other = (Registracija) obj;
-		if (korisnik == null) {
-			if (other.korisnik != null)
+		if (gost == null) {
+			if (other.gost != null)
 				return false;
-		} else if (!korisnik.equals(other.korisnik))
+		} else if (!gost.equals(other.gost))
 			return false;
 		if (soba == null) {
 			if (other.soba != null)
@@ -53,11 +53,11 @@ public class Registracija implements Serializable{
 			return false;
 		return true;
 	}
-	public Korisnik getKorisnik() {
-		return korisnik;
+	public Gost getGost() {
+		return gost;
 	}
-	public void setKorisnik(Korisnik korisnik) {
-		this.korisnik = korisnik;
+	public void setGost(Gost gost) {
+		this.gost = gost;
 	}
 	public Soba getSoba() {
 		return soba;
