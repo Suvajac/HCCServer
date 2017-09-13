@@ -46,4 +46,33 @@ public class MySQLSobaDAO implements SobaDAO {
 			return retVal;
 	}
 
+	@Override
+	public Soba getSobuSaBrojem(int broj) {
+		Soba retVal = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT * FROM soba where BrSobe=? ";
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, broj);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				retVal = new Soba(rs.getInt(1), rs.getInt(2),
+						rs.getInt(3),rs.getDouble(4));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
+
 }

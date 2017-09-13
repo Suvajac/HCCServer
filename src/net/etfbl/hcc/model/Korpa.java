@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Korpa {
-	private List<Proizvod> listaProizvoda;
-	
+	private ArrayList<Proizvod> listaProizvoda;
+
 	public Korpa(){
 		listaProizvoda = new ArrayList<>();
 	}
-	
+
 	public boolean add(Proizvod p){
 		return listaProizvoda.add(p);
 	}
-	
+
 	public boolean remove(Proizvod p){
 		return listaProizvoda.remove(p);
 	}
-	
+
 	public double getUkupnaCijena(){
 		double cijena = 0.0;
 		for(Proizvod p : listaProizvoda){
@@ -51,11 +51,11 @@ public class Korpa {
 		return true;
 	}
 
-	public List<Proizvod> getListaProizvoda() {
+	public ArrayList<Proizvod> getListaProizvoda() {
 		return listaProizvoda;
 	}
 
-	public void setListaProizvoda(List<Proizvod> listaProizvoda) {
+	public void setListaProizvoda(ArrayList<Proizvod> listaProizvoda) {
 		this.listaProizvoda = listaProizvoda;
 	}
 }

@@ -2,7 +2,6 @@ package net.etfbl.hcc;
 
 import java.io.*;
 import java.net.Socket;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -52,6 +51,18 @@ public class ServerThread extends Thread{
 							rezLista.add(k);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
+							break;
+						case "Registracija.getRegistracije" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Registracija.getRegistracije");
+							ArrayList<Registracija> registracije=null;
+							registracije=HCCUtil.getDAOFactory().getRegistracijaDAO().getRegistracije();
+							rezLista.clear();
+							rezLista.add(registracije);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Registracija.dodaj" :
+
 							break;
 						case "Gost.getKorisnike" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.getKorisnike");
@@ -133,6 +144,16 @@ public class ServerThread extends Thread{
 						case "UslugaRestorana.dodaj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - UslugaRestorana.dodaj");
 							UslugaRestorana uslgrest=(UslugaRestorana) ppin.getListaObjekata().get(0);
+							int rezIdRestUslg=HCCUtil.getDAOFactory().getUslugaRestoranaDAO().dodaj(uslgrest);
+							uslgrest.setIdUsluge(rezIdRestUslg);
+							boolean daLiSetovoProizvodeRestoran=HCCUtil.getDAOFactory().getProizvodiRestoranDAO().setProizvodi(uslgrest);
+							Stavka stavkaUslgRest=new Stavka(0,LocalDateTime.now(),uslgrest);
+							boolean daLiSetovoStavkuRest=HCCUtil.getDAOFactory().getStavkaDAO().dodaj(stavkaUslgRest, (Racun) ppin.getListaObjekata().get(1));
+							rezLista.clear();
+							rezLista.add(true);
+							rezLista.add(rezIdRestUslg);
+							rezLista.add(daLiSetovoProizvodeRestoran);
+							rezLista.add(daLiSetovoStavkuRest);
 							break;
 						case "SobnaUsluga.dodaj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - SobnaUsluga.dodaj");

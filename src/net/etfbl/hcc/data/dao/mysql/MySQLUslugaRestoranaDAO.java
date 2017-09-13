@@ -1,8 +1,10 @@
 package net.etfbl.hcc.data.dao.mysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.UslugaRestoranaDAO;
@@ -16,29 +18,31 @@ public class MySQLUslugaRestoranaDAO implements UslugaRestoranaDAO {
 	}
 
 	@Override
-	public boolean dodaj(UslugaRestorana usluga) {
-		boolean retVal = false;
+	public int dodaj(UslugaRestorana usluga) {
+		int retVal = 0;
 		Connection conn = null;
-		PreparedStatement ps = null;
+		CallableStatement proc = null;
 
-		String query = "call insert_into_uslugarestorana "
-				+ "(?, ?, ? , ? , ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, usluga.getIdUsluge());
-			ps.setString(2, usluga.getNaziv());
-			ps.setDouble(3, usluga.getCijena());
-			ps.setInt(4, usluga.getBrojStolica());
-			ps.setString(5, usluga.getVrijeme());
+			proc = conn.prepareCall(" call insert_into_uslugarestorana (?, ?, ? , ? , ? , ?) ");
+			proc.registerOutParameter(6, Types.INTEGER);
 
-			retVal = ps.executeUpdate() == 1;
+			proc.setInt(1, usluga.getIdUsluge());
+			proc.setString(2, usluga.getNaziv());
+			proc.setDouble(3, usluga.getCijena());
+			proc.setInt(4, usluga.getBrojStolica());
+			proc.setString(5, usluga.getVrijeme());
+
+			proc.execute();
+			retVal = proc.getInt(6);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
-			DBUtilities.getInstance().close(ps);
+			DBUtilities.getInstance().close(proc);
 		}
 		return retVal;
 	}

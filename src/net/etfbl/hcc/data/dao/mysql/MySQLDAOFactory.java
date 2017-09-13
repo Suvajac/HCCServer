@@ -70,7 +70,7 @@ public class MySQLDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public MySQLUslugaRestoranaDAO UslugaRestoranaDAO() {
+	public MySQLUslugaRestoranaDAO getUslugaRestoranaDAO() {
 		return new MySQLUslugaRestoranaDAO();
 	}
 
@@ -102,5 +102,10 @@ public class MySQLDAOFactory extends DAOFactory{
 	@Override
 	public MySQLOpremaSportUslugaDAO getOpremaSportUslugaDAO() {
 		return new MySQLOpremaSportUslugaDAO();
+	}
+
+	@Override
+	public MySQLRegistracijaDAO getRegistracijaDAO() {
+		return new MySQLRegistracijaDAO();
 	};
 }

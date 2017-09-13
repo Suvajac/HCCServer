@@ -1,7 +1,7 @@
 package net.etfbl.hcc.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Registracija implements Serializable{
 	/**
@@ -9,15 +9,15 @@ public class Registracija implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Date datumOd;
-	private Date datumDo;
+	private LocalDate datumOd;
+	private LocalDate datumDo;
 	private Gost gost;
 	private Soba soba;
 
 	public Registracija() {
 		// TODO Auto-generated constructor stub
 	}
-	public Registracija(Date datumOd, Date datumDo, Gost username, Soba idSobe) {
+	public Registracija(LocalDate datumOd, LocalDate datumDo, Gost username, Soba idSobe) {
 		this.datumOd = datumOd;
 		this.datumDo = datumDo;
 		this.gost = username;
@@ -65,16 +65,16 @@ public class Registracija implements Serializable{
 	public void setSoba(Soba soba) {
 		this.soba = soba;
 	}
-	public Date getDatumOd() {
+	public LocalDate getDatumOd() {
 		return datumOd;
 	}
-	public void setDatumOd(Date datumOd) {
+	public void setDatumOd(LocalDate datumOd) {
 		this.datumOd = datumOd;
 	}
-	public Date getDatumDo() {
+	public LocalDate getDatumDo() {
 		return datumDo;
 	}
-	public void setDatumDo(Date datumDo) {
+	public void setDatumDo(LocalDate datumDo) {
 		this.datumDo = datumDo;
 	}
 
