@@ -38,7 +38,6 @@ CREATE TABLE `proizvodisoba` (
 
 LOCK TABLES `proizvodisoba` WRITE;
 /*!40000 ALTER TABLE `proizvodisoba` DISABLE KEYS */;
-INSERT INTO `proizvodisoba` VALUES (1,1),(1,2),(1,3);
 /*!40000 ALTER TABLE `proizvodisoba` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 10:55:05
+-- Dump completed on 2017-09-13 18:02:21

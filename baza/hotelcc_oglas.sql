@@ -27,7 +27,7 @@ CREATE TABLE `oglas` (
   `Datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Poruka` varchar(256) NOT NULL,
   PRIMARY KEY (`IdOglasa`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `oglas` (
 
 LOCK TABLES `oglas` WRITE;
 /*!40000 ALTER TABLE `oglas` DISABLE KEYS */;
-INSERT INTO `oglas` VALUES (1,'2004-09-20 00:00:00','Upozoravaju se gosti da pripaze prilikom napustanja objekta iz razloga sto se vrse radovi na obliznjem objektu.'),(2,'2013-01-20 00:00:00','Popravka internet odasiljaca u trajanju od 2h.');
+INSERT INTO `oglas` VALUES (1,'2004-09-20 00:00:00','Upozoravaju se gosti da pripaze prilikom napustanja objekta iz razloga sto se vrse radovi na obliznjem objektu.'),(2,'2013-01-20 00:00:00','Popravka internet odasiljaca u trajanju od 2h.'),(4,'2017-09-13 09:19:16','Ovo je novi oglas'),(5,'2017-09-13 09:20:32','Ovo je novi oglas');
 /*!40000 ALTER TABLE `oglas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 10:55:07
+-- Dump completed on 2017-09-13 18:02:22

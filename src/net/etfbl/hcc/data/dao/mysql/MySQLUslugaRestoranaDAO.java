@@ -29,7 +29,7 @@ public class MySQLUslugaRestoranaDAO implements UslugaRestoranaDAO {
 			ps.setInt(1, usluga.getIdUsluge());
 			ps.setString(2, usluga.getNaziv());
 			ps.setDouble(3, usluga.getCijena());
-			ps.setInt(4, usluga.getSto().getIdStola());
+			ps.setInt(4, usluga.getBrojStolica());
 			ps.setString(5, usluga.getVrijeme());
 
 			retVal = ps.executeUpdate() == 1;

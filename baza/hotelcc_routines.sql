@@ -59,6 +59,71 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insert_into_oglas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_oglas`(
+	in varid int(11),
+    in varTime timestamp,
+	in varPoruka varchar(256),
+    out rez int(11)
+	)
+begin
+	declare a int(11) default 0;
+	if(varid >0) then
+		insert into oglas(IdOglasa,Datum,Poruka) values(varid,varTime,varPoruka);
+		set rez=varid;
+	else
+		insert into oglas(Datum,Poruka) values(varTime,varPoruka);
+		select max(IdOglasa) into a from oglas;
+		set rez=a;
+    end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insert_into_proizvod` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_proizvod`(
+	in varid int(11),
+    in varNaziv varchar(150),
+	in varCijena double,
+    in varTip varchar(20),
+    out rez int(11)
+	)
+begin
+	declare a int(11) default 0;
+	if(varid >0) then
+		insert into proizvod(IdProizvoda,Naziv,Cijena,Tip) values(varid,varNaziv,varCijena,varTip);
+		set rez=varid;
+	else
+		insert into proizvod(Naziv,Cijena,Tip) values(varNaziv,varCijena,varTip);
+		select max(IdProizvoda) into a from proizvod;
+		set rez=a;
+    end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `insert_into_recepcionar` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -101,18 +166,21 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_sobnausluga`(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
-    in varTip varchar(20)
+    in varCijena decimal(8,2),
+    in varTip varchar(20),
+	out rez int(11)
 	)
 begin
 	declare a int(11) default 0;
 	if(varid >0) then
 		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
 		insert into sobnausluga(IdUsluge,Tip) values(varid,varTip);
+        set rez=varid;
 	else
 		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
 		select max(IdUsluge) into a from usluga;
 		insert into sobnausluga(IdUsluge,Tip) values(a,varTip);
+        set rez=a;
     end if;
 	
 end ;;
@@ -169,7 +237,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_sportusluga`(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
+    in varCijena decimal(8,2),
     in varIdTermina int(11),
     out rez int(11)
 	)
@@ -205,7 +273,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_uslugarestorana`(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
+    in varCijena decimal(8,2),
     in varIdStola int(11),
     in varVrijeme varchar(20)
 	)
@@ -275,7 +343,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_wellnessusluga`(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
+    in varCijena decimal(8,2),
     in varIdTermina int(11),
     out rez int(11)
 	)
@@ -308,4 +376,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 10:55:07
+-- Dump completed on 2017-09-13 18:02:22

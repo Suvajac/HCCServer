@@ -119,17 +119,20 @@ create procedure insert_into_uslugarestorana(
 	in varNaziv varchar(20),
     in varCijena decimal(8,2),
     in varIdStola int(11),
-    in varVrijeme varchar(20)
+    in varVrijeme varchar(20),
+	out rez int(11)
 	)
 begin
 	declare a int(11) default 0;
 	if(varid >0) then
 		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
-		insert into uslugarestorana(IdUsluge,IdStola,Vrijeme) values(varid,varIdStola,varVrijeme);
+		insert into uslugarestorana(IdUsluge,BrojStolica,Vrijeme) values(varid,varIdStola,varVrijeme);
+        set rez=varid;
 	else
 		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
 		select max(IdUsluge) into a from usluga;
-		insert into uslugarestorana(IdUsluge,IdStola,Vrijeme) values(a,varIdStola,varVrijeme);
+		insert into uslugarestorana(IdUsluge,BrojStolica,Vrijeme) values(a,varIdStola,varVrijeme);
+        set rez=a;
     end if;
 	
 end$$
