@@ -93,18 +93,21 @@ delimiter $$
 create procedure insert_into_sobnausluga(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
-    in varTip varchar(20)
+    in varCijena decimal(8,2),
+    in varTip varchar(20),
+	out rez int(11)
 	)
 begin
 	declare a int(11) default 0;
 	if(varid >0) then
 		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
 		insert into sobnausluga(IdUsluge,Tip) values(varid,varTip);
+        set rez=varid;
 	else
 		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
 		select max(IdUsluge) into a from usluga;
 		insert into sobnausluga(IdUsluge,Tip) values(a,varTip);
+        set rez=a;
     end if;
 	
 end$$
@@ -114,7 +117,7 @@ delimiter $$
 create procedure insert_into_uslugarestorana(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
+    in varCijena decimal(8,2),
     in varIdStola int(11),
     in varVrijeme varchar(20)
 	)
@@ -136,7 +139,7 @@ delimiter $$
 create procedure insert_into_wellnessusluga(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
+    in varCijena decimal(8,2),
     in varIdTermina int(11),
     out rez int(11)
 	)
@@ -160,7 +163,7 @@ delimiter $$
 create procedure insert_into_sportusluga(
 	in varid int(11),
 	in varNaziv varchar(20),
-    in varCijena decimal,
+    in varCijena decimal(8,2),
     in varIdTermina int(11),
     out rez int(11)
 	)

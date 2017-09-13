@@ -25,7 +25,7 @@ public class MySQLWellnessUslugaDAO implements WellnessUslugaDAO {
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			proc = conn.prepareCall("{ call insert_into_wellnessusluga (?, ?, ? , ? , ?) }");
+			proc = conn.prepareCall(" call insert_into_wellnessusluga (?, ?, ? , ? , ?) ");
 			proc.registerOutParameter(5, Types.INTEGER);
 
 			proc.setInt(1, usluga.getIdUsluge());
