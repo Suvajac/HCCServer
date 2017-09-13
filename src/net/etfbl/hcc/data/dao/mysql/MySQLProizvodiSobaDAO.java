@@ -47,7 +47,7 @@ public class MySQLProizvodiSobaDAO implements ProizvodiSobaDAO {
 
 	@Override
 	public boolean setProizvodi(SobnaUsluga usluga) {
-		boolean retVal = false;
+		boolean retVal = true;
 		Connection conn = null;
 		PreparedStatement ps = null;
 

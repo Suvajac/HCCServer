@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.GostDAO;

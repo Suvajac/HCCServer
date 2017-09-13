@@ -134,6 +134,22 @@ public class ServerThread extends Thread{
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - UslugaRestorana.dodaj");
 							UslugaRestorana uslgrest=(UslugaRestorana) ppin.getListaObjekata().get(0);
 							break;
+						case "SobnaUsluga.dodaj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - SobnaUsluga.dodaj");
+							SobnaUsluga sobuslg=(SobnaUsluga) ppin.getListaObjekata().get(0);
+							int rezultatIdSobnaUslg=HCCUtil.getDAOFactory().getSobnaUslugaDAO().dodaj(sobuslg);
+							sobuslg.setIdUsluge(rezultatIdSobnaUslg);
+							boolean daLiSetovoProizvode=HCCUtil.getDAOFactory().getProizvodiSobaDAO().setProizvodi(sobuslg);
+							Stavka stavkaSobUslg=new Stavka(0,LocalDateTime.now(),sobuslg);
+							boolean daLiSetovoStavkuSoba=HCCUtil.getDAOFactory().getStavkaDAO().dodaj(stavkaSobUslg, (Racun) ppin.getListaObjekata().get(1));
+							rezLista.clear();
+							rezLista.add(true);
+							rezLista.add(rezultatIdSobnaUslg);
+							rezLista.add(daLiSetovoProizvode);
+							rezLista.add(daLiSetovoStavkuSoba);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
 						case "Utisak.dodaj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Utisak.dodaj");
 							Utisak u=(Utisak) ppin.getListaObjekata().get(0);
@@ -263,6 +279,15 @@ public class ServerThread extends Thread{
 							ArrayList<SportskaOprema> oprema = HCCUtil.getDAOFactory().getSportskaOpremaDAO().getOprema();
 							rezLista.clear();
 							rezLista.add(oprema);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Racun.azuriraj" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Racun.azuriraj");
+							Racun rac=(Racun) ppin.getListaObjekata().get(0);
+							test=HCCUtil.getDAOFactory().getRacunDAO().azuriraj(rac);
+							rezLista.clear();
+							rezLista.add(test);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
