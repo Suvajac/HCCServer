@@ -83,7 +83,7 @@ public class MySQLSobaDAO implements SobaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String query = "SELECT * from soba natural join registracija where DatumDo ";
+		String query = "SELECT * from soba where BrSobe not in(select BrSobe from registracija where DatumDo > curdate())  ";
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

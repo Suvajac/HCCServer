@@ -81,7 +81,7 @@ public class ServerThread extends Thread{
 
 							//sobu dobijam dobru
 							HCCUtil.getDAOFactory().getRegistracijaDAO().dodaj(registracija); //upise se registracija u bazu
-
+							rezLista.clear();
 							rezLista.add(registracija);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
