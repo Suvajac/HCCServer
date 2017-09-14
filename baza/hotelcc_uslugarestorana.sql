@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -28,7 +30,7 @@ CREATE TABLE `uslugarestorana` (
   `Vrijeme` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`),
   CONSTRAINT `uslugarestorana_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +39,7 @@ CREATE TABLE `uslugarestorana` (
 
 LOCK TABLES `uslugarestorana` WRITE;
 /*!40000 ALTER TABLE `uslugarestorana` DISABLE KEYS */;
-INSERT INTO `uslugarestorana` VALUES (2,19,'10:59'),(2,20,'11:00');
+INSERT INTO `uslugarestorana` VALUES (2,19,'10:59'),(2,20,'11:00'),(2,21,'01:01'),(2,22,'01:04');
 /*!40000 ALTER TABLE `uslugarestorana` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-14 14:57:56
+-- Dump completed on 2017-09-15  0:45:06

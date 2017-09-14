@@ -32,9 +32,12 @@ public class MySQLProizvodiRestoranDAO implements ProizvodiRestoranDAO {
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, usluga.getIdUsluge());
 			rs = ps.executeQuery();
-
-			while (rs.next())
-				retVal.add(new Proizvod(rs.getInt(1),rs.getString(4),rs.getString(2),rs.getDouble(3)));
+			int loop=0;
+			while (rs.next()){
+				loop=rs.getInt(6);
+				for(int i=0;i<loop;i++)
+					retVal.add(new Proizvod(rs.getInt(1),rs.getString(4),rs.getString(2),rs.getDouble(3)));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
@@ -51,7 +54,7 @@ public class MySQLProizvodiRestoranDAO implements ProizvodiRestoranDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into proizvodirestoran(IdProizvoda,IdUslugaRestorana) values (?, ?) ";
+		String query = "call insert_into_proizvodirestoran(?,?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);

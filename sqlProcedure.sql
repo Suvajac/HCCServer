@@ -247,6 +247,51 @@ begin
 end$$
 delimiter ;
 
+delimiter $$
+create procedure insert_into_proizvodirestoran(
+	in varPro int(11),
+    in varUsl int(11)
+	)
+begin
+	if (exists (SELECT * FROM proizvodirestoran where IdProizvoda=varPro and IdUslugaRestorana=varUsl)) 
+		then
+			update proizvodirestoran set Kolicina=Kolicina+1 where IdProizvoda=varPro and IdUslugaRestorana=varUsl;
+		else	
+			insert into proizvodirestoran(IdProizvoda,IdUslugaRestorana) values (varPro,varUsl);
+        end if;
+end$$
+delimiter ;
+
+delimiter $$
+create procedure insert_into_opremasportusluga(
+	in varPro int(11),
+    in varUsl int(11)
+	)
+begin
+	if (exists (SELECT * FROM opremasportusluga where IdSportskeOpreme=varPro and IdUsluge=varUsl)) 
+		then
+			update opremasportusluga set Kolicina=Kolicina+1 where IdSportskeOpreme=varPro and IdUsluge=varUsl;
+		else	
+			insert into opremasportusluga(IdSportskeOpreme,IdUsluge) values (varPro,varUsl);
+        end if;
+end$$
+delimiter ;
+
+delimiter $$
+create procedure insert_into_proizvodisoba(
+	in varPro int(11),
+    in varUsl int(11)
+	)
+begin
+	if (exists (SELECT * FROM proizvodisoba where IdProizvoda=varPro and IdSobneUsluge=varUsl)) 
+		then
+			update proizvodisoba set Kolicina=Kolicina+1 where IdProizvoda=varPro and IdSobneUsluge=varUsl;
+		else	
+			insert into proizvodisoba(IdProizvoda,IdSobneUsluge) values (varPro,varUsl);
+        end if;
+end$$
+delimiter ;
+
 -- korisnicki nalog
 drop user if exists 'mils'@'localhost';
 create user 'mils'@'localhost' identified by 'mils';
@@ -263,5 +308,8 @@ grant execute on procedure hotelcc.insert_into_sportusluga to 'mils'@'localhost'
 grant execute on procedure hotelcc.insert_into_oglas to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_proizvod to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_obavjestenje to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_proizvodirestoran to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_opremasportusluga to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_proizvodisoba to 'mils'@'localhost';
 grant select on mysql.proc to 'mils'@'localhost';
 flush privileges;

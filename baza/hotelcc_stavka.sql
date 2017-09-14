@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -32,7 +34,7 @@ CREATE TABLE `stavka` (
   KEY `R_42` (`IdUsluge`),
   CONSTRAINT `stavka_ibfk_1` FOREIGN KEY (`IdRacuna`) REFERENCES `racun` (`IdRacuna`),
   CONSTRAINT `stavka_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +43,7 @@ CREATE TABLE `stavka` (
 
 LOCK TABLES `stavka` WRITE;
 /*!40000 ALTER TABLE `stavka` DISABLE KEYS */;
-INSERT INTO `stavka` VALUES (17,'2017-09-13 16:10:41',2,17),(19,'2017-09-14 08:29:26',2,19),(20,'2017-09-14 08:30:36',2,20);
+INSERT INTO `stavka` VALUES (17,'2017-09-13 16:10:41',2,17),(19,'2017-09-14 08:29:26',2,19),(20,'2017-09-14 08:30:36',2,20),(21,'2017-09-14 22:32:02',3,21),(22,'2017-09-14 22:34:11',3,22);
 /*!40000 ALTER TABLE `stavka` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-14 14:57:56
+-- Dump completed on 2017-09-15  0:45:06

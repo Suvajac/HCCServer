@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -25,6 +27,7 @@ DROP TABLE IF EXISTS `opremasportusluga`;
 CREATE TABLE `opremasportusluga` (
   `IdSportskeOpreme` int(11) NOT NULL,
   `IdUsluge` int(11) NOT NULL,
+  `Kolicina` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`IdSportskeOpreme`,`IdUsluge`),
   KEY `fk_opremasportusluga_1_idx` (`IdUsluge`),
   CONSTRAINT `fk_opremasportusluga_1` FOREIGN KEY (`IdUsluge`) REFERENCES `sportusluga` (`IdUsluge`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-14 14:57:57
+-- Dump completed on 2017-09-15  0:45:07

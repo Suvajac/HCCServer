@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -25,6 +27,7 @@ DROP TABLE IF EXISTS `proizvodirestoran`;
 CREATE TABLE `proizvodirestoran` (
   `IdUslugaRestorana` int(11) NOT NULL,
   `IdProizvoda` int(11) NOT NULL,
+  `Kolicina` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`IdUslugaRestorana`,`IdProizvoda`),
   KEY `fk_proizvodirestoran_1_idx` (`IdProizvoda`),
   CONSTRAINT `fk_proizvodirestoran_1` FOREIGN KEY (`IdProizvoda`) REFERENCES `proizvod` (`IdProizvoda`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -38,7 +41,7 @@ CREATE TABLE `proizvodirestoran` (
 
 LOCK TABLES `proizvodirestoran` WRITE;
 /*!40000 ALTER TABLE `proizvodirestoran` DISABLE KEYS */;
-INSERT INTO `proizvodirestoran` VALUES (20,3),(20,4);
+INSERT INTO `proizvodirestoran` VALUES (20,3,1),(20,4,1),(22,2,2),(22,8,3);
 /*!40000 ALTER TABLE `proizvodirestoran` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-14 14:57:56
+-- Dump completed on 2017-09-15  0:45:05

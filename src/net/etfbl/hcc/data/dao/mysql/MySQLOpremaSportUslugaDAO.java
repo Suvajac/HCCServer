@@ -33,8 +33,12 @@ public class MySQLOpremaSportUslugaDAO implements OpremaSportUslugaDAO {
 			ps.setInt(1, usluga.getIdUsluge());
 			rs = ps.executeQuery();
 
-			while (rs.next())
-				retVal.add(new SportskaOprema(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getString(4)));
+			int loop=0;
+			while (rs.next()){
+				loop=rs.getInt(6);
+				for(int i=0;i<loop;i++)
+					retVal.add(new SportskaOprema(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getString(4)));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
@@ -51,7 +55,7 @@ public class MySQLOpremaSportUslugaDAO implements OpremaSportUslugaDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into opremasportusluga(IdSportskeOpreme,IdUsluge) values (?, ?) ";
+		String query = "call insert_into_opremasportusluga(?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);

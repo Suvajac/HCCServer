@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -30,7 +32,7 @@ CREATE TABLE `utisak` (
   PRIMARY KEY (`IdUtiska`,`Username`),
   KEY `R_4` (`Username`),
   CONSTRAINT `utisak_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `korisnik` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +41,7 @@ CREATE TABLE `utisak` (
 
 LOCK TABLES `utisak` WRITE;
 /*!40000 ALTER TABLE `utisak` DISABLE KEYS */;
-INSERT INTO `utisak` VALUES (2,'Prvi utisak','2017-09-12 13:26:30','bojansuvajac'),(4,'Utisak za Lekica','2017-09-13 10:36:55','bojansuvajac'),(5,'Dodaj utisak','2017-09-13 16:18:26','bojansuvajac');
+INSERT INTO `utisak` VALUES (2,'Prvi utisak','2017-09-12 13:26:30','bojansuvajac'),(4,'Utisak za Lekica','2017-09-13 10:36:55','bojansuvajac'),(5,'Dodaj utisak','2017-09-13 16:18:26','bojansuvajac'),(6,'Imam i ja utisak','2017-09-14 21:22:20','ljubisamilincic');
 /*!40000 ALTER TABLE `utisak` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-14 14:57:57
+-- Dump completed on 2017-09-15  0:45:06
