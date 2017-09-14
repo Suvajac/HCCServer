@@ -17,10 +17,10 @@ public class Registracija implements Serializable{
 	public Registracija() {
 		// TODO Auto-generated constructor stub
 	}
-	public Registracija(LocalDate datumOd, LocalDate datumDo, Gost username, Soba idSobe) {
+	public Registracija(LocalDate datumOd, LocalDate datumDo, Gost gost, Soba idSobe) {
 		this.datumOd = datumOd;
 		this.datumDo = datumDo;
-		this.gost = username;
+		this.gost = gost;
 		this.soba = idSobe;
 	}
 
