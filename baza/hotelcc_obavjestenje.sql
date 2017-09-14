@@ -37,7 +37,7 @@ CREATE TABLE `obavjestenje` (
 
 LOCK TABLES `obavjestenje` WRITE;
 /*!40000 ALTER TABLE `obavjestenje` DISABLE KEYS */;
-INSERT INTO `obavjestenje` VALUES (1,'Prvo obavjestenje!','2014-09-12 12:51:50',1),(2,'Drugo obavjestenje','2013-09-12 12:50:06',0);
+INSERT INTO `obavjestenje` VALUES (1,'Prvo obavjestenje!','2014-09-12 12:51:50',1),(2,'Drugo obavjestenje','2013-09-12 12:50:06',1);
 /*!40000 ALTER TABLE `obavjestenje` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 18:02:20
+-- Dump completed on 2017-09-14 14:57:56

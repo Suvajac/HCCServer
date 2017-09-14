@@ -32,7 +32,7 @@ CREATE TABLE `stavka` (
   KEY `R_42` (`IdUsluge`),
   CONSTRAINT `stavka_ibfk_1` FOREIGN KEY (`IdRacuna`) REFERENCES `racun` (`IdRacuna`),
   CONSTRAINT `stavka_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `stavka` (
 
 LOCK TABLES `stavka` WRITE;
 /*!40000 ALTER TABLE `stavka` DISABLE KEYS */;
+INSERT INTO `stavka` VALUES (17,'2017-09-13 16:10:41',2,17),(19,'2017-09-14 08:29:26',2,19),(20,'2017-09-14 08:30:36',2,20);
 /*!40000 ALTER TABLE `stavka` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 18:02:21
+-- Dump completed on 2017-09-14 14:57:56

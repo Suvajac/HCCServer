@@ -27,7 +27,7 @@ CREATE TABLE `registracija` (
   `DatumOd` date NOT NULL,
   `DatumDo` date NOT NULL,
   `BrSobe` int(11) NOT NULL,
-  PRIMARY KEY (`Username`,`BrSobe`),
+  PRIMARY KEY (`Username`,`BrSobe`,`DatumOd`,`DatumDo`),
   KEY `R_7` (`BrSobe`),
   CONSTRAINT `registracija_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `gost` (`Username`),
   CONSTRAINT `registracija_ibfk_2` FOREIGN KEY (`BrSobe`) REFERENCES `soba` (`BrSobe`)
@@ -40,7 +40,7 @@ CREATE TABLE `registracija` (
 
 LOCK TABLES `registracija` WRITE;
 /*!40000 ALTER TABLE `registracija` DISABLE KEYS */;
-INSERT INTO `registracija` VALUES ('bojansuvajac','2008-09-20','2024-09-20',209),('danielcrnovcic','2011-09-20','2030-09-20',206),('draganbunic','2006-09-20','2020-09-20',101),('ljubisamilincic','2005-09-20','2021-09-20',105),('svetozarvukovic','2010-09-20','2026-09-20',202);
+INSERT INTO `registracija` VALUES ('draganbunic','2006-09-20','2020-09-20',101),('ljubisamilincic','2005-09-20','2021-09-20',105),('svetozarvukovic','2010-09-20','2006-09-20',202),('danielcrnovcic','2011-09-20','2030-09-20',206),('bojansuvajac','2008-09-20','2024-09-20',209);
 /*!40000 ALTER TABLE `registracija` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 18:02:22
+-- Dump completed on 2017-09-14 14:57:57

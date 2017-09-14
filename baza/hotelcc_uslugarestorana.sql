@@ -23,14 +23,12 @@ DROP TABLE IF EXISTS `uslugarestorana`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `uslugarestorana` (
-  `IdStola` int(11) NOT NULL,
+  `BrojStolica` int(11) NOT NULL,
   `IdUsluge` int(11) NOT NULL AUTO_INCREMENT,
   `Vrijeme` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`),
-  KEY `R_38` (`IdStola`),
-  CONSTRAINT `uslugarestorana_ibfk_1` FOREIGN KEY (`IdStola`) REFERENCES `sto` (`IdStola`),
   CONSTRAINT `uslugarestorana_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +37,7 @@ CREATE TABLE `uslugarestorana` (
 
 LOCK TABLES `uslugarestorana` WRITE;
 /*!40000 ALTER TABLE `uslugarestorana` DISABLE KEYS */;
+INSERT INTO `uslugarestorana` VALUES (2,19,'10:59'),(2,20,'11:00');
 /*!40000 ALTER TABLE `uslugarestorana` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 18:02:21
+-- Dump completed on 2017-09-14 14:57:56

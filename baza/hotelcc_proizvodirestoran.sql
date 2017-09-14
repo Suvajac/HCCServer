@@ -38,6 +38,7 @@ CREATE TABLE `proizvodirestoran` (
 
 LOCK TABLES `proizvodirestoran` WRITE;
 /*!40000 ALTER TABLE `proizvodirestoran` DISABLE KEYS */;
+INSERT INTO `proizvodirestoran` VALUES (20,3),(20,4);
 /*!40000 ALTER TABLE `proizvodirestoran` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 18:02:21
+-- Dump completed on 2017-09-14 14:57:56

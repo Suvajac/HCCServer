@@ -38,21 +38,44 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_gost`(
     in varPrezime varchar(20),
     in varBrTel varchar(30),
     in varLozinka varchar(512),
-	in varBrojSobe int,
-    in varDatumOd date,
-    in varDatumDo date)
+    in varIdRac int(11))
 begin
-	declare idRac int default 0;
-	
-    insert into racun(Placen) values (0);
-    
-	select max(IdRacuna) into idRac from racun;
-    
 	insert into korisnik(Username,Ime,Prezime,
 		BrojTelefona,LozinkaHash) values(varUser,varIme,varPrezime,varBrTel,varLozinka);
-	insert into gost(Username,IdRacuna) values(varUser,idRac);
-	insert into registracija(Username,DatumOd,DatumDo,BrSobe) values(varUser,varDatumOd,varDatumDo,varBrojSobe);
-   
+	insert into gost(Username,IdRacuna) values(varUser,varIdRac);
+	
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insert_into_obavjestenje` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_obavjestenje`(
+	in varid int(11),
+    in varTekst varchar(500),
+	in varDatum timestamp,
+    out rez int(11)
+	)
+begin
+	declare a int(11) default 0;
+	if(varid >0) then
+		insert into obavjestenje(IdObavjestenja,Tekst,Datum,Procitano) values(varid,varTekst,varDatum,0);
+		set rez=varid;
+	else
+		insert into obavjestenje(Tekst,Datum,Procitano) values(varTekst,varDatum,0);
+		select max(IdObavjestenja) into a from obavjestenje;
+		set rez=a;
+    end if;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -118,6 +141,27 @@ begin
 		select max(IdProizvoda) into a from proizvod;
 		set rez=a;
     end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insert_into_racun` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_racun`(
+	out rez int(11) )
+begin
+    insert into racun(Placen) values (0);
+	select max(IdRacuna) into rez from racun;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -275,17 +319,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_uslugarestorana`(
 	in varNaziv varchar(20),
     in varCijena decimal(8,2),
     in varIdStola int(11),
-    in varVrijeme varchar(20)
+    in varVrijeme varchar(20),
+	out rez int(11)
 	)
 begin
 	declare a int(11) default 0;
 	if(varid >0) then
 		insert into usluga(IdUsluge,Naziv,Cijena) values(varid,varNaziv,varCijena);
-		insert into uslugarestorana(IdUsluge,IdStola,Vrijeme) values(varid,varIdStola,varVrijeme);
+		insert into uslugarestorana(IdUsluge,BrojStolica,Vrijeme) values(varid,varIdStola,varVrijeme);
+        set rez=varid;
 	else
 		insert into usluga(Naziv,Cijena) values(varNaziv,varCijena);
 		select max(IdUsluge) into a from usluga;
-		insert into uslugarestorana(IdUsluge,IdStola,Vrijeme) values(a,varIdStola,varVrijeme);
+		insert into uslugarestorana(IdUsluge,BrojStolica,Vrijeme) values(a,varIdStola,varVrijeme);
+        set rez=a;
     end if;
 	
 end ;;
@@ -376,4 +423,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-13 18:02:22
+-- Dump completed on 2017-09-14 14:57:58
