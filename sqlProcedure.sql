@@ -227,6 +227,26 @@ begin
 end$$
 delimiter ;
 
+delimiter $$
+create procedure insert_into_obavjestenje(
+	in varid int(11),
+    in varTekst varchar(500),
+	in varDatum timestamp,
+    out rez int(11)
+	)
+begin
+	declare a int(11) default 0;
+	if(varid >0) then
+		insert into obavjestenje(IdObavjestenja,Tekst,Datum,Procitano) values(varid,varTekst,varDatum,0);
+		set rez=varid;
+	else
+		insert into obavjestenje(Tekst,Datum,Procitano) values(varTekst,varDatum,0);
+		select max(IdObavjestenja) into a from obavjestenje;
+		set rez=a;
+    end if;
+end$$
+delimiter ;
+
 -- korisnicki nalog
 drop user if exists 'mils'@'localhost';
 create user 'mils'@'localhost' identified by 'mils';
@@ -242,5 +262,6 @@ grant execute on procedure hotelcc.insert_into_wellnessusluga to 'mils'@'localho
 grant execute on procedure hotelcc.insert_into_sportusluga to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_oglas to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_proizvod to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_obavjestenje to 'mils'@'localhost';
 grant select on mysql.proc to 'mils'@'localhost';
 flush privileges;

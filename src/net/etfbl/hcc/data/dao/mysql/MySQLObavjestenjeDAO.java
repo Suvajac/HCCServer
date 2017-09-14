@@ -1,10 +1,12 @@
 package net.etfbl.hcc.data.dao.mysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -68,6 +70,34 @@ public class MySQLObavjestenjeDAO implements ObavjestenjeDAO {
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
 			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
+	}
+
+	@Override
+	public int dodaj(Obavjestenje obavjestenje) {
+		int retVal = 0;
+		Connection conn = null;
+		CallableStatement proc = null;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			proc = conn.prepareCall(" call insert_into_obavjestenje (?, ?, ? , ? ) ");
+			proc.registerOutParameter(4, Types.INTEGER);
+
+			proc.setInt(1, obavjestenje.getIdObavjestenje());
+			proc.setString(2, obavjestenje.getTekst());
+			proc.setTimestamp(3, java.sql.Timestamp.valueOf(obavjestenje.getDatum()));
+
+			proc.execute();
+			retVal = proc.getInt(4);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(proc);
 		}
 		return retVal;
 	}

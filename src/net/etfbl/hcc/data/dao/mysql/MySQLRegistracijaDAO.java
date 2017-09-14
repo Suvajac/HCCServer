@@ -60,7 +60,7 @@ public class MySQLRegistracijaDAO implements RegistracijaDAO {
 			while (rs.next())
 				retVal.add(new Registracija(rs.getDate(2).toLocalDate(),rs.getDate(3).toLocalDate(),
 						HCCUtil.getDAOFactory().getGostDAO().getKorisnik(rs.getString(1)),
-						HCCUtil.getDAOFactory().gesSobaDAO().getSobuSaBrojem(rs.getInt(4))));
+						HCCUtil.getDAOFactory().getSobaDAO().getSobuSaBrojem(rs.getInt(4))));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

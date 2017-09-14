@@ -70,17 +70,18 @@ public class ServerThread extends Thread{
 								tempGRacun.setRacun(HCCUtil.getDAOFactory().getRacunDAO().kreiraj()); //novi racun mu se doda
 								HCCUtil.getDAOFactory().getGostDAO().dodaj(tempGRacun);  //doda se i taj gost u bazu
 								registracija.setGost(tempGRacun);  //registracija dobije gosta koji je u bazi i koji ima racun
-								HCCUtil.getDAOFactory().getRegistracijaDAO().dodaj(registracija); //upise se registracija u bazu
 								//dodaj novog gosta sa racunom
 							}else{
 								Gost tempGRacun=registracija.getGost();//uzme se taj gost koji vec postoji
 								tempGRacun.setRacun(HCCUtil.getDAOFactory().getRacunDAO().kreiraj()); //kreira mu se novi racun
 								HCCUtil.getDAOFactory().getGostDAO().noviRacun(tempGRacun); //u bazu se setuje novi racun za tog gosta
 								registracija.setGost(tempGRacun); //registracija.gost se doda taj novi racun
-								HCCUtil.getDAOFactory().getRegistracijaDAO().dodaj(registracija); //upise se registracija u bazu
 								//dodaj novi racun na novog gosta
 							}
-							rezLista.clear();
+
+							//sobu dobijam dobru
+							HCCUtil.getDAOFactory().getRegistracijaDAO().dodaj(registracija); //upise se registracija u bazu
+
 							rezLista.add(registracija);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
@@ -105,7 +106,7 @@ public class ServerThread extends Thread{
 							ppout.setListaObjekata(rezLista);
 							break;*/
 						case "Gost.azuriraj" :
-							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.azuriraj");
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.promijeniSifru");
 							Gost newgost=(Gost) ppin.getListaObjekata().get(0);
 							test=HCCUtil.getDAOFactory().getGostDAO().azuriraj(newgost);
 							rezLista.clear();
@@ -136,6 +137,12 @@ public class ServerThread extends Thread{
 							rezLista.add(rezultatIdSpUslg);
 							rezLista.add(daLiSetovoOpremu);
 							rezLista.add(daLiSetovoStavkuSport);
+							if(test && rezultatIdSpUslg>0 && daLiSetovoOpremu && daLiSetovoStavkuSport){
+								Obavjestenje obsu=new Obavjestenje("Korisnik "+username+" je narucio "+spuslg.getNaziv()+".",
+										LocalDateTime.now(),false);
+								MulticastServer.posaljiObavjestenje(obsu);
+								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obsu);
+							}
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
@@ -159,6 +166,12 @@ public class ServerThread extends Thread{
 							rezLista.add(test);
 							rezLista.add(rezultatIdWellUslg);
 							rezLista.add(daLiSetovoStavkuWell);
+							if(test && rezultatIdWellUslg>0 && daLiSetovoStavkuWell){
+								Obavjestenje obwu=new Obavjestenje("Korisnik "+username+" je narucio "+welluslg.getNaziv()+".",
+										LocalDateTime.now(),false);
+								MulticastServer.posaljiObavjestenje(obwu);
+								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obwu);
+							}
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
@@ -175,6 +188,14 @@ public class ServerThread extends Thread{
 							rezLista.add(rezIdRestUslg);
 							rezLista.add(daLiSetovoProizvodeRestoran);
 							rezLista.add(daLiSetovoStavkuRest);
+							if(test && rezIdRestUslg>0 && daLiSetovoProizvodeRestoran && daLiSetovoStavkuRest){
+								Obavjestenje obur=new Obavjestenje("Korisnik "+username+" je narucio "+uslgrest.getNaziv()+".",
+										LocalDateTime.now(),false);
+								MulticastServer.posaljiObavjestenje(obur);
+								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obur);
+							}
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
 							break;
 						case "SobnaUsluga.dodaj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - SobnaUsluga.dodaj");
@@ -189,6 +210,12 @@ public class ServerThread extends Thread{
 							rezLista.add(rezultatIdSobnaUslg);
 							rezLista.add(daLiSetovoProizvode);
 							rezLista.add(daLiSetovoStavkuSoba);
+							if(test && rezultatIdSobnaUslg>0 && daLiSetovoProizvode && daLiSetovoStavkuSoba){
+								Obavjestenje obsu=new Obavjestenje("Korisnik "+username+" je narucio "+sobuslg.getNaziv()+".",
+										LocalDateTime.now(),false);
+								MulticastServer.posaljiObavjestenje(obsu);
+								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obsu);
+							}
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
@@ -330,6 +357,14 @@ public class ServerThread extends Thread{
 							test=HCCUtil.getDAOFactory().getRacunDAO().azuriraj(rac);
 							rezLista.clear();
 							rezLista.add(test);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
+							break;
+						case "Soba.getSobe" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Soba.getSobe");
+							ArrayList<Soba> sobe = HCCUtil.getDAOFactory().getSobaDAO().getSobe();
+							rezLista.clear();
+							rezLista.add(sobe);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;

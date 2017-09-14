@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.SobaDAO;
@@ -65,6 +66,32 @@ public class MySQLSobaDAO implements SobaDAO {
 				retVal = new Soba(rs.getInt(1), rs.getInt(2),
 						rs.getInt(3),rs.getDouble(4));
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
+
+	@Override
+	public ArrayList<Soba> getSobe() {
+		ArrayList<Soba> retVal = new ArrayList<Soba>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT * from soba ";
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				retVal.add(new Soba(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getDouble(4)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

@@ -36,7 +36,7 @@ public abstract class DAOFactory {
 	public abstract MySQLProizvodDAO getProizvodDAO();
 	public abstract MySQLRacunDAO getRacunDAO();
 	public abstract MySQLRecepcionarDAO getRecepcionarDAO();
-	public abstract MySQLSobaDAO gesSobaDAO();
+	public abstract MySQLSobaDAO getSobaDAO();
 	public abstract MySQLSobnaUslugaDAO getSobnaUslugaDAO();
 	public abstract MySQLSportskaOpremaDAO getSportskaOpremaDAO();
 	public abstract MySQLSportTerminDAO getSportTerminDAO();

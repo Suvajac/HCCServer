@@ -40,7 +40,7 @@ public class MySQLDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public MySQLSobaDAO gesSobaDAO() {
+	public MySQLSobaDAO getSobaDAO() {
 		return new MySQLSobaDAO();
 	}
 
@@ -107,5 +107,6 @@ public class MySQLDAOFactory extends DAOFactory{
 	@Override
 	public MySQLRegistracijaDAO getRegistracijaDAO() {
 		return new MySQLRegistracijaDAO();
-	};
+	}
+
 }
