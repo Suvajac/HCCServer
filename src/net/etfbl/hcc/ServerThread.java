@@ -137,8 +137,8 @@ public class ServerThread extends Thread{
 							rezLista.add(rezultatIdSpUslg);
 							rezLista.add(daLiSetovoOpremu);
 							rezLista.add(daLiSetovoStavkuSport);
-							if(test && rezultatIdSpUslg>0 && daLiSetovoOpremu && daLiSetovoStavkuSport){
-								Obavjestenje obsu=new Obavjestenje("Korisnik "+username+" je narucio "+spuslg.getNaziv()+".",
+							if(test && rezultatIdSpUslg>0 && daLiSetovoStavkuSport){
+								Obavjestenje obsu=new Obavjestenje(0,"Korisnik "+username+" je narucio "+spuslg.getNaziv()+".",
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obsu);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obsu);
@@ -167,7 +167,7 @@ public class ServerThread extends Thread{
 							rezLista.add(rezultatIdWellUslg);
 							rezLista.add(daLiSetovoStavkuWell);
 							if(test && rezultatIdWellUslg>0 && daLiSetovoStavkuWell){
-								Obavjestenje obwu=new Obavjestenje("Korisnik "+username+" je narucio "+welluslg.getNaziv()+".",
+								Obavjestenje obwu=new Obavjestenje(0,"Korisnik "+username+" je narucio "+welluslg.getNaziv()+".",
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obwu);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obwu);
@@ -188,8 +188,8 @@ public class ServerThread extends Thread{
 							rezLista.add(rezIdRestUslg);
 							rezLista.add(daLiSetovoProizvodeRestoran);
 							rezLista.add(daLiSetovoStavkuRest);
-							if(test && rezIdRestUslg>0 && daLiSetovoProizvodeRestoran && daLiSetovoStavkuRest){
-								Obavjestenje obur=new Obavjestenje("Korisnik "+username+" je narucio "+uslgrest.getNaziv()+".",
+							if(test && rezIdRestUslg>0 && daLiSetovoStavkuRest){
+								Obavjestenje obur=new Obavjestenje(0,"Korisnik "+username+" je narucio "+uslgrest.getNaziv()+".",
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obur);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obur);
@@ -203,6 +203,7 @@ public class ServerThread extends Thread{
 							int rezultatIdSobnaUslg=HCCUtil.getDAOFactory().getSobnaUslugaDAO().dodaj(sobuslg);
 							sobuslg.setIdUsluge(rezultatIdSobnaUslg);
 							boolean daLiSetovoProizvode=HCCUtil.getDAOFactory().getProizvodiSobaDAO().setProizvodi(sobuslg);
+							System.out.println(daLiSetovoProizvode);
 							Stavka stavkaSobUslg=new Stavka(0,LocalDateTime.now(),sobuslg);
 							boolean daLiSetovoStavkuSoba=HCCUtil.getDAOFactory().getStavkaDAO().dodaj(stavkaSobUslg, (Racun) ppin.getListaObjekata().get(1));
 							rezLista.clear();
@@ -210,8 +211,8 @@ public class ServerThread extends Thread{
 							rezLista.add(rezultatIdSobnaUslg);
 							rezLista.add(daLiSetovoProizvode);
 							rezLista.add(daLiSetovoStavkuSoba);
-							if(test && rezultatIdSobnaUslg>0 && daLiSetovoProizvode && daLiSetovoStavkuSoba){
-								Obavjestenje obsu=new Obavjestenje("Korisnik "+username+" je narucio "+sobuslg.getNaziv()+".",
+							if(test && rezultatIdSobnaUslg>0 && daLiSetovoStavkuSoba){
+								Obavjestenje obsu=new Obavjestenje(0,"Korisnik "+username+" je narucio "+sobuslg.getNaziv()+".",
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obsu);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obsu);

@@ -15,6 +15,7 @@ public class UslugaRestorana extends Usluga implements Serializable{
 
 	public UslugaRestorana() {
 		// TODO Auto-generated constructor stub
+		listaProizvoda=new ArrayList<Proizvod>();
 	}
 
 	public UslugaRestorana(int idUsluge, String naziv,double c,String vrijeme,int brojStolica) {
@@ -22,6 +23,7 @@ public class UslugaRestorana extends Usluga implements Serializable{
 		// TODO Auto-generated constructor stub
 		this.vrijeme=vrijeme;
 		this.brojStolica=brojStolica;
+		listaProizvoda=new ArrayList<Proizvod>();
 	}
 
 	public String getVrijeme() {
@@ -47,7 +49,7 @@ public class UslugaRestorana extends Usluga implements Serializable{
 	public void setBrojStolica(int brojStolica) {
 		this.brojStolica = brojStolica;
 	}
-	
-	
+
+
 
 }

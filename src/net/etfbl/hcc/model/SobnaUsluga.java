@@ -8,9 +8,9 @@ public class SobnaUsluga extends Usluga implements Serializable{
 	/**
 	 *
 	 */
-	
+
 	private ArrayList<Proizvod> listaProizvoda;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private String tip;
@@ -25,11 +25,13 @@ public class SobnaUsluga extends Usluga implements Serializable{
 
 	public SobnaUsluga() {
 		// TODO Auto-generated constructor stub
+		listaProizvoda=new ArrayList<Proizvod>();
 	}
 
 	public SobnaUsluga(int idUsluge, String naziv,double c,String t) {
 		super(idUsluge, naziv,c);
 		this.tip=t;
+		listaProizvoda=new ArrayList<Proizvod>();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,5 +42,5 @@ public class SobnaUsluga extends Usluga implements Serializable{
 	public void setListaProizvoda(ArrayList<Proizvod> listaProizvoda) {
 		this.listaProizvoda = listaProizvoda;
 	}
-	
+
 }

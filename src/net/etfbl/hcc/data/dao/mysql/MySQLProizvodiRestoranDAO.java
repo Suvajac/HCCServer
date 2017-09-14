@@ -55,13 +55,14 @@ public class MySQLProizvodiRestoranDAO implements ProizvodiRestoranDAO {
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			for(Proizvod p:usluga.getListaProizvoda()){
-				ps.setInt(1, p.getIdProizvoda());
-				ps.setInt(2, usluga.getIdUsluge());
-				retVal = ps.executeUpdate() == 1;
-				if(!retVal)
-					return false;
-			}
+			if(usluga.getListaProizvoda().size()>0)
+				for(Proizvod p:usluga.getListaProizvoda()){
+					ps.setInt(1, p.getIdProizvoda());
+					ps.setInt(2, usluga.getIdUsluge());
+					retVal = ps.executeUpdate() == 1;
+					if(!retVal)
+						return false;
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

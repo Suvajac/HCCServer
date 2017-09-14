@@ -55,7 +55,7 @@ public class MySQLProizvodiSobaDAO implements ProizvodiSobaDAO {
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			if(usluga.getListaProizvoda()!=null)
+			if(usluga.getListaProizvoda().size()>0)
 				for(Proizvod p:usluga.getListaProizvoda()){
 					ps.setInt(1, p.getIdProizvoda());
 					ps.setInt(2, usluga.getIdUsluge());

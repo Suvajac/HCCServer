@@ -55,13 +55,14 @@ public class MySQLOpremaSportUslugaDAO implements OpremaSportUslugaDAO {
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			for(SportskaOprema so:usluga.getListaOpreme()){
-				ps.setInt(1, so.getIdProizvoda());
-				ps.setInt(2, usluga.getIdUsluge());
-				retVal = ps.executeUpdate() == 1;
-				if(!retVal)
-					return false;
-			}
+			if(usluga.getListaOpreme().size()>0)
+				for(SportskaOprema so:usluga.getListaOpreme()){
+					ps.setInt(1, so.getIdProizvoda());
+					ps.setInt(2, usluga.getIdUsluge());
+					retVal = ps.executeUpdate() == 1;
+					if(!retVal)
+						return false;
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
