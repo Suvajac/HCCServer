@@ -5,7 +5,7 @@ import net.etfbl.hcc.model.Korisnik;
 import net.etfbl.hcc.model.Popust;
 
 public interface RacunDAO {
-	public boolean kreiraj(Racun racun);
+	public Racun kreiraj();
 	public boolean azuriraj(Racun racun);
 	public Racun getRacun(Korisnik korisnik);
 	public boolean dodajPopust(Popust popust,Racun racun);

@@ -62,7 +62,28 @@ public class ServerThread extends Thread{
 							ppout.setListaObjekata(rezLista);
 							break;
 						case "Registracija.dodaj" :
-
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Registracija.dodaj");
+							Registracija registracija=(Registracija)ppin.getListaObjekata().get(0);
+							Gost oldGost=HCCUtil.getDAOFactory().getGostDAO().getKorisnikOld(registracija.getGost().getUsername());
+							if(oldGost==null){    //provjeri se da li dobijeni gost vec postoji u bazi
+								Gost tempGRacun=registracija.getGost(); //ako ne onda se pokupe podaci tog gosta
+								tempGRacun.setRacun(HCCUtil.getDAOFactory().getRacunDAO().kreiraj()); //novi racun mu se doda
+								HCCUtil.getDAOFactory().getGostDAO().dodaj(tempGRacun);  //doda se i taj gost u bazu
+								registracija.setGost(tempGRacun);  //registracija dobije gosta koji je u bazi i koji ima racun
+								HCCUtil.getDAOFactory().getRegistracijaDAO().dodaj(registracija); //upise se registracija u bazu
+								//dodaj novog gosta sa racunom
+							}else{
+								Gost tempGRacun=registracija.getGost();//uzme se taj gost koji vec postoji
+								tempGRacun.setRacun(HCCUtil.getDAOFactory().getRacunDAO().kreiraj()); //kreira mu se novi racun
+								HCCUtil.getDAOFactory().getGostDAO().noviRacun(tempGRacun); //u bazu se setuje novi racun za tog gosta
+								registracija.setGost(tempGRacun); //registracija.gost se doda taj novi racun
+								HCCUtil.getDAOFactory().getRegistracijaDAO().dodaj(registracija); //upise se registracija u bazu
+								//dodaj novi racun na novog gosta
+							}
+							rezLista.clear();
+							rezLista.add(registracija);
+							ppout=new ProtokolPoruka("response");
+							ppout.setListaObjekata(rezLista);
 							break;
 						case "Gost.getKorisnike" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.getKorisnike");
@@ -73,7 +94,7 @@ public class ServerThread extends Thread{
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
-						case "Gost.dodaj" :
+						/*case "Gost.dodaj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.dodaj");
 							Gost g=(Gost) ppin.getListaObjekata().get(0);
 							HCCUtil.getDAOFactory().getGostDAO().dodaj(g);
@@ -82,7 +103,7 @@ public class ServerThread extends Thread{
 							rezLista.add(gResponse);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
-							break;
+							break;*/
 						case "Gost.azuriraj" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Gost.azuriraj");
 							Gost newgost=(Gost) ppin.getListaObjekata().get(0);
@@ -303,8 +324,8 @@ public class ServerThread extends Thread{
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
-						case "Racun.azuriraj" :
-							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Racun.azuriraj");
+						case "Racun.plati" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Racun.plati");
 							Racun rac=(Racun) ppin.getListaObjekata().get(0);
 							test=HCCUtil.getDAOFactory().getRacunDAO().azuriraj(rac);
 							rezLista.clear();

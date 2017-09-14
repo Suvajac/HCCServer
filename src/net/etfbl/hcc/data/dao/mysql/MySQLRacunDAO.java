@@ -1,14 +1,18 @@
 package net.etfbl.hcc.data.dao.mysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
 
 import net.etfbl.hcc.connection.ConnectionPool;
 import net.etfbl.hcc.data.dao.RacunDAO;
 import net.etfbl.hcc.model.Korisnik;
 import net.etfbl.hcc.model.Popust;
 import net.etfbl.hcc.model.Racun;
+import net.etfbl.hcc.model.Stavka;
 import net.etfbl.hcc.util.DBUtilities;
 
 public class MySQLRacunDAO implements RacunDAO {
@@ -18,9 +22,30 @@ public class MySQLRacunDAO implements RacunDAO {
 	}
 
 	@Override
-	public boolean kreiraj(Racun racun) {
-		// ne treba radi se kad kreiras Gosta
-		return false;
+	public Racun kreiraj() {
+		Racun retVal = new Racun();
+		int id=0;
+		Connection conn = null;
+		CallableStatement proc = null;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			proc = conn.prepareCall("call insert_into_racun (?) ");
+			proc.registerOutParameter(1, Types.INTEGER);
+			proc.execute();
+			id = proc.getInt(1);
+			retVal.setIdRacuna(id);
+			retVal.setPlacen(false);
+			retVal.setStavke(new ArrayList<Stavka>());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(proc);
+		}
+		return retVal;
 	}
 
 	@Override

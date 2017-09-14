@@ -6,18 +6,22 @@ create procedure insert_into_gost(
 	in varIme varchar(20),
     in varPrezime varchar(20),
     in varBrTel varchar(30),
-    in varLozinka varchar(512) )
+    in varLozinka varchar(512),
+    in varIdRac int(11))
 begin
-	declare idRac int default 0;
-	
-    insert into racun(Placen) values (0);
-    
-	select max(IdRacuna) into idRac from racun;
-    
 	insert into korisnik(Username,Ime,Prezime,
 		BrojTelefona,LozinkaHash) values(varUser,varIme,varPrezime,varBrTel,varLozinka);
-	insert into gost(Username,IdRacuna) values(varUser,idRac);
+	insert into gost(Username,IdRacuna) values(varUser,varIdRac);
 	
+end$$
+delimiter ;
+
+delimiter $$
+create procedure insert_into_racun(
+	out rez int(11) )
+begin
+    insert into racun(Placen) values (0);
+	select max(IdRacuna) into rez from racun;
 end$$
 delimiter ;
 
@@ -228,6 +232,7 @@ drop user if exists 'mils'@'localhost';
 create user 'mils'@'localhost' identified by 'mils';
 grant select, insert, update, delete on hotelcc.* to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_gost to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_racun to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_recepcionar to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_sporttermin to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_wellnesstermin to 'mils'@'localhost';

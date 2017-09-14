@@ -51,7 +51,7 @@ public class MySQLProizvodiRestoranDAO implements ProizvodiRestoranDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "insert into proizvodirestoran(IdProizvoda,IdUslugeRestorana) values (?, ?) ";
+		String query = "insert into proizvodirestoran(IdProizvoda,IdUslugaRestorana) values (?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);

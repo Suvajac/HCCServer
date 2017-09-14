@@ -50,7 +50,7 @@ public class MySQLRegistracijaDAO implements RegistracijaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String query = "SELECT * from registracija ";
+		String query = "SELECT * from registracija where DatumDo > curdate() ";
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
