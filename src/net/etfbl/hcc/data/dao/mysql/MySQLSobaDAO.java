@@ -54,7 +54,7 @@ public class MySQLSobaDAO implements SobaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String query = "SELECT * FROM soba where BrSobe=? ";
+		String query = "SELECT * FROM soba where BrSobe=?";
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -77,13 +77,13 @@ public class MySQLSobaDAO implements SobaDAO {
 	}
 
 	@Override
-	public ArrayList<Soba> getSobe() {
+	public ArrayList<Soba> getSlobodneSobe() {
 		ArrayList<Soba> retVal = new ArrayList<Soba>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String query = "SELECT * from soba ";
+		String query = "SELECT * from soba natural join registracija where DatumDo ";
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

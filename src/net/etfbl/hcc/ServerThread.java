@@ -360,9 +360,9 @@ public class ServerThread extends Thread{
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
-						case "Soba.getSobe" :
-							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Soba.getSobe");
-							ArrayList<Soba> sobe = HCCUtil.getDAOFactory().getSobaDAO().getSobe();
+						case "Soba.getSlobodneSobe" :
+							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Soba.getSlobodneSobe");
+							ArrayList<Soba> sobe = HCCUtil.getDAOFactory().getSobaDAO().getSlobodneSobe();
 							rezLista.clear();
 							rezLista.add(sobe);
 							ppout=new ProtokolPoruka("response");
