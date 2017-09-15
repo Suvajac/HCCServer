@@ -2,8 +2,6 @@ package net.etfbl.hcc.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class UslugaRestorana extends Usluga implements Serializable{
 	/**
@@ -32,7 +30,7 @@ public class UslugaRestorana extends Usluga implements Serializable{
 	public String toString() {
 		String temp = "UslugaRestorana [vrijeme=" + vrijeme + ", brojStolica="
 				+ brojStolica + "]\n";
-		
+
 		if(listaProizvoda.size()>0){
 			ArrayList<Proizvod> tempLista = new ArrayList<>();
 			for(Proizvod p : listaProizvoda){

@@ -138,7 +138,7 @@ public class ServerThread extends Thread{
 							rezLista.add(daLiSetovoOpremu);
 							rezLista.add(daLiSetovoStavkuSport);
 							if(test && rezultatIdSpUslg>0 && daLiSetovoStavkuSport){
-								Obavjestenje obsu=new Obavjestenje(0,"Korisnik "+username+" je narucio "+spuslg.getNaziv()+".",
+								Obavjestenje obsu=new Obavjestenje(0,"Korisnik "+username+" je narucio:\n"+spuslg.toString(),
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obsu);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obsu);
@@ -167,7 +167,7 @@ public class ServerThread extends Thread{
 							rezLista.add(rezultatIdWellUslg);
 							rezLista.add(daLiSetovoStavkuWell);
 							if(test && rezultatIdWellUslg>0 && daLiSetovoStavkuWell){
-								Obavjestenje obwu=new Obavjestenje(0,"Korisnik "+username+" je narucio "+welluslg.getNaziv()+".",
+								Obavjestenje obwu=new Obavjestenje(0,"Korisnik "+username+" je narucio:\n"+welluslg.toString(),
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obwu);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obwu);
@@ -189,7 +189,7 @@ public class ServerThread extends Thread{
 							rezLista.add(daLiSetovoProizvodeRestoran);
 							rezLista.add(daLiSetovoStavkuRest);
 							if(rezIdRestUslg>0 && daLiSetovoStavkuRest){
-								Obavjestenje obur=new Obavjestenje(0,"Korisnik "+username+" je narucio "+uslgrest.getNaziv()+".",
+								Obavjestenje obur=new Obavjestenje(0,"Korisnik "+username+" je narucio:\n"+uslgrest.toString(),
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obur);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obur);
@@ -211,7 +211,7 @@ public class ServerThread extends Thread{
 							rezLista.add(daLiSetovoProizvode);
 							rezLista.add(daLiSetovoStavkuSoba);
 							if(rezultatIdSobnaUslg>0 && daLiSetovoStavkuSoba){
-								Obavjestenje obsu=new Obavjestenje(0,"Korisnik "+username+" je narucio "+sobuslg.getNaziv()+".",
+								Obavjestenje obsu=new Obavjestenje(0,"Korisnik "+username+" je narucio:\n"+sobuslg.toString(),
 										LocalDateTime.now(),false);
 								MulticastServer.posaljiObavjestenje(obsu);
 								HCCUtil.getDAOFactory().getObavjestenjeDAO().dodaj(obsu);
