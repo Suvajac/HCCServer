@@ -36,7 +36,33 @@ public class MySQLPopustDAO implements PopustDAO {
 
 			retVal = ps.executeUpdate() == 1;
 		} catch(MySQLIntegrityConstraintViolationException e){
-			System.out.println("Pogresan kod popusta je unesen!");
+			//System.out.println("Pogresan kod popusta je unesen!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
+	}
+
+	@Override
+	public boolean popustIskoristi(int kodPopusta) {
+		boolean retVal = false;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		if(kodPopusta<=0)
+			return false;
+		String query = "update popust set Aktivan=0  where KodPopusta=?";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, kodPopusta);
+
+			retVal = ps.executeUpdate() == 1;
+		} catch(MySQLIntegrityConstraintViolationException e){
+			//System.out.println("Pogresan kod popusta je unesen!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			//DBUtilities.getInstance().showSQLException(e);
@@ -113,6 +139,33 @@ public class MySQLPopustDAO implements PopustDAO {
 
 			while (rs.next())
 				retVal.add(new Popust(rs.getInt(1),rs.getDouble(2),rs.getBoolean(3)));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
+
+	@Override
+	public boolean provjeriPopust(int kodPopusta) {
+		boolean retVal = false;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "select * from popust where KodPopusta=? and Aktivan=1 ";
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, kodPopusta);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				retVal=true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

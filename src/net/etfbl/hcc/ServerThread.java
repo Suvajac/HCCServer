@@ -271,9 +271,16 @@ public class ServerThread extends Thread{
 							break;
 						case "Popust.potvrdiPopust" :
 							System.out.println(TemporalStringConverters.toString(LocalDateTime.now())+" ["+username+"] - Popust.potvrdiPopust");
-							test = HCCUtil.getDAOFactory().getPopustDAO().potvrdiPopust((int)ppin.getListaObjekata().get(0),(Gost) ppin.getListaObjekata().get(1));
+							int kodPopusta=(int)ppin.getListaObjekata().get(0);
+							boolean popustAktivan=HCCUtil.getDAOFactory().getPopustDAO().provjeriPopust(kodPopusta);
+							boolean iskoristenPopust=false;
+							if(popustAktivan){
+								test = HCCUtil.getDAOFactory().getPopustDAO().potvrdiPopust(kodPopusta,(Gost) ppin.getListaObjekata().get(1));
+								iskoristenPopust=HCCUtil.getDAOFactory().getPopustDAO().popustIskoristi(kodPopusta);
+							}
 							rezLista.clear();
-							rezLista.add(test);
+							rezLista.add(popustAktivan);
+							rezLista.add(iskoristenPopust);
 							ppout=new ProtokolPoruka("response");
 							ppout.setListaObjekata(rezLista);
 							break;
