@@ -1,7 +1,6 @@
 package net.etfbl.hcc.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Korpa {
 	private ArrayList<Proizvod> listaProizvoda;
