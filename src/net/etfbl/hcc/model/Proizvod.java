@@ -42,6 +42,12 @@ public class Proizvod implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "Proizvod [naziv=" + naziv + ", cijena=" + cijena;
+	}
 	public int getIdProizvoda() {
 		return idProizvoda;
 	}

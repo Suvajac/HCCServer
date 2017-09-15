@@ -34,6 +34,31 @@ public class SobnaUsluga extends Usluga implements Serializable{
 		listaProizvoda=new ArrayList<Proizvod>();
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public String toString() {
+		String temp = "Sobna usluga [tip=" + tip + "]\n";
+		
+		if(listaProizvoda.size()>0){
+			ArrayList<Proizvod> tempLista = new ArrayList<>();
+			for(Proizvod p : listaProizvoda){
+				tempLista.add(p);
+			}
+			for(int i=0;i<tempLista.size();i++){
+				Proizvod p = tempLista.get(i);
+				int kolicina = 1;
+				for(int j=0;j<tempLista.size();j++){
+					Proizvod pp = tempLista.get(j);
+					if(i!=j && pp.equals(p)){
+						tempLista.remove(pp);
+						kolicina++;
+					}
+				}
+				temp+=p+", kolicina="+kolicina+"]\n";
+			}
+		}
+		return temp;
+	}
 
 	public ArrayList<Proizvod> getListaProizvoda() {
 		return listaProizvoda;

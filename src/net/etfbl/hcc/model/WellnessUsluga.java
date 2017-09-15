@@ -15,6 +15,15 @@ public class WellnessUsluga extends Usluga implements Serializable{
 		wellnessTermin=null;
 	}
 
+	
+	
+	@Override
+	public String toString() {
+		return "WellnessUsluga ["+wellnessTermin + "]\n";
+	}
+
+
+
 	public WellnessUsluga(int idUsluge, String naziv,double c) {
 		super(idUsluge, naziv,c);
 		wellnessTermin=null;

@@ -24,6 +24,31 @@ public class SportUsluga extends Usluga implements Serializable{
 		sportTermin=null;
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public String toString() {
+		String temp = "Sport usluga [termin=" + sportTermin + "]\n";
+		
+		if(listaOpreme.size()>0){
+			ArrayList<SportskaOprema> tempLista = new ArrayList<>();
+			for(SportskaOprema op : listaOpreme){
+				tempLista.add(op);
+			}
+			for(int i=0;i<tempLista.size();i++){
+				Proizvod p = tempLista.get(i);
+				int kolicina = 1;
+				for(int j=0;j<tempLista.size();j++){
+					Proizvod pp = tempLista.get(j);
+					if(i!=j && pp.equals(p)){
+						tempLista.remove(pp);
+						kolicina++;
+					}
+				}
+				temp+=p+", kolicina="+kolicina+"]\n";
+			}
+		}
+		return temp;
+	}
 
 	public ArrayList<SportskaOprema> getListaOpreme() {
 		return listaOpreme;

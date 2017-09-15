@@ -17,6 +17,11 @@ public class SportskaOprema extends Proizvod implements Serializable{
 	public SportskaOprema(int idProizvoda, String naziv, double cijena,String velicina) {
 		super(idProizvoda,"oprema",naziv,cijena);
 		this.velicina = velicina;
+	}	
+
+	@Override
+	public String toString() {
+		return "SportskaOprema [naziv=" + naziv + ", cijena=" + cijena+ "[velicina=" + velicina;
 	}
 
 	public String getVelicina() {

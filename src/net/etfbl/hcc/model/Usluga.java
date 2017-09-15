@@ -40,7 +40,12 @@ public class Usluga implements Serializable{
 			return false;
 		return true;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Usluga [naziv=" + naziv + ", cijena=" + cijena + "]";
+	}
+	
 	public double getCijena() {
 		return cijena;
 	}

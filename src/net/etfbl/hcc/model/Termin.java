@@ -41,6 +41,12 @@ public class Termin implements Serializable{
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Termin datum=" + datum + ", vrijeme=" + vrijeme;
+	}
+	
 	public String getVrijeme() {
 		return vrijeme;
 	}

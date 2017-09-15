@@ -2,6 +2,8 @@ package net.etfbl.hcc.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UslugaRestorana extends Usluga implements Serializable{
 	/**
@@ -24,6 +26,32 @@ public class UslugaRestorana extends Usluga implements Serializable{
 		this.vrijeme=vrijeme;
 		this.brojStolica=brojStolica;
 		listaProizvoda=new ArrayList<Proizvod>();
+	}
+
+	@Override
+	public String toString() {
+		String temp = "UslugaRestorana [vrijeme=" + vrijeme + ", brojStolica="
+				+ brojStolica + "]\n";
+		
+		if(listaProizvoda.size()>0){
+			ArrayList<Proizvod> tempLista = new ArrayList<>();
+			for(Proizvod p : listaProizvoda){
+				tempLista.add(p);
+			}
+			for(int i=0;i<tempLista.size();i++){
+				Proizvod p = tempLista.get(i);
+				int kolicina = 1;
+				for(int j=0;j<tempLista.size();j++){
+					Proizvod pp = tempLista.get(j);
+					if(i!=j && pp.equals(p)){
+						tempLista.remove(pp);
+						kolicina++;
+					}
+				}
+				temp+=p+", kolicina="+kolicina+"]\n";
+			}
+		}
+		return temp;
 	}
 
 	public String getVrijeme() {
