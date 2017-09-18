@@ -2,6 +2,7 @@ package net.etfbl.hcc.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SportUsluga extends Usluga implements Serializable{
 	/**
@@ -27,26 +28,17 @@ public class SportUsluga extends Usluga implements Serializable{
 	
 	@Override
 	public String toString() {
-		String temp = "Sport usluga [termin=" + sportTermin + "]\n";
+		String temp = "Sport usluga ["+sportTermin + "]\n";
 		
-		if(listaOpreme.size()>0){
-			ArrayList<SportskaOprema> tempLista = new ArrayList<>();
-			for(SportskaOprema op : listaOpreme){
-				tempLista.add(op);
-			}
-			for(int i=0;i<tempLista.size();i++){
-				Proizvod p = tempLista.get(i);
-				int kolicina = 1;
-				for(int j=0;j<tempLista.size();j++){
-					Proizvod pp = tempLista.get(j);
-					if(i!=j && pp.equals(p)){
-						tempLista.remove(pp);
-						kolicina++;
-					}
-				}
-				temp+=p+", kolicina="+kolicina+"]\n";
+		ArrayList<SportskaOprema> tempLista = new ArrayList<>();
+		
+		for(SportskaOprema o : listaOpreme) {
+			if(!tempLista.contains(o)) {
+				temp+=o+", kolicina="+Collections.frequency(listaOpreme, o)+"]\n";
+				tempLista.add(o);
 			}
 		}
+		tempLista = null;
 		return temp;
 	}
 

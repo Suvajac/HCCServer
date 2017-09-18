@@ -21,7 +21,7 @@ public class SportskaOprema extends Proizvod implements Serializable{
 
 	@Override
 	public String toString() {
-		return "SportskaOprema [naziv=" + naziv + ", cijena=" + cijena+ "[velicina=" + velicina;
+		return "SportskaOprema [naziv=" + naziv + ", cijena=" + cijena+ ", velicina=" + velicina;
 	}
 
 	public String getVelicina() {
