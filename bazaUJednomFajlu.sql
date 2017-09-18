@@ -67,7 +67,7 @@ CREATE TABLE `korisnik` (
 
 LOCK TABLES `korisnik` WRITE;
 /*!40000 ALTER TABLE `korisnik` DISABLE KEYS */;
-INSERT INTO `korisnik` VALUES ('aleksandarlekic','Aleksandar','Lekic','065/333-444','913949030'),('bojansuvajac','Bojan','Suvajac','065/111-222','1648781151'),('danielcrnovcic','Daniel','Crnovcic','065/999-000','1692808598'),('draganbunic','Dragan','Bunic','065/555-666','-1205948140'),('ljubisamilincic','Ljubisa','Milincic','065/777-888','177715508'),('svetozarvukovic','Svetozar','Vukovic','066/123-456','-1439170465');
+INSERT INTO `korisnik` VALUES ('aleksandarlekic','Aleksandar','Lekic','065/333-444','913949030'),('bojansuvajac','Bojan','Suvajac','065/111-222','-1861353340'),('danielcrnovcic','Daniel','Crnovcic','065/999-000','1692808598'),('draganbunic','Dragan','Bunic','065/555-666','-1205948140'),('ljubisamilincic','Ljubisa','Milincic','065/777-888','177715508'),('svetozarvukovic','Svetozar','Vukovic','066/123-456','-1439170465');
 /*!40000 ALTER TABLE `korisnik` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,11 +80,11 @@ DROP TABLE IF EXISTS `obavjestenje`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `obavjestenje` (
   `IdObavjestenja` int(11) NOT NULL AUTO_INCREMENT,
-  `Tekst` varchar(150) DEFAULT NULL,
+  `Tekst` varchar(1500) DEFAULT NULL,
   `Datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Procitano` tinyint(1) NOT NULL,
   PRIMARY KEY (`IdObavjestenja`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `obavjestenje` (
 
 LOCK TABLES `obavjestenje` WRITE;
 /*!40000 ALTER TABLE `obavjestenje` DISABLE KEYS */;
-INSERT INTO `obavjestenje` VALUES (1,'Prvo obavjestenje!','2014-09-12 12:51:50',1),(2,'Drugo obavjestenje','2013-09-12 12:50:06',1),(3,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:32:02',0),(4,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:34:11',0);
+INSERT INTO `obavjestenje` VALUES (3,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:32:02',1),(4,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:34:11',0),(5,'Korisnik bojansuvajac je narucio Usluga restorana.','2017-09-15 08:10:23',1);
 /*!40000 ALTER TABLE `obavjestenje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `oglas` (
 
 LOCK TABLES `oglas` WRITE;
 /*!40000 ALTER TABLE `oglas` DISABLE KEYS */;
-INSERT INTO `oglas` VALUES (1,'2004-09-20 00:00:00','Upozoravaju se gosti da pripaze prilikom napustanja objekta iz razloga sto se vrse radovi na obliznjem objektu.'),(2,'2013-01-20 00:00:00','Popravka internet odasiljaca u trajanju od 2h.'),(4,'2017-09-13 09:19:16','Ovo je novi oglas'),(5,'2017-09-13 09:20:32','Ovo je novi oglas');
+INSERT INTO `oglas` VALUES (1,'2004-09-20 00:00:00','Upozoravaju se gosti da pripaze prilikom napustanja objekta iz razloga sto se vrse radovi na obliznjem objektu.'),(2,'2013-01-20 00:00:00','Popravka internet odasiljaca u trajanju od 2h.');
 /*!40000 ALTER TABLE `oglas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ CREATE TABLE `popust` (
 
 LOCK TABLES `popust` WRITE;
 /*!40000 ALTER TABLE `popust` DISABLE KEYS */;
-INSERT INTO `popust` VALUES (1,20.00,0),(2,0.00,1),(3,10.00,1),(4,15.00,1);
+INSERT INTO `popust` VALUES (1,20.00,1),(2,11.00,1),(3,10.00,0),(4,15.00,1),(5,35.00,1);
 /*!40000 ALTER TABLE `popust` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +196,7 @@ CREATE TABLE `proizvod` (
 
 LOCK TABLES `proizvod` WRITE;
 /*!40000 ALTER TABLE `proizvod` DISABLE KEYS */;
-INSERT INTO `proizvod` VALUES (1,'Coca Cola',2.3,'Pice'),(2,'Fanta',2.3,'Pice'),(3,'Hamburger',4.5,'Hrana'),(4,'Pizza',6.99,'Hrana'),(5,'Dalmatinski pršut',34.99,'Hrana'),(6,'Salata plodovi mora',36.49,'Hrana'),(7,'Goveđa juha',24.49,'Hrana'),(8,'Juha od povrća',13.99,'Hrana'),(9,'Crni rižoto',21.49,'Hrana'),(10,'Piletina sa pomfritom',23.49,'Hrana'),(11,'Biftek na žaru',44.49,'Hrana'),(12,'Biftek sa pomfritom',54.49,'Hrana'),(13,'Peškir',8.99,'Higijensko sredstvo'),(14,'Supa',4.99,'Hrana'),(15,'Becka snicla',19.99,'Hrana');
+INSERT INTO `proizvod` VALUES (1,'Coca Cola',2.3,'Pice'),(2,'Fanta',2.3,'Pice'),(3,'Hamburger',4.5,'Hrana'),(4,'Pizza',6.99,'Hrana'),(5,'Dalmatinski pršut',34.99,'Hrana'),(6,'Salata plodovi mora',36.49,'Hrana'),(7,'Goveđa juha',24.49,'Hrana'),(8,'Juha od povrća',13.99,'Hrana'),(9,'Crni rižoto',21.49,'Hrana'),(10,'Piletina sa pomfritom',23.49,'Hrana'),(11,'Biftek na žaru',44.49,'Hrana'),(12,'Biftek sa pomfritom',54.49,'Hrana'),(14,'Supa',4.99,'Hrana'),(15,'Becka snicla',19.99,'Hrana');
 /*!40000 ALTER TABLE `proizvod` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +224,6 @@ CREATE TABLE `proizvodirestoran` (
 
 LOCK TABLES `proizvodirestoran` WRITE;
 /*!40000 ALTER TABLE `proizvodirestoran` DISABLE KEYS */;
-INSERT INTO `proizvodirestoran` VALUES (20,3,1),(20,4,1),(22,2,2),(22,8,3);
 /*!40000 ALTER TABLE `proizvodirestoran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,7 +251,6 @@ CREATE TABLE `proizvodisoba` (
 
 LOCK TABLES `proizvodisoba` WRITE;
 /*!40000 ALTER TABLE `proizvodisoba` DISABLE KEYS */;
-INSERT INTO `proizvodisoba` VALUES (17,3,0),(17,4,0);
 /*!40000 ALTER TABLE `proizvodisoba` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,7 +268,7 @@ CREATE TABLE `racun` (
   PRIMARY KEY (`IdRacuna`),
   KEY `racun_ibfk_1_idx` (`IdPopusta`),
   CONSTRAINT `racun_ibfk_1` FOREIGN KEY (`IdPopusta`) REFERENCES `popust` (`KodPopusta`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +277,7 @@ CREATE TABLE `racun` (
 
 LOCK TABLES `racun` WRITE;
 /*!40000 ALTER TABLE `racun` DISABLE KEYS */;
-INSERT INTO `racun` VALUES (1,0,1),(2,0,3),(3,0,NULL),(4,0,4),(5,1,NULL);
+INSERT INTO `racun` VALUES (1,0,1),(2,0,3),(3,0,1),(4,0,4),(5,1,NULL);
 /*!40000 ALTER TABLE `racun` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +372,7 @@ CREATE TABLE `sobnausluga` (
   `Tip` varchar(20) NOT NULL,
   PRIMARY KEY (`IdUsluge`),
   CONSTRAINT `sobnausluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,7 +381,6 @@ CREATE TABLE `sobnausluga` (
 
 LOCK TABLES `sobnausluga` WRITE;
 /*!40000 ALTER TABLE `sobnausluga` DISABLE KEYS */;
-INSERT INTO `sobnausluga` VALUES (17,'Dostava');
 /*!40000 ALTER TABLE `sobnausluga` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,7 +421,7 @@ CREATE TABLE `sporttermin` (
   `IdTermina` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`IdTermina`),
   CONSTRAINT `sporttermin_ibfk_1` FOREIGN KEY (`IdTermina`) REFERENCES `termin` (`IdTermina`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -450,7 +447,7 @@ CREATE TABLE `sportusluga` (
   KEY `R_57` (`IdTermina`),
   CONSTRAINT `sportusluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE,
   CONSTRAINT `sportusluga_ibfk_2` FOREIGN KEY (`IdTermina`) REFERENCES `sporttermin` (`IdTermina`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -479,7 +476,7 @@ CREATE TABLE `stavka` (
   KEY `R_42` (`IdUsluge`),
   CONSTRAINT `stavka_ibfk_1` FOREIGN KEY (`IdRacuna`) REFERENCES `racun` (`IdRacuna`),
   CONSTRAINT `stavka_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -488,7 +485,6 @@ CREATE TABLE `stavka` (
 
 LOCK TABLES `stavka` WRITE;
 /*!40000 ALTER TABLE `stavka` DISABLE KEYS */;
-INSERT INTO `stavka` VALUES (17,'2017-09-13 16:10:41',2,17),(19,'2017-09-14 08:29:26',2,19),(20,'2017-09-14 08:30:36',2,20),(21,'2017-09-14 22:32:02',3,21),(22,'2017-09-14 22:34:11',3,22);
 /*!40000 ALTER TABLE `stavka` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -507,7 +503,7 @@ CREATE TABLE `termin` (
   KEY `R_71` (`IdTermina`),
   KEY `termin_ibfk_1` (`Vrijeme`),
   CONSTRAINT `termin_ibfk_1` FOREIGN KEY (`Vrijeme`) REFERENCES `vrijemetermina` (`Vrijeme`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -531,7 +527,7 @@ CREATE TABLE `usluga` (
   `Naziv` varchar(20) NOT NULL,
   `Cijena` decimal(8,2) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -540,7 +536,6 @@ CREATE TABLE `usluga` (
 
 LOCK TABLES `usluga` WRITE;
 /*!40000 ALTER TABLE `usluga` DISABLE KEYS */;
-INSERT INTO `usluga` VALUES (17,'Sobna usluga',11.49),(18,'Usluga restorana',11.49),(19,'Usluga restorana',11.49),(20,'Usluga restorana',11.49),(21,'Usluga restorana',82.18),(22,'Usluga restorana',46.57);
 /*!40000 ALTER TABLE `usluga` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -557,7 +552,7 @@ CREATE TABLE `uslugarestorana` (
   `Vrijeme` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`),
   CONSTRAINT `uslugarestorana_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -566,7 +561,6 @@ CREATE TABLE `uslugarestorana` (
 
 LOCK TABLES `uslugarestorana` WRITE;
 /*!40000 ALTER TABLE `uslugarestorana` DISABLE KEYS */;
-INSERT INTO `uslugarestorana` VALUES (2,19,'10:59'),(2,20,'11:00'),(2,21,'01:01'),(2,22,'01:04');
 /*!40000 ALTER TABLE `uslugarestorana` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -585,7 +579,7 @@ CREATE TABLE `utisak` (
   PRIMARY KEY (`IdUtiska`,`Username`),
   KEY `R_4` (`Username`),
   CONSTRAINT `utisak_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `korisnik` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -594,7 +588,7 @@ CREATE TABLE `utisak` (
 
 LOCK TABLES `utisak` WRITE;
 /*!40000 ALTER TABLE `utisak` DISABLE KEYS */;
-INSERT INTO `utisak` VALUES (2,'Prvi utisak','2017-09-12 13:26:30','bojansuvajac'),(4,'Utisak za Lekica','2017-09-13 10:36:55','bojansuvajac'),(5,'Dodaj utisak','2017-09-13 16:18:26','bojansuvajac'),(6,'Imam i ja utisak','2017-09-14 21:22:20','ljubisamilincic');
+INSERT INTO `utisak` VALUES (2,'Prvi utisak','2017-09-12 13:26:30','bojansuvajac');
 /*!40000 ALTER TABLE `utisak` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -632,7 +626,7 @@ CREATE TABLE `wellnesstermin` (
   `IdTermina` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`IdTermina`),
   CONSTRAINT `wellnesstermin_ibfk_1` FOREIGN KEY (`IdTermina`) REFERENCES `termin` (`IdTermina`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -658,7 +652,7 @@ CREATE TABLE `wellnessusluga` (
   KEY `R_56` (`IdTermina`),
   CONSTRAINT `wellnessusluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE,
   CONSTRAINT `wellnessusluga_ibfk_2` FOREIGN KEY (`IdTermina`) REFERENCES `wellnesstermin` (`IdTermina`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1159,4 +1153,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:47:35
+-- Dump completed on 2017-09-18 22:55:24

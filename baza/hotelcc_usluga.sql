@@ -29,7 +29,7 @@ CREATE TABLE `usluga` (
   `Naziv` varchar(20) NOT NULL,
   `Cijena` decimal(8,2) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,6 @@ CREATE TABLE `usluga` (
 
 LOCK TABLES `usluga` WRITE;
 /*!40000 ALTER TABLE `usluga` DISABLE KEYS */;
-INSERT INTO `usluga` VALUES (17,'Sobna usluga',11.49),(18,'Usluga restorana',11.49),(19,'Usluga restorana',11.49),(20,'Usluga restorana',11.49),(21,'Usluga restorana',82.18),(22,'Usluga restorana',46.57);
 /*!40000 ALTER TABLE `usluga` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:06
+-- Dump completed on 2017-09-18 22:54:52

@@ -31,7 +31,7 @@ CREATE TABLE `racun` (
   PRIMARY KEY (`IdRacuna`),
   KEY `racun_ibfk_1_idx` (`IdPopusta`),
   CONSTRAINT `racun_ibfk_1` FOREIGN KEY (`IdPopusta`) REFERENCES `popust` (`KodPopusta`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `racun` (
 
 LOCK TABLES `racun` WRITE;
 /*!40000 ALTER TABLE `racun` DISABLE KEYS */;
-INSERT INTO `racun` VALUES (1,0,1),(2,0,3),(3,0,NULL),(4,0,4),(5,1,NULL);
+INSERT INTO `racun` VALUES (1,0,1),(2,0,3),(3,0,1),(4,0,4),(5,1,NULL);
 /*!40000 ALTER TABLE `racun` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:06
+-- Dump completed on 2017-09-18 22:54:52

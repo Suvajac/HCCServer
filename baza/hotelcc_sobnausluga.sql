@@ -29,7 +29,7 @@ CREATE TABLE `sobnausluga` (
   `Tip` varchar(20) NOT NULL,
   PRIMARY KEY (`IdUsluge`),
   CONSTRAINT `sobnausluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,6 @@ CREATE TABLE `sobnausluga` (
 
 LOCK TABLES `sobnausluga` WRITE;
 /*!40000 ALTER TABLE `sobnausluga` DISABLE KEYS */;
-INSERT INTO `sobnausluga` VALUES (17,'Dostava');
 /*!40000 ALTER TABLE `sobnausluga` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:05
+-- Dump completed on 2017-09-18 22:54:51

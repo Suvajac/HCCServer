@@ -40,7 +40,7 @@ CREATE TABLE `korisnik` (
 
 LOCK TABLES `korisnik` WRITE;
 /*!40000 ALTER TABLE `korisnik` DISABLE KEYS */;
-INSERT INTO `korisnik` VALUES ('aleksandarlekic','Aleksandar','Lekic','065/333-444','913949030'),('bojansuvajac','Bojan','Suvajac','065/111-222','1648781151'),('danielcrnovcic','Daniel','Crnovcic','065/999-000','1692808598'),('draganbunic','Dragan','Bunic','065/555-666','-1205948140'),('ljubisamilincic','Ljubisa','Milincic','065/777-888','177715508'),('svetozarvukovic','Svetozar','Vukovic','066/123-456','-1439170465');
+INSERT INTO `korisnik` VALUES ('aleksandarlekic','Aleksandar','Lekic','065/333-444','913949030'),('bojansuvajac','Bojan','Suvajac','065/111-222','-1861353340'),('danielcrnovcic','Daniel','Crnovcic','065/999-000','1692808598'),('draganbunic','Dragan','Bunic','065/555-666','-1205948140'),('ljubisamilincic','Ljubisa','Milincic','065/777-888','177715508'),('svetozarvukovic','Svetozar','Vukovic','066/123-456','-1439170465');
 /*!40000 ALTER TABLE `korisnik` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:05
+-- Dump completed on 2017-09-18 22:54:52

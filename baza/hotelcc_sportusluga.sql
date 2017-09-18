@@ -31,7 +31,7 @@ CREATE TABLE `sportusluga` (
   KEY `R_57` (`IdTermina`),
   CONSTRAINT `sportusluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE,
   CONSTRAINT `sportusluga_ibfk_2` FOREIGN KEY (`IdTermina`) REFERENCES `sporttermin` (`IdTermina`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:06
+-- Dump completed on 2017-09-18 22:54:53

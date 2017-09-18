@@ -26,11 +26,11 @@ DROP TABLE IF EXISTS `obavjestenje`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `obavjestenje` (
   `IdObavjestenja` int(11) NOT NULL AUTO_INCREMENT,
-  `Tekst` varchar(150) DEFAULT NULL,
+  `Tekst` varchar(1500) DEFAULT NULL,
   `Datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Procitano` tinyint(1) NOT NULL,
   PRIMARY KEY (`IdObavjestenja`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `obavjestenje` (
 
 LOCK TABLES `obavjestenje` WRITE;
 /*!40000 ALTER TABLE `obavjestenje` DISABLE KEYS */;
-INSERT INTO `obavjestenje` VALUES (1,'Prvo obavjestenje!','2014-09-12 12:51:50',1),(2,'Drugo obavjestenje','2013-09-12 12:50:06',1),(3,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:32:02',0),(4,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:34:11',0);
+INSERT INTO `obavjestenje` VALUES (3,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:32:02',1),(4,'Korisnik ljubisamilincic je narucio Usluga restorana.','2017-09-14 22:34:11',0),(5,'Korisnik bojansuvajac je narucio Usluga restorana.','2017-09-15 08:10:23',1);
 /*!40000 ALTER TABLE `obavjestenje` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:05
+-- Dump completed on 2017-09-18 22:54:51

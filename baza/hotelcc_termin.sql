@@ -32,7 +32,7 @@ CREATE TABLE `termin` (
   KEY `R_71` (`IdTermina`),
   KEY `termin_ibfk_1` (`Vrijeme`),
   CONSTRAINT `termin_ibfk_1` FOREIGN KEY (`Vrijeme`) REFERENCES `vrijemetermina` (`Vrijeme`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:06
+-- Dump completed on 2017-09-18 22:54:53

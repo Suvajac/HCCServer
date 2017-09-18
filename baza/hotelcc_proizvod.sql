@@ -39,7 +39,7 @@ CREATE TABLE `proizvod` (
 
 LOCK TABLES `proizvod` WRITE;
 /*!40000 ALTER TABLE `proizvod` DISABLE KEYS */;
-INSERT INTO `proizvod` VALUES (1,'Coca Cola',2.3,'Pice'),(2,'Fanta',2.3,'Pice'),(3,'Hamburger',4.5,'Hrana'),(4,'Pizza',6.99,'Hrana'),(5,'Dalmatinski pršut',34.99,'Hrana'),(6,'Salata plodovi mora',36.49,'Hrana'),(7,'Goveđa juha',24.49,'Hrana'),(8,'Juha od povrća',13.99,'Hrana'),(9,'Crni rižoto',21.49,'Hrana'),(10,'Piletina sa pomfritom',23.49,'Hrana'),(11,'Biftek na žaru',44.49,'Hrana'),(12,'Biftek sa pomfritom',54.49,'Hrana'),(13,'Peškir',8.99,'Higijensko sredstvo'),(14,'Supa',4.99,'Hrana'),(15,'Becka snicla',19.99,'Hrana');
+INSERT INTO `proizvod` VALUES (1,'Coca Cola',2.3,'Pice'),(2,'Fanta',2.3,'Pice'),(3,'Hamburger',4.5,'Hrana'),(4,'Pizza',6.99,'Hrana'),(5,'Dalmatinski pršut',34.99,'Hrana'),(6,'Salata plodovi mora',36.49,'Hrana'),(7,'Goveđa juha',24.49,'Hrana'),(8,'Juha od povrća',13.99,'Hrana'),(9,'Crni rižoto',21.49,'Hrana'),(10,'Piletina sa pomfritom',23.49,'Hrana'),(11,'Biftek na žaru',44.49,'Hrana'),(12,'Biftek sa pomfritom',54.49,'Hrana'),(14,'Supa',4.99,'Hrana'),(15,'Becka snicla',19.99,'Hrana');
 /*!40000 ALTER TABLE `proizvod` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  0:45:06
+-- Dump completed on 2017-09-18 22:54:53
