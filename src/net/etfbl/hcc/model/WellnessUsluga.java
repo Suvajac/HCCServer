@@ -19,7 +19,7 @@ public class WellnessUsluga extends Usluga implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "WellnessUsluga ["+wellnessTermin + "]\n";
+		return "WellnessUsluga ["+wellnessTermin + "]"+System.getProperty("line.separator");
 	}
 
 

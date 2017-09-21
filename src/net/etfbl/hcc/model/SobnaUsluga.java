@@ -38,13 +38,14 @@ public class SobnaUsluga extends Usluga implements Serializable{
 	
 	@Override
 	public String toString() {
-		String temp = "Sobna usluga [tip=" + tip + "]\n";
+		String newLine = System.getProperty("line.separator");
+		String temp = "Sobna usluga [tip=" + tip + "]"+newLine;
 		
 		ArrayList<Proizvod> tempLista = new ArrayList<>();
 		
 		for(Proizvod p : listaProizvoda) {
 			if(!tempLista.contains(p)) {
-				temp+=p+", kolicina="+Collections.frequency(listaProizvoda, p)+"]\n";
+				temp+=p+", kolicina="+Collections.frequency(listaProizvoda, p)+"]"+newLine;
 				tempLista.add(p);
 			}
 		}

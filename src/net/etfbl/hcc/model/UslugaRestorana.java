@@ -1,9 +1,7 @@
 package net.etfbl.hcc.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-
+import java.util.*;
 public class UslugaRestorana extends Usluga implements Serializable{
 	/**
 	 *
@@ -29,18 +27,19 @@ public class UslugaRestorana extends Usluga implements Serializable{
 
 	@Override
 	public String toString() {
+		String newLine = System.getProperty("line.separator");
 		String temp = "UslugaRestorana [vrijeme=" + vrijeme + ", brojStolica="
-				+ brojStolica + "]\n";
-
+				+ brojStolica + "]"+newLine;
+		
 		ArrayList<Proizvod> tempLista = new ArrayList<>();
-
+		
 		for(Proizvod p : listaProizvoda) {
 			if(!tempLista.contains(p)) {
-				temp+=p+", kolicina="+Collections.frequency(listaProizvoda, p)+"]\n";
+				temp+=p+", kolicina="+Collections.frequency(listaProizvoda, p)+"]"+newLine;
 				tempLista.add(p);
 			}
 		}
-
+		
 		tempLista=null;
 		return temp;
 	}

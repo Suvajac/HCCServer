@@ -28,13 +28,14 @@ public class SportUsluga extends Usluga implements Serializable{
 	
 	@Override
 	public String toString() {
-		String temp = "Sport usluga ["+sportTermin + "]\n";
+		String newLine = System.getProperty("line.separator");
+		String temp = "Sport usluga ["+sportTermin + "]"+newLine;
 		
 		ArrayList<SportskaOprema> tempLista = new ArrayList<>();
 		
 		for(SportskaOprema o : listaOpreme) {
 			if(!tempLista.contains(o)) {
-				temp+=o+", kolicina="+Collections.frequency(listaOpreme, o)+"]\n";
+				temp+=o+", kolicina="+Collections.frequency(listaOpreme, o)+"]"+newLine;
 				tempLista.add(o);
 			}
 		}
