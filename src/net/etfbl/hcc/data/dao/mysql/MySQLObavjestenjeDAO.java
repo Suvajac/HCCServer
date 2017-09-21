@@ -82,10 +82,11 @@ public class MySQLObavjestenjeDAO implements ObavjestenjeDAO {
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			proc = conn.prepareCall(" call insert_into_obavjestenje (?, ?, ? , ? ) ");
+			proc = conn.prepareCall(" call insert_into_obavjestenje (?, ?, ?, ?) ");
 			proc.registerOutParameter(4, Types.INTEGER);
 
 			proc.setInt(1, obavjestenje.getIdObavjestenje());
+			System.out.println(obavjestenje.getTekst());
 			proc.setString(2, obavjestenje.getTekst());
 			proc.setTimestamp(3, java.sql.Timestamp.valueOf(obavjestenje.getDatum()));
 

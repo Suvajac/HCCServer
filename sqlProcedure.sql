@@ -292,6 +292,17 @@ begin
 end$$
 delimiter ;
 
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_usluga`(
+	in varNaziv varchar(20),
+    in varCijena decimal(6,2),
+	out rez int(11) )
+begin
+    insert into usluga(Naziv,Cijena) values (varNaziv,varCijena);
+	select max(IdUsluge) into rez from usluga;
+end ;;
+DELIMITER ;
+
 -- korisnicki nalog
 drop user if exists 'mils'@'localhost';
 create user 'mils'@'localhost' identified by 'mils';
@@ -311,5 +322,7 @@ grant execute on procedure hotelcc.insert_into_obavjestenje to 'mils'@'localhost
 grant execute on procedure hotelcc.insert_into_proizvodirestoran to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_opremasportusluga to 'mils'@'localhost';
 grant execute on procedure hotelcc.insert_into_proizvodisoba to 'mils'@'localhost';
+grant execute on procedure hotelcc.insert_into_usluga to 'mils'@'localhost';
+
 grant select on mysql.proc to 'mils'@'localhost';
 flush privileges;

@@ -109,4 +109,8 @@ public class MySQLDAOFactory extends DAOFactory{
 		return new MySQLRegistracijaDAO();
 	}
 
+	@Override
+	public MySQLUslugaDAO getUslugaDAO() {
+		return new MySQLUslugaDAO();
+	}
 }

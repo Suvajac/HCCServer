@@ -2,7 +2,10 @@ package net.etfbl.hcc;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import net.etfbl.hcc.model.*;
@@ -68,6 +71,16 @@ public class ServerThread extends Thread{
 							if(oldGost==null){    //provjeri se da li dobijeni gost vec postoji u bazi
 								Gost tempGRacun=registracija.getGost(); //ako ne onda se pokupe podaci tog gosta
 								tempGRacun.setRacun(HCCUtil.getDAOFactory().getRacunDAO().kreiraj()); //novi racun mu se doda
+								LocalDate tempDate = LocalDate.from(registracija.getDatumOd());
+								long days = tempDate.until(registracija.getDatumDo(), ChronoUnit.DAYS);
+								double cijenaNocenja = days*registracija.getSoba().getCijenaPoDanu();
+								Usluga nocenjeUsluga = new Usluga(-1,"Noćenje",cijenaNocenja);
+								int idUslugeNocenja = HCCUtil.getDAOFactory().getUslugaDAO().dodaj(nocenjeUsluga);
+								nocenjeUsluga.setIdUsluge(idUslugeNocenja);
+								Stavka nocenje = new Stavka(-1,LocalDateTime.now(),nocenjeUsluga);
+								tempGRacun.getRacun().getStavke().add(nocenje);
+								
+								HCCUtil.getDAOFactory().getStavkaDAO().dodaj(nocenje, tempGRacun.getRacun());
 								HCCUtil.getDAOFactory().getGostDAO().dodaj(tempGRacun);  //doda se i taj gost u bazu
 								registracija.setGost(tempGRacun);  //registracija dobije gosta koji je u bazi i koji ima racun
 								//dodaj novog gosta sa racunom

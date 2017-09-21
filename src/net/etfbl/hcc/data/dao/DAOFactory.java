@@ -18,6 +18,7 @@ import net.etfbl.hcc.data.dao.mysql.MySQLSportTerminDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLSportUslugaDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLSportskaOpremaDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLStavkaDAO;
+import net.etfbl.hcc.data.dao.mysql.MySQLUslugaDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLUslugaRestoranaDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLUtisakDAO;
 import net.etfbl.hcc.data.dao.mysql.MySQLWellnessTerminDAO;
@@ -50,4 +51,5 @@ public abstract class DAOFactory {
 	public abstract MySQLProizvodiSobaDAO getProizvodiSobaDAO();
 	public abstract MySQLOpremaSportUslugaDAO getOpremaSportUslugaDAO();
 	public abstract MySQLRegistracijaDAO getRegistracijaDAO();
+	public abstract MySQLUslugaDAO getUslugaDAO();
 }
