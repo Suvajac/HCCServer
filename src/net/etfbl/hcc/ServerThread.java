@@ -5,7 +5,6 @@ import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import net.etfbl.hcc.model.*;
@@ -79,7 +78,7 @@ public class ServerThread extends Thread{
 								nocenjeUsluga.setIdUsluge(idUslugeNocenja);
 								Stavka nocenje = new Stavka(-1,LocalDateTime.now(),nocenjeUsluga);
 								tempGRacun.getRacun().getStavke().add(nocenje);
-								
+
 								HCCUtil.getDAOFactory().getStavkaDAO().dodaj(nocenje, tempGRacun.getRacun());
 								HCCUtil.getDAOFactory().getGostDAO().dodaj(tempGRacun);  //doda se i taj gost u bazu
 								registracija.setGost(tempGRacun);  //registracija dobije gosta koji je u bazi i koji ima racun
