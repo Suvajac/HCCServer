@@ -293,7 +293,7 @@ end$$
 delimiter ;
 
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_usluga`(
+CREATE PROCEDURE insert_into_usluga(
 	in varNaziv varchar(20),
     in varCijena decimal(6,2),
 	out rez int(11) )

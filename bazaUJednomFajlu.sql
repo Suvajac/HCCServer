@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -84,7 +82,7 @@ CREATE TABLE `obavjestenje` (
   `Datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Procitano` tinyint(1) NOT NULL,
   PRIMARY KEY (`IdObavjestenja`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +107,7 @@ CREATE TABLE `oglas` (
   `Datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Poruka` varchar(256) NOT NULL,
   PRIMARY KEY (`IdOglasa`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,7 +370,7 @@ CREATE TABLE `sobnausluga` (
   `Tip` varchar(20) NOT NULL,
   PRIMARY KEY (`IdUsluge`),
   CONSTRAINT `sobnausluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,7 +419,7 @@ CREATE TABLE `sporttermin` (
   `IdTermina` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`IdTermina`),
   CONSTRAINT `sporttermin_ibfk_1` FOREIGN KEY (`IdTermina`) REFERENCES `termin` (`IdTermina`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -447,7 +445,7 @@ CREATE TABLE `sportusluga` (
   KEY `R_57` (`IdTermina`),
   CONSTRAINT `sportusluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE,
   CONSTRAINT `sportusluga_ibfk_2` FOREIGN KEY (`IdTermina`) REFERENCES `sporttermin` (`IdTermina`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -476,7 +474,7 @@ CREATE TABLE `stavka` (
   KEY `R_42` (`IdUsluge`),
   CONSTRAINT `stavka_ibfk_1` FOREIGN KEY (`IdRacuna`) REFERENCES `racun` (`IdRacuna`),
   CONSTRAINT `stavka_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -503,7 +501,7 @@ CREATE TABLE `termin` (
   KEY `R_71` (`IdTermina`),
   KEY `termin_ibfk_1` (`Vrijeme`),
   CONSTRAINT `termin_ibfk_1` FOREIGN KEY (`Vrijeme`) REFERENCES `vrijemetermina` (`Vrijeme`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -527,7 +525,7 @@ CREATE TABLE `usluga` (
   `Naziv` varchar(20) NOT NULL,
   `Cijena` decimal(8,2) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -552,7 +550,7 @@ CREATE TABLE `uslugarestorana` (
   `Vrijeme` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`IdUsluge`),
   CONSTRAINT `uslugarestorana_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,7 +577,7 @@ CREATE TABLE `utisak` (
   PRIMARY KEY (`IdUtiska`,`Username`),
   KEY `R_4` (`Username`),
   CONSTRAINT `utisak_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `korisnik` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -626,7 +624,7 @@ CREATE TABLE `wellnesstermin` (
   `IdTermina` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`IdTermina`),
   CONSTRAINT `wellnesstermin_ibfk_1` FOREIGN KEY (`IdTermina`) REFERENCES `termin` (`IdTermina`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -652,7 +650,7 @@ CREATE TABLE `wellnessusluga` (
   KEY `R_56` (`IdTermina`),
   CONSTRAINT `wellnessusluga_ibfk_1` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`) ON DELETE CASCADE,
   CONSTRAINT `wellnessusluga_ibfk_2` FOREIGN KEY (`IdTermina`) REFERENCES `wellnesstermin` (`IdTermina`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1034,6 +1032,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insert_into_usluga` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_into_usluga`(
+	in varNaziv varchar(20),
+    in varCijena decimal(6,2),
+	out rez int(11) )
+begin
+    insert into usluga(Naziv,Cijena) values (varNaziv,varCijena);
+	select max(IdUsluge) into rez from usluga;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `insert_into_uslugarestorana` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1153,4 +1174,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-18 22:55:24
+-- Dump completed on 2017-09-26 19:59:00

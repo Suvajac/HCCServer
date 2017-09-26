@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `hotelcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `hotelcc`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: hotelcc
@@ -34,7 +32,7 @@ CREATE TABLE `stavka` (
   KEY `R_42` (`IdUsluge`),
   CONSTRAINT `stavka_ibfk_1` FOREIGN KEY (`IdRacuna`) REFERENCES `racun` (`IdRacuna`),
   CONSTRAINT `stavka_ibfk_2` FOREIGN KEY (`IdUsluge`) REFERENCES `usluga` (`IdUsluge`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-18 22:54:52
+-- Dump completed on 2017-09-26 19:58:39
